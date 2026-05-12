@@ -3,266 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projeto Integrador 1 · Etapa 1</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Projeto Integrador I · Etapa 1 · Editora Z40</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #fff;
-  color: #1a1a1a;
+  color: #272727;
   max-width: 720px;
   margin: 0 auto;
-  padding: 60px 32px 100px;
-  line-height: 1.8;
+  padding: 48px 32px 80px;
+  line-height: 1.75;
+  font-size: 15px;
 }
-.topo {
-  margin-bottom: 48px;
-  padding-bottom: 28px;
-  border-bottom: 2px solid #1a1a1a;
-}
-.curso {
-  font-size: .72rem;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-  color: #999;
-  margin-bottom: 14px;
-}
-h1 {
-  font-size: 1.9rem;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 6px;
-}
-.subtitulo { font-size: .95rem; color: #666; }
 
+/* ── TOPO / CAPA ── */
+.topo {
+  text-align: center;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  border-bottom: 2px solid #156082;
+}
+.topo img {
+  display: block;
+  margin: 0 auto 14px;
+  height: 56px;
+}
+.topo-titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0F4761;
+  margin-bottom: 2px;
+}
+.topo-sub {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F4761;
+}
+
+/* ── INFO ALUNO ── */
 .aluno {
-  margin-bottom: 48px;
   display: flex;
-  gap: 48px;
+  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
 }
 .aluno-item label {
   display: block;
-  font-size: .68rem;
+  font-size: .65rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: #bbb;
-  margin-bottom: 3px;
+  color: #aaa;
+  margin-bottom: 2px;
 }
-.aluno-item span { font-size: .92rem; font-weight: 500; }
-
-/* bloco de introdução oficial */
-.intro-oficial {
-  background: #f7f7f7;
-  border-radius: 6px;
-  padding: 20px 22px;
-  margin-bottom: 48px;
-}
-.intro-oficial p {
-  font-size: .88rem;
-  color: #444;
-  line-height: 1.75;
-  margin-bottom: 10px;
-}
-.intro-oficial p:last-child { margin-bottom: 0; }
-.intro-oficial strong { color: #1a1a1a; }
-
-/* cada atividade */
-.etapa {
-  margin-bottom: 0;
-  padding: 48px 0;
-  border-bottom: 1px solid #eee;
-}
-.etapa:last-of-type { border-bottom: none; }
-
-.etapa-num {
-  font-size: .68rem;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-  color: #bbb;
-  margin-bottom: 6px;
-}
-
-/* enunciado oficial em destaque */
-.enunciado {
-  margin-bottom: 24px;
-}
-.enunciado-tag {
-  display: inline-block;
-  font-size: .6rem;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-  color: #fff;
-  background: #1a1a1a;
-  padding: 3px 8px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-}
-.enunciado h2 {
-  font-size: 1.15rem;
+.aluno-item span {
+  font-size: .93rem;
   font-weight: 600;
-  margin-bottom: 8px;
-}
-.enunciado p {
-  font-size: .85rem;
-  color: #666;
-  line-height: 1.7;
+  color: #272727;
 }
 
-/* divisor entre enunciado e resposta */
-.divisor {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 22px 0;
+/* ── SEÇÕES DE TEXTO ── */
+.secao-titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F4761;
+  margin: 32px 0 12px;
 }
-.divisor-linha { flex: 1; height: 1px; background: #e0e0e0; }
-.divisor-tag {
-  font-size: .6rem;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-  color: #bbb;
-  white-space: nowrap;
-}
-
-/* resposta */
-.resposta p {
-  font-size: .95rem;
-  color: #222;
-  line-height: 1.85;
+.texto {
+  font-size: .93rem;
+  color: #272727;
+  line-height: 1.8;
   margin-bottom: 14px;
+  text-align: justify;
 }
-.resposta p:last-child { margin-bottom: 0; }
+.texto:last-child { margin-bottom: 0; }
+.texto strong { color: #272727; }
 
-
-/* bloco desenvolvimento da etapa */
-.desenvolvimento {
-  background: #1a1a1a;
-  border-radius: 6px;
-  padding: 18px 22px;
-  margin-bottom: 48px;
-}
-.desenvolvimento-titulo {
-  font-size: .65rem;
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  color: #888;
-  margin-bottom: 6px;
-}
-.desenvolvimento-uc {
-  font-size: .95rem;
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.5;
+/* ── INTRO ── */
+.intro {
+  margin-bottom: 32px;
 }
 
-
-/* bloco DOI */
-.doi-bloco {
-  margin-top: 48px;
-  padding: 20px 24px;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-.doi-icone {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.doi-texto label {
-  display: block;
-  font-size: .62rem;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-  color: #bbb;
-  margin-bottom: 5px;
-}
-.doi-texto .doi-titulo {
-  font-size: .9rem;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 4px;
-}
-.doi-texto .doi-autor {
-  font-size: .8rem;
-  color: #666;
-  margin-bottom: 8px;
-}
-.doi-texto a.doi-link {
-  display: inline-block;
-  font-size: .78rem;
-  color: #fff;
-  background: #1a1a1a;
-  padding: 5px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-  letter-spacing: .03em;
-}
-.doi-texto a.doi-link:hover {
-  background: #333;
-}
-
-
-/* bloco logística digital */
-.logistica {
-  margin-top: 36px;
-  margin-bottom: 0;
-}
-.logistica-titulo {
-  font-size: .62rem;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: #bbb;
-  margin-bottom: 10px;
-}
-.logistica-destaque {
-  background: #f5f5f5;
-  border-left: 3px solid #1a1a1a;
+/* ── LOGÍSTICA DIGITAL ── */
+.logistica-bloco {
+  background: #EBF3FA;
+  border-left: 4px solid #156082;
   border-radius: 0 6px 6px 0;
   padding: 16px 20px;
   margin-bottom: 14px;
 }
-.logistica-destaque p {
+.logistica-bloco p {
   font-size: .9rem;
-  line-height: 1.7;
-  color: #222;
+  line-height: 1.75;
+  color: #272727;
   margin: 0;
 }
-.logistica-definicao {
-  background: #1a1a1a;
+.logistica-def {
+  background: #0F4761;
   border-radius: 6px;
   padding: 16px 20px;
+  margin-bottom: 36px;
 }
-.logistica-definicao p {
-  font-size: .85rem;
+.logistica-def p {
+  font-size: .88rem;
   line-height: 1.7;
-  color: #ccc;
+  color: #B0C8D8;
   margin: 0;
 }
-.logistica-definicao p strong {
+.logistica-def strong { color: #fff; }
+
+/* ── DESENVOLVIMENTO (barra azul) ── */
+.dev-barra {
+  background: #0F4761;
+  border-radius: 6px;
+  padding: 16px 22px;
+  margin-bottom: 36px;
+}
+.dev-label {
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #B0C8D8;
+  margin-bottom: 6px;
+}
+.dev-uc {
+  font-size: .95rem;
+  font-weight: 700;
   color: #fff;
+  line-height: 1.5;
 }
 
-.fim {
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px solid #eee;
-  font-size: .72rem;
-  color: #ccc;
+/* ── ITEM (cada atividade) ── */
+.item {
+  padding: 32px 0;
+  border-bottom: 1px solid #E6E6E6;
+}
+.item:last-of-type { border-bottom: none; }
+
+.item-num {
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+.item h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F4761;
+  margin-bottom: 16px;
+}
+.item .texto {
+  margin-bottom: 12px;
+}
+
+/* ── DOI ── */
+.doi {
+  margin-top: 40px;
+  padding: 18px 22px;
+  border: 1px solid #D6E4ED;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #FAFCFE;
+}
+.doi-icone { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.doi-texto label {
+  display: block;
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+.doi-titulo { font-size: .88rem; font-weight: 700; color: #0F4761; margin-bottom: 3px; }
+.doi-autor { font-size: .78rem; color: #666; margin-bottom: 8px; }
+.doi a {
+  display: inline-block;
+  font-size: .76rem;
+  color: #fff;
+  background: #0F4761;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: .02em;
+}
+.doi a:hover { background: #156082; }
+
+/* ── RODAPÉ ── */
+.rodape {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 2px solid #156082;
+  font-size: .7rem;
+  color: #aaa;
   text-align: center;
 }
 </style>
 </head>
 <body>
 
+<!-- ══ TOPO ══ -->
 <div class="topo">
-  <p class="curso">SENAC EAD &middot; Curso Técnico em Logística &middot; Projeto Integrador I &middot; Módulo 1</p>
-  <h1>Etapa 1</h1>
-  <p class="subtitulo">Empresa criada: <strong>EDITORA Z40</strong></p>
+  <img src="data:image/jpeg;base64,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" alt="SENAC EAD">
+  <p class="topo-titulo">SENAC EAD</p>
+  <p class="topo-sub">Curso Técnico em Logística</p>
 </div>
 
 <div class="aluno">
@@ -270,180 +221,114 @@ h1 {
     <label>Nome do(a) estudante</label>
     <span>Paulo Sérgio de Andrade</span>
   </div>
-  <div class="aluno-item">
-    <label>Site da empresa</label>
-    <span>https://z40.pages.dev/</span>
-  </div>
-</div>
-
-<!-- Introdução oficial -->
-<div class="intro-oficial">
-  <p><strong>Introdução da Etapa 1</strong></p>
-  <p>Nesta primeira etapa, você vai planejar os primeiros passos para criar sua empresa. O objetivo é imaginar como ela será, escolher o segmento de mercado em que vai atuar, dar um nome à empresa e definir quem serão os clientes e o que será vendido ou oferecido. Também será necessário pensar na localização da empresa.</p>
-  <p>Além disso, liste tudo o que sua empresa precisa para começar a funcionar, como equipamentos, materiais e produtos. Depois, descreva como será o fluxo de recebimento de mercadorias, explicando o caminho que os produtos farão desde a chegada até serem organizados para uso ou venda.</p>
-  <p><strong>Observação:</strong> escreva cinco linhas, no mínimo, em cada item.</p>
-</div>
-
-
-<!-- ── LOGÍSTICA DIGITAL ── -->
-<div class="logistica">
-  <p class="logistica-titulo">Sobre a empresa &amp; logística digital</p>
-  <div class="logistica-destaque">
-    <p>A <strong>Editora Z40</strong> é uma empresa fictícia de serviços editoriais 100% digitais, especializada em revisão, edição, formatação e produção de conteúdos online para pessoas e empresas em todo o Brasil. Seu projeto destaca a <strong>logística digital</strong>, com processos totalmente online de recebimento, armazenamento, gestão e entrega de arquivos, além de planejamento logístico eficiente, baixo custo operacional, uso de tecnologia, organização em nuvem e foco em qualidade, inovação e sustentabilidade.</p>
-  </div>
-  <div class="logistica-definicao">
-    <p><strong>O que é logística digital?</strong> É a organização e gestão de processos realizados totalmente no ambiente online, usando tecnologia para receber, armazenar, processar e entregar serviços ou informações sem circulação física de mercadorias. Na Editora Z40, isso inclui o envio de arquivos pela internet, conferência digital, armazenamento em nuvem, edição online, controle por sistemas de gestão e entrega final ao cliente por plataformas digitais, garantindo agilidade, redução de custos e eficiência operacional.</p>
-  </div>
-</div>
-
-<!-- ── DESENVOLVIMENTO DA ETAPA 1 ── -->
-<div class="desenvolvimento">
-  <p class="desenvolvimento-titulo">Desenvolvimento da Etapa 1</p>
-  <p class="desenvolvimento-uc">UC01: Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico</p>
-</div>
-
-<!-- ── ITEM 1 ── -->
-<div class="etapa">
-  <p class="etapa-num">Item 1</p>
-
-  <div class="enunciado">
-    <span class="enunciado-tag">O que foi pedido</span>
-    <h2>Definir o segmento de mercado</h2>
-    <p>Pense em qual área sua empresa atuará: ela venderá produtos (varejo)? Prestará serviços? Será uma fábrica (indústria)? Venderá pela internet (e-commerce)?</p>
-  </div>
-
-  <div class="divisor">
-    <div class="divisor-linha"></div>
-    <span class="divisor-tag">Resposta</span>
-    <div class="divisor-linha"></div>
-  </div>
-
-  <div class="resposta">
-    <p>A empresa <strong>EDITORA Z40</strong> atua no segmento de <strong>e-commerce e serviços digitais</strong>, com foco em edição, revisão e publicação de conteúdo online. O mercado digital de conteúdo está em franca expansão no Brasil e no mundo, impulsionado pelo crescimento das plataformas digitais, redes sociais e pela crescente demanda por conteúdo de qualidade em todas as áreas do conhecimento.</p>
-    <p>A empresa opera exclusivamente no ambiente virtual, disponibilizando seus serviços pelo site <strong>https://z40.pages.dev/</strong>. Por ser um negócio 100% digital, o alcance geográfico é nacional, sem restrições de localidade para os clientes, qualquer pessoa ou empresa com acesso à internet pode contratar os serviços da EDITORA Z40, independentemente de onde esteja no Brasil.</p>
-    <p>O segmento de serviços digitais editoriais é altamente estratégico no cenário atual, pois empresas de todos os portes precisam de conteúdo bem escrito, revisado e publicado para se destacar nos meios digitais. Isso inclui desde textos para sites e blogs até materiais corporativos, e-books, artigos acadêmicos e roteiros de vídeo.</p>
-    <p>Empresas como a Rock Content e a Contentools são referências nacionais nesse mercado e demonstram que há grande espaço para negócios especializados em produção e edição de conteúdo digital. A EDITORA Z40 se diferencia por oferecer um serviço personalizado, com atenção individualizada a cada cliente e entrega com alto padrão de qualidade linguística e editorial.</p>
-    <p>A escolha por esse segmento se justifica pela baixa necessidade de estrutura física, pelo alto potencial de escala com poucos recursos iniciais e pela demanda crescente de criadores de conteúdo, empreendedores digitais e empresas que precisam de apoio profissional para se comunicar melhor com seu público.</p>
+  <div class="aluno-item" style="text-align:right">
+    <label>Empresa fictícia</label>
+    <span>Editora Z40</span>
   </div>
 </div>
 
 
-<!-- ── ITEM 2 ── -->
-<div class="etapa">
-  <p class="etapa-num">Item 2</p>
-
-  <div class="enunciado">
-    <span class="enunciado-tag">O que foi pedido</span>
-    <h2>Dar um nome à empresa</h2>
-    <p>Use a criatividade para pensar em um nome interessante e que tenha a ver com o que a empresa faz.</p>
-  </div>
-
-  <div class="divisor">
-    <div class="divisor-linha"></div>
-    <span class="divisor-tag">Resposta</span>
-    <div class="divisor-linha"></div>
-  </div>
-
-  <div class="resposta">
-    <p>O nome escolhido para a empresa é <strong>EDITORA Z40</strong>. Essa denominação moderna e marcante remete diretamente à atividade central do negócio: a edição de conteúdo. O termo "EDITOR" comunica de imediato o propósito da empresa — editar, revisar e aprimorar textos e conteúdos —, enquanto "Z40" representa uma identidade única, tecnológica e diferenciada no universo digital.</p>
-    <p>O "Z" no nome tem uma dupla simbologia: pode remeter à última letra do alfabeto, sugerindo que a empresa vai do início (A) ao fim (Z) na entrega do conteúdo, garantindo uma solução completa ao cliente; ao mesmo tempo, evoca a ideia de geração Z, conectada ao ambiente digital e às tendências do mercado contemporâneo de comunicação online.</p>
-    <p>O número "40" complementa a identidade com uma referência a solidez e maturidade, transmitindo confiança e experiência mesmo em um ambiente de negócios dinâmico e em constante evolução. Juntos, EDITOR e Z40 formam um nome curto, fácil de memorizar, impactante e adequado ao posicionamento digital da empresa.</p>
-    <p>O site oficial da empresa é <strong>https://z40.pages.dev/</strong>, onde os clientes podem conhecer os serviços, solicitar orçamentos e entrar em contato com a equipe. O endereço digital reforça a identidade da marca, usando o mesmo código "z40" do nome comercial, o que facilita a associação e o reconhecimento da empresa pelos clientes.</p>
-    <p>A marca EDITORA Z40 foi construída para transmitir profissionalismo, agilidade e inovação, valores essenciais para uma empresa que atua na criação e aperfeiçoamento de conteúdo digital. O nome é versátil o suficiente para atender tanto profissionais autônomos e criadores de conteúdo quanto empresas de médio e grande porte que buscam parceiros editoriais confiáveis.</p>
-  </div>
+<!-- ══ INTRODUÇÃO ══ -->
+<div class="intro">
+  <p class="secao-titulo">Introdução</p>
+  <p class="texto">O presente projeto apresenta o planejamento logístico da <strong>Editora Z40</strong>, empresa fictícia de serviços editoriais 100% digitais, desenvolvida no âmbito do Projeto Integrador I do Curso Técnico em Logística do SENAC EAD. A Editora Z40 é especializada em revisão, edição, formatação e produção de conteúdos online, atendendo pessoas físicas e jurídicas em todo o território nacional por meio de uma operação inteiramente virtual.</p>
+  <p class="texto">Nesta primeira etapa, são abordados os fundamentos da empresa: a definição do segmento de mercado, a construção da identidade da marca, a identificação do público-alvo e do portfólio de serviços, o mapeamento completo das necessidades logísticas e a descrição do fluxo operacional de recebimento, processamento e entrega de demandas. Por se tratar de uma empresa sem circulação de mercadorias físicas, o projeto destaca o conceito de <strong>logística digital</strong> — a organização e gestão de processos realizados totalmente no ambiente online, utilizando tecnologia para receber, armazenar, processar e entregar serviços com agilidade, segurança e eficiência.</p>
+  <p class="texto">Todo o conteúdo que se segue reflete as competências da UC01 (Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico), adaptadas à realidade de um negócio digital contemporâneo.</p>
 </div>
 
 
-<!-- ── ITEM 3 ── -->
-<div class="etapa">
-  <p class="etapa-num">Item 3</p>
+<!-- ══ SOBRE A EMPRESA & LOGÍSTICA DIGITAL ══ -->
+<p class="secao-titulo">Sobre a empresa e a logística digital</p>
 
-  <div class="enunciado">
-    <span class="enunciado-tag">O que foi pedido</span>
-    <h2>Identificar o público-alvo, os produtos ou serviços oferecidos e a localização</h2>
-    <p>Quem serão os clientes: jovens, adultos, empresas ou todos? O que sua empresa venderá ou oferecerá? Onde ela estará localizada — na cidade, em um bairro específico ou totalmente on-line?</p>
-  </div>
+<div class="logistica-bloco">
+  <p>A <strong>Editora Z40</strong> é uma empresa fictícia de serviços editoriais 100% digitais, especializada em revisão, edição, formatação e produção de conteúdos online para pessoas e empresas em todo o Brasil. Seu projeto destaca a <strong>logística digital</strong>, com processos totalmente online de recebimento, armazenamento, gestão e entrega de arquivos, além de planejamento logístico eficiente, baixo custo operacional, uso de tecnologia, organização em nuvem e foco em qualidade, inovação e sustentabilidade.</p>
+</div>
 
-  <div class="divisor">
-    <div class="divisor-linha"></div>
-    <span class="divisor-tag">Resposta</span>
-    <div class="divisor-linha"></div>
-  </div>
-
-  <div class="resposta">
-    <p>O <strong>público-alvo</strong> da EDITORA Z40 é composto por escritores independentes, blogueiros, criadores de conteúdo digital, pequenas e médias empresas, estudantes universitários e profissionais liberais que necessitam de serviços qualificados de revisão e edição de textos. A empresa também atende agências de marketing digital, startups e empreendedores que precisam de conteúdo bem escrito e revisado para suas comunicações institucionais e campanhas digitais.</p>
-    <p>Os <strong>serviços oferecidos</strong> pela EDITORA Z40 incluem: revisão ortográfica, gramatical e estilística de textos; edição de conteúdo para blogs, sites e redes sociais; formatação e padronização de documentos acadêmicos e corporativos; produção de e-books e materiais digitais; e consultoria em estratégia de conteúdo para marcas que desejam fortalecer sua presença online. Cada serviço é personalizado de acordo com as necessidades e o perfil de cada cliente.</p>
-    <p>A <strong>localização da empresa</strong> é 100% online, com sede operacional no Brasil e atendimento a clientes em todo o território nacional. Todo o contato com os clientes acontece de forma digital, pelo site <strong>https://z40.pages.dev/</strong>, por e-mail e por aplicativos de mensagem, o que elimina barreiras geográficas e permite que a empresa atenda clientes de qualquer região do país com a mesma agilidade e qualidade.</p>
-    <p>O modelo de negócio digital permite à EDITORA Z40 manter custos operacionais reduzidos, pois não há necessidade de manter um espaço físico de atendimento ao público, estoque de produtos físicos ou logística de transporte de mercadorias. Isso possibilita oferecer preços competitivos ao mercado e reinvestir as margens em tecnologia e qualificação da equipe.</p>
-    <p>A decisão de operar exclusivamente no ambiente digital foi estratégica: o e-commerce de serviços tem crescido de forma acelerada no Brasil, especialmente após a pandemia de Covid-19, que acelerou a digitalização de pequenas e médias empresas. Esse contexto criou uma demanda crescente por serviços editoriais online, tornando o momento ideal para o lançamento e expansão da EDITORA Z40 no mercado nacional.</p>
-  </div>
+<div class="logistica-def">
+  <p><strong>O que é logística digital?</strong> É a organização e gestão de processos realizados totalmente no ambiente online, usando tecnologia para receber, armazenar, processar e entregar serviços ou informações sem circulação física de mercadorias. Na Editora Z40, isso inclui o envio de arquivos pela internet, conferência digital, armazenamento em nuvem, edição online, controle por sistemas de gestão e entrega final ao cliente por plataformas digitais, garantindo agilidade, redução de custos e eficiência operacional.</p>
 </div>
 
 
-<!-- ── ITEM 4 ── -->
-<div class="etapa">
-  <p class="etapa-num">Item 4</p>
-
-  <div class="enunciado">
-    <span class="enunciado-tag">O que foi pedido</span>
-    <h2>Mapear as necessidades logísticas</h2>
-    <p>Identifique equipamentos, materiais e produtos necessários para iniciar a operação. Liste tudo o que sua empresa precisará para funcionar: equipamentos (computadores, caixas, máquinas, prateleiras etc.), materiais (papel, embalagens, sacolas etc.) e produtos (aquilo que será vendido ou usado no serviço).</p>
-  </div>
-
-  <div class="divisor">
-    <div class="divisor-linha"></div>
-    <span class="divisor-tag">Resposta</span>
-    <div class="divisor-linha"></div>
-  </div>
-
-  <div class="resposta">
-    <p>Os principais <strong>equipamentos</strong> necessários para a operação da EDITORA Z40 são: computadores de alta performance com processadores rápidos e memória RAM adequada para trabalhar com múltiplos documentos simultaneamente; monitores de boa resolução para facilitar a leitura e revisão de textos longos; nobreaks para proteção dos equipamentos contra oscilações de energia; roteadores de alta velocidade e conexão de internet fibra óptica para garantir comunicação ágil com os clientes; e dispositivos móveis (smartphones e tablets) para atendimento e comunicação em tempo real.</p>
-    <p>Os <strong>materiais e ferramentas digitais</strong> essenciais incluem: licenças de softwares de edição e revisão de texto (Microsoft Office 365, Google Workspace, Grammarly Pro); plataforma de hospedagem e domínio do site https://z40.pages.dev/; ferramentas de gestão de projetos e comunicação interna (Trello, Notion, Slack); sistemas de armazenamento e compartilhamento de arquivos em nuvem (Google Drive, OneDrive); e plataformas de pagamento online seguras (PayPal, Mercado Pago, PagBank) para receber os pagamentos dos clientes com comodidade e segurança.</p>
-    <p>Em relação aos <strong>produtos e serviços contratados externamente</strong>, a empresa necessita de: serviço de domínio e hospedagem estável do site; assinatura de ferramentas de marketing digital para divulgação dos serviços (Google Ads, Meta Ads); plataformas de reunião virtual (Google Meet, Zoom) para alinhamentos com os clientes; e eventualmente, serviços de tradução ou legendagem para atender demandas de conteúdo bilíngue de clientes que atuam em mercados internacionais.</p>
-    <p>O <strong>sistema de gestão de demandas e clientes</strong> (CRM) é uma necessidade fundamental para controlar todas as solicitações recebidas, acompanhar o andamento de cada projeto, registrar prazos de entrega e histórico de relacionamento com cada cliente. Sem esse controle, a empresa corre o risco de perder prazos, gerar retrabalho e comprometer a qualidade do atendimento.</p>
-    <p>Além disso, a empresa precisará investir em <strong>segurança digital</strong> desde o início, incluindo antivírus profissional, backup automático dos arquivos em nuvem e políticas claras de confidencialidade para proteger os documentos e informações dos clientes. Esse investimento inicial na infraestrutura logístico-digital é indispensável para garantir agilidade, qualidade e confiabilidade às operações da EDITORA Z40 desde o primeiro dia de funcionamento.</p>
-  </div>
+<!-- ══ DESENVOLVIMENTO DA ETAPA 1 ══ -->
+<div class="dev-barra">
+  <p class="dev-label">Desenvolvimento da Etapa 1</p>
+  <p class="dev-uc">UC01: Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico</p>
 </div>
 
 
-<!-- ── ITEM 5 ── -->
-<div class="etapa">
-  <p class="etapa-num">Item 5</p>
-
-  <div class="enunciado">
-    <span class="enunciado-tag">O que foi pedido</span>
-    <h2>Descrever o fluxo logístico básico da empresa (UC01 — Recebimento de mercadorias)</h2>
-    <p>Explique como será o recebimento das mercadorias: de onde os produtos virão? Como serão recebidos? Onde serão guardados? Como serão preparados para o uso ou para a venda?</p>
-  </div>
-
-  <div class="divisor">
-    <div class="divisor-linha"></div>
-    <span class="divisor-tag">Resposta</span>
-    <div class="divisor-linha"></div>
-  </div>
-
-  <div class="resposta">
-    <p><strong>De onde vêm os insumos e demandas:</strong> por se tratar de uma empresa de serviços digitais, a EDITORA Z40 não recebe mercadorias físicas no sentido tradicional. O "insumo" principal da empresa são os arquivos de texto e documentos enviados pelos clientes para edição e revisão. Esses arquivos chegam por meio do formulário de solicitação disponível no site <strong>https://z40.pages.dev/</strong>, por e-mail ou por compartilhamento direto via Google Drive ou outro repositório em nuvem indicado pelo cliente.</p>
-    <p><strong>Como são recebidos e conferidos:</strong> ao receber uma nova demanda, o responsável pelo atendimento realiza a conferência do pedido, verificando se todos os arquivos foram enviados corretamente, se as instruções do cliente estão claras (tipo de revisão solicitada, prazo, formato de entrega e referências de estilo) e se o pagamento foi confirmado na plataforma. Qualquer dúvida ou inconsistência é comunicada ao cliente antes do início do trabalho para evitar retrabalho e garantir alinhamento total.</p>
-    <p><strong>Onde são armazenados:</strong> após a conferência, os arquivos recebidos são organizados em pastas específicas no sistema de armazenamento em nuvem da empresa, identificadas pelo nome do cliente, número do projeto e data de recebimento. Esse sistema de organização digital substitui o depósito físico de uma empresa tradicional e garante que qualquer membro da equipe possa acessar o material correto com agilidade, em qualquer momento e de qualquer dispositivo.</p>
-    <p><strong>Como são processados e editados:</strong> após o registro e a organização dos arquivos, o projeto é distribuído ao editor responsável de acordo com a especialidade exigida (revisão gramatical, edição de estilo, formatação acadêmica, produção de conteúdo etc.). O editor realiza o trabalho aplicando os padrões de qualidade da EDITORA Z40, utilizando as ferramentas de revisão e os guias de estilo acordados com o cliente. Ao concluir, o arquivo revisado passa por uma verificação final antes de ser liberado para entrega.</p>
-    <p><strong>Como chegam ao cliente:</strong> o arquivo finalizado é entregue ao cliente pelo canal combinado no início do projeto — geralmente por e-mail, Google Drive ou plataforma própria. O cliente recebe uma notificação com os detalhes da entrega e tem um prazo para solicitação de ajustes inclusos no serviço. Toda a operação é registrada no sistema de gestão da empresa para controle de qualidade, rastreabilidade dos projetos e histórico de relacionamento com cada cliente, garantindo transparência e confiança em todo o processo logístico digital.</p>
-  </div>
+<!-- ══ ITEM 1 ══ -->
+<div class="item">
+  <p class="item-num">Item 1</p>
+  <h2>Segmento de mercado</h2>
+  <p class="texto">A empresa <strong>EDITORA Z40</strong> atua no segmento de <strong>e-commerce e serviços digitais</strong>, com foco em edição, revisão e publicação de conteúdo online. O mercado digital de conteúdo está em franca expansão no Brasil e no mundo, impulsionado pelo crescimento das plataformas digitais, redes sociais e pela crescente demanda por conteúdo de qualidade em todas as áreas do conhecimento.</p>
+  <p class="texto">A empresa opera exclusivamente no ambiente virtual, disponibilizando seus serviços pelo site <strong>https://z40.pages.dev/</strong>. Por ser um negócio 100% digital, o alcance geográfico é nacional, sem restrições de localidade para os clientes, qualquer pessoa ou empresa com acesso à internet pode contratar os serviços da EDITORA Z40, independentemente de onde esteja no Brasil.</p>
+  <p class="texto">O segmento de serviços digitais editoriais é altamente estratégico no cenário atual, pois empresas de todos os portes precisam de conteúdo bem escrito, revisado e publicado para se destacar nos meios digitais. Isso inclui desde textos para sites e blogs até materiais corporativos, e-books, artigos acadêmicos e roteiros de vídeo.</p>
+  <p class="texto">Empresas como a Rock Content e a Contentools são referências nacionais nesse mercado e demonstram que há grande espaço para negócios especializados em produção e edição de conteúdo digital. A EDITORA Z40 se diferencia por oferecer um serviço personalizado, com atenção individualizada a cada cliente e entrega com alto padrão de qualidade linguística e editorial.</p>
+  <p class="texto">A escolha por esse segmento se justifica pela baixa necessidade de estrutura física, pelo alto potencial de escala com poucos recursos iniciais e pela demanda crescente de criadores de conteúdo, empreendedores digitais e empresas que precisam de apoio profissional para se comunicar melhor com seu público.</p>
 </div>
 
 
-<div class="doi-bloco">
+<!-- ══ ITEM 2 ══ -->
+<div class="item">
+  <p class="item-num">Item 2</p>
+  <h2>Nome da empresa</h2>
+  <p class="texto">O nome escolhido para a empresa é <strong>EDITORA Z40</strong>. Essa denominação moderna e marcante remete diretamente à atividade central do negócio: a edição de conteúdo. O termo "EDITOR" comunica de imediato o propósito da empresa — editar, revisar e aprimorar textos e conteúdos —, enquanto "Z40" representa uma identidade única, tecnológica e diferenciada no universo digital.</p>
+  <p class="texto">O "Z" no nome tem uma dupla simbologia: pode remeter à última letra do alfabeto, sugerindo que a empresa vai do início (A) ao fim (Z) na entrega do conteúdo, garantindo uma solução completa ao cliente; ao mesmo tempo, evoca a ideia de geração Z, conectada ao ambiente digital e às tendências do mercado contemporâneo de comunicação online.</p>
+  <p class="texto">O número "40" complementa a identidade com uma referência a solidez e maturidade, transmitindo confiança e experiência mesmo em um ambiente de negócios dinâmico e em constante evolução. Juntos, EDITOR e Z40 formam um nome curto, fácil de memorizar, impactante e adequado ao posicionamento digital da empresa.</p>
+  <p class="texto">O site oficial da empresa é <strong>https://z40.pages.dev/</strong>, onde os clientes podem conhecer os serviços, solicitar orçamentos e entrar em contato com a equipe. O endereço digital reforça a identidade da marca, usando o mesmo código "z40" do nome comercial, o que facilita a associação e o reconhecimento da empresa pelos clientes.</p>
+  <p class="texto">A marca EDITORA Z40 foi construída para transmitir profissionalismo, agilidade e inovação, valores essenciais para uma empresa que atua na criação e aperfeiçoamento de conteúdo digital. O nome é versátil o suficiente para atender tanto profissionais autônomos e criadores de conteúdo quanto empresas de médio e grande porte que buscam parceiros editoriais confiáveis.</p>
+</div>
+
+
+<!-- ══ ITEM 3 ══ -->
+<div class="item">
+  <p class="item-num">Item 3</p>
+  <h2>Público-alvo, serviços oferecidos e localização</h2>
+  <p class="texto">O <strong>público-alvo</strong> da EDITORA Z40 é composto por escritores independentes, blogueiros, criadores de conteúdo digital, pequenas e médias empresas, estudantes universitários e profissionais liberais que necessitam de serviços qualificados de revisão e edição de textos. A empresa também atende agências de marketing digital, startups e empreendedores que precisam de conteúdo bem escrito e revisado para suas comunicações institucionais e campanhas digitais.</p>
+  <p class="texto">Os <strong>serviços oferecidos</strong> pela EDITORA Z40 incluem: revisão ortográfica, gramatical e estilística de textos; edição de conteúdo para blogs, sites e redes sociais; formatação e padronização de documentos acadêmicos e corporativos; produção de e-books e materiais digitais; e consultoria em estratégia de conteúdo para marcas que desejam fortalecer sua presença online. Cada serviço é personalizado de acordo com as necessidades e o perfil de cada cliente.</p>
+  <p class="texto">A <strong>localização da empresa</strong> é 100% online, com sede operacional no Brasil e atendimento a clientes em todo o território nacional. Todo o contato com os clientes acontece de forma digital, pelo site <strong>https://z40.pages.dev/</strong>, por e-mail e por aplicativos de mensagem, o que elimina barreiras geográficas e permite que a empresa atenda clientes de qualquer região do país com a mesma agilidade e qualidade.</p>
+  <p class="texto">O modelo de negócio digital permite à EDITORA Z40 manter custos operacionais reduzidos, pois não há necessidade de manter um espaço físico de atendimento ao público, estoque de produtos físicos ou logística de transporte de mercadorias. Isso possibilita oferecer preços competitivos ao mercado e reinvestir as margens em tecnologia e qualificação da equipe.</p>
+  <p class="texto">A decisão de operar exclusivamente no ambiente digital foi estratégica: o e-commerce de serviços tem crescido de forma acelerada no Brasil, especialmente após a pandemia de Covid-19, que acelerou a digitalização de pequenas e médias empresas. Esse contexto criou uma demanda crescente por serviços editoriais online, tornando o momento ideal para o lançamento e expansão da EDITORA Z40 no mercado nacional.</p>
+</div>
+
+
+<!-- ══ ITEM 4 ══ -->
+<div class="item">
+  <p class="item-num">Item 4</p>
+  <h2>Necessidades logísticas</h2>
+  <p class="texto">Os principais <strong>equipamentos</strong> necessários para a operação da EDITORA Z40 são: computadores de alta performance com processadores rápidos e memória RAM adequada para trabalhar com múltiplos documentos simultaneamente; monitores de boa resolução para facilitar a leitura e revisão de textos longos; nobreaks para proteção dos equipamentos contra oscilações de energia; roteadores de alta velocidade e conexão de internet fibra óptica para garantir comunicação ágil com os clientes; e dispositivos móveis (smartphones e tablets) para atendimento e comunicação em tempo real.</p>
+  <p class="texto">Os <strong>materiais e ferramentas digitais</strong> essenciais incluem: licenças de softwares de edição e revisão de texto (Microsoft Office 365, Google Workspace, Grammarly Pro); plataforma de hospedagem e domínio do site https://z40.pages.dev/; ferramentas de gestão de projetos e comunicação interna (Trello, Notion, Slack); sistemas de armazenamento e compartilhamento de arquivos em nuvem (Google Drive, OneDrive); e plataformas de pagamento online seguras (PayPal, Mercado Pago, PagBank) para receber os pagamentos dos clientes com comodidade e segurança.</p>
+  <p class="texto">Em relação aos <strong>produtos e serviços contratados externamente</strong>, a empresa necessita de: serviço de domínio e hospedagem estável do site; assinatura de ferramentas de marketing digital para divulgação dos serviços (Google Ads, Meta Ads); plataformas de reunião virtual (Google Meet, Zoom) para alinhamentos com os clientes; e eventualmente, serviços de tradução ou legendagem para atender demandas de conteúdo bilíngue de clientes que atuam em mercados internacionais.</p>
+  <p class="texto">O <strong>sistema de gestão de demandas e clientes</strong> (CRM) é uma necessidade fundamental para controlar todas as solicitações recebidas, acompanhar o andamento de cada projeto, registrar prazos de entrega e histórico de relacionamento com cada cliente. Sem esse controle, a empresa corre o risco de perder prazos, gerar retrabalho e comprometer a qualidade do atendimento.</p>
+  <p class="texto">Além disso, a empresa precisará investir em <strong>segurança digital</strong> desde o início, incluindo antivírus profissional, backup automático dos arquivos em nuvem e políticas claras de confidencialidade para proteger os documentos e informações dos clientes. Esse investimento inicial na infraestrutura logístico-digital é indispensável para garantir agilidade, qualidade e confiabilidade às operações da EDITORA Z40 desde o primeiro dia de funcionamento.</p>
+</div>
+
+
+<!-- ══ ITEM 5 ══ -->
+<div class="item">
+  <p class="item-num">Item 5</p>
+  <h2>Fluxo logístico básico (UC01)</h2>
+  <p class="texto"><strong>De onde vêm os insumos e demandas:</strong> por se tratar de uma empresa de serviços digitais, a EDITORA Z40 não recebe mercadorias físicas no sentido tradicional. O "insumo" principal da empresa são os arquivos de texto e documentos enviados pelos clientes para edição e revisão. Esses arquivos chegam por meio do formulário de solicitação disponível no site <strong>https://z40.pages.dev/</strong>, por e-mail ou por compartilhamento direto via Google Drive ou outro repositório em nuvem indicado pelo cliente.</p>
+  <p class="texto"><strong>Como são recebidos e conferidos:</strong> ao receber uma nova demanda, o responsável pelo atendimento realiza a conferência do pedido, verificando se todos os arquivos foram enviados corretamente, se as instruções do cliente estão claras (tipo de revisão solicitada, prazo, formato de entrega e referências de estilo) e se o pagamento foi confirmado na plataforma. Qualquer dúvida ou inconsistência é comunicada ao cliente antes do início do trabalho para evitar retrabalho e garantir alinhamento total.</p>
+  <p class="texto"><strong>Onde são armazenados:</strong> após a conferência, os arquivos recebidos são organizados em pastas específicas no sistema de armazenamento em nuvem da empresa, identificadas pelo nome do cliente, número do projeto e data de recebimento. Esse sistema de organização digital substitui o depósito físico de uma empresa tradicional e garante que qualquer membro da equipe possa acessar o material correto com agilidade, em qualquer momento e de qualquer dispositivo.</p>
+  <p class="texto"><strong>Como são processados e editados:</strong> após o registro e a organização dos arquivos, o projeto é distribuído ao editor responsável de acordo com a especialidade exigida (revisão gramatical, edição de estilo, formatação acadêmica, produção de conteúdo etc.). O editor realiza o trabalho aplicando os padrões de qualidade da EDITORA Z40, utilizando as ferramentas de revisão e os guias de estilo acordados com o cliente. Ao concluir, o arquivo revisado passa por uma verificação final antes de ser liberado para entrega.</p>
+  <p class="texto"><strong>Como chegam ao cliente:</strong> o arquivo finalizado é entregue ao cliente pelo canal combinado no início do projeto — geralmente por e-mail, Google Drive ou plataforma própria. O cliente recebe uma notificação com os detalhes da entrega e tem um prazo para solicitação de ajustes inclusos no serviço. Toda a operação é registrada no sistema de gestão da empresa para controle de qualidade, rastreabilidade dos projetos e histórico de relacionamento com cada cliente, garantindo transparência e confiança em todo o processo logístico digital.</p>
+</div>
+
+
+<!-- ══ DOI ══ -->
+<div class="doi">
   <div class="doi-icone">📄</div>
   <div class="doi-texto">
     <label>Publicação vinculada — Zenodo</label>
     <p class="doi-titulo">Projeto Integrador I · Etapa 1 · Editora Z40</p>
-    <p class="doi-autor">Paulo Sérgio de Andrade &middot; SENAC EAD &middot; Curso Técnico em Logística</p>
-    <a class="doi-link" href="https://doi.org/10.5281/zenodo.20132046" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20132046 ↗</a>
+    <p class="doi-autor">Paulo Sérgio de Andrade · SENAC EAD · Curso Técnico em Logística</p>
+    <a href="https://doi.org/10.5281/zenodo.20140521" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20140521 ↗</a>
   </div>
 </div>
 
-<div class="fim">
-  SENAC EAD &middot; Curso Técnico em Logística &middot; Projeto Integrador I &middot; Etapa 1 &middot; EDITORA Z40
+<div class="rodape">
+  SENAC EAD · Curso Técnico em Logística · Projeto Integrador I · Etapa 1 · EDITORA Z40
 </div>
 
 </body>
