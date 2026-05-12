@@ -157,6 +157,55 @@ h1 {
   line-height: 1.5;
 }
 
+
+/* bloco DOI */
+.doi-bloco {
+  margin-top: 48px;
+  padding: 20px 24px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.doi-icone {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.doi-texto label {
+  display: block;
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  color: #bbb;
+  margin-bottom: 5px;
+}
+.doi-texto .doi-titulo {
+  font-size: .9rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+.doi-texto .doi-autor {
+  font-size: .8rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+.doi-texto a.doi-link {
+  display: inline-block;
+  font-size: .78rem;
+  color: #fff;
+  background: #1a1a1a;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: .03em;
+}
+.doi-texto a.doi-link:hover {
+  background: #333;
+}
+
 .fim {
   margin-top: 56px;
   padding-top: 24px;
@@ -330,6 +379,16 @@ h1 {
   </div>
 </div>
 
+
+<div class="doi-bloco">
+  <div class="doi-icone">📄</div>
+  <div class="doi-texto">
+    <label>Publicação vinculada — Zenodo</label>
+    <p class="doi-titulo">Projeto Integrador I · Etapa 1 · Editora Z40</p>
+    <p class="doi-autor">Paulo Sérgio de Andrade &middot; SENAC EAD &middot; Curso Técnico em Logística</p>
+    <a class="doi-link" href="https://doi.org/10.5281/zenodo.20132046" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20132046 ↗</a>
+  </div>
+</div>
 
 <div class="fim">
   SENAC EAD &middot; Curso Técnico em Logística &middot; Projeto Integrador I &middot; Etapa 1 &middot; EDITORA Z40
