@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto Integrador I · Etapa 1 · Editora Z40</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: #272727;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 32px 0;
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+/* ── TOPO / CAPA ── */
+.topo {
+  text-align: center;
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid #156082;
+}
+.topo img {
+  display: block;
+  margin: 0 auto 14px;
+  height: 56px;
+}
+.topo-titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0F4761;
+  margin-bottom: 2px;
+}
+.topo-sub {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F4761;
+}
+
+/* ── INFO ALUNO ── */
+.aluno {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.aluno-item label {
+  display: block;
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #aaa;
+  margin-bottom: 2px;
+}
+.aluno-item span {
+  font-size: .93rem;
+  font-weight: 600;
+  color: #272727;
+}
+
+/* ── SEÇÕES DE TEXTO ── */
+.secao-titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F4761;
+  margin: 32px 0 12px;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+.texto {
+  font-size: .93rem;
+  color: #272727;
+  line-height: 1.8;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+.texto:last-child { margin-bottom: 0; }
+.texto strong { color: #272727; }
+
+/* ── INTRO ── */
+.intro {
+  margin-bottom: 18px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* ── LOGÍSTICA DIGITAL ── */
+.logistica-bloco {
+  background: #EBF3FA;
+  border-left: 4px solid #156082;
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin-bottom: 6px;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+.logistica-bloco p {
+  font-size: .9rem;
+  line-height: 1.75;
+  color: #272727;
+  margin: 0;
+}
+.logistica-def {
+  background: #0F4761;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 36px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  page-break-before: avoid;
+  break-before: avoid;
+}
+.logistica-def p {
+  font-size: .88rem;
+  line-height: 1.7;
+  color: #B0C8D8;
+  margin: 0;
+}
+.logistica-def strong { color: #fff; }
+
+/* ── DESENVOLVIMENTO (barra azul) ── */
+.dev-barra {
+  background: #0F4761;
+  border-radius: 6px;
+  padding: 16px 22px;
+  margin-bottom: 36px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.dev-label {
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #B0C8D8;
+  margin-bottom: 6px;
+}
+.dev-uc {
+  font-size: .95rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.5;
+}
+
+/* ── ITEM (cada atividade) ── */
+.item {
+  padding: 32px 0;
+  border-bottom: 1px solid #E6E6E6;
+}
+.item:last-of-type { border-bottom: none; }
+
+.item-num {
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+.item h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F4761;
+  margin-bottom: 16px;
+}
+.item .texto {
+  margin-bottom: 12px;
+}
+
+/* ── DOI ── */
+.doi {
+  margin-top: 40px;
+  padding: 18px 22px;
+  border: 1px solid #D6E4ED;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #FAFCFE;
+}
+.doi-icone { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.doi-texto label {
+  display: block;
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+.doi-titulo { font-size: .88rem; font-weight: 700; color: #0F4761; margin-bottom: 3px; }
+.doi-autor { font-size: .78rem; color: #666; margin-bottom: 8px; }
+.doi a {
+  display: inline-block;
+  font-size: .76rem;
+  color: #fff;
+  background: #0F4761;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: .02em;
+}
+.doi a:hover { background: #156082; }
+
+/* ── RODAPÉ ── */
+.rodape {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 2px solid #156082;
+  font-size: .7rem;
+  color: #aaa;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOPO ══ -->
+<div class="topo">
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASERUQEBAVFhUXFRUVFhUVFRUVFhcVFRUXFxcYGBUYHSkjGBsmHBUXIzIiJiosLy8vFyA0OTQtOCkuLywBCgoKDg0OHBAQHCwmICAuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLv/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAAAQYFBwMECAL/xABLEAABAwICBgUHBgsGBwAAAAABAAIDBBEFIQYHEjFBUSJhcYGREzJCUqGx0RdTcpKTwSMzNWJjc4KDstLhFBUkNEOzFiVEVHTw8f/EABoBAQADAQEBAAAAAAAAAAAAAAADBAUCAQb/xAAxEQACAgEDAgMGBgIDAAAAAAAAAQIDBBESITFBBRORIjJRYXGBM0KhwdHwFCNSseH/2gAMAwEAAhEDEQA/AN4oiIAiIgCIiAIiIAiIgIUoiAIiIAiIgChSiAIiICCpREBClQpQEKURAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREARFBKAlFhsX0mo6VzWVE7WOduBzNuZA3DtXLQ4/RzfiamJ/UHtv4XuutstNdODndHpqZRF8hwU3XJ0SiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgIJVB0909bS3p6az57dI72xX583dXirfi9NLJEY4ZfJOdl5TZDi0Hfsg5bXWVRY9UlPe76uZxJJJswEk5kk2Oano8lPWx/Yhu8zTSC+5qWoqHyOdJI9z3uN3Ocbkk9a4xz4rdUeqjDxvfOf3gHuauT5KsN/Tfaf0Wn/n0rjn0M7/Ct+RqXDdIa2nP4GqkaPVLi5v1XXCuOE62KhlhUwNkHrRnYd9U5E96sUuqahPmyzt/aafe1dGbVDF6FXJ+0xp9yjnfi2e8v0JI05MOj/UtGA6cUNXYMlDH/NydF3dfIqzXWma7VLVj8VNFJ1OBYfvC+sNkx7DMjA+WEeh+Nbb80t6TfC3Uq08eqX4U/s+CxG+xfiR+65Nyoqno1pxTVRET7wT8YZbtJ+iXW2verWFUlCUHpJaFmMlJaolERcnQREQBERAEREARFCAlERAEREAREQBERAEREAREQBEUFASi4KipawXcbLFVGMu9Btus7/BQ2Xwr95kkKZz91GaLrb10KzGIIvPkF+AGZ9iwNTVOILpHkgZnl4KuzzF7i49w5BZuT4m4L2I8/M0Mfw3e/afoWio0uZ6ETj1khoXRk0tnPmsYPE/BYBFly8RyZfm0+iRpQ8Px4/l1+uplX6R1R9MDsb/Vcbsbqj/rO7rfBY5FA8m59ZP1Jlj0rpFeiO9/fNV8+/xHwXIzHqof6xPaAVj18rxZFy53v1PXRU/yr0RmodJ6kbyx3a0j713IdL3+nCD9F3xCrJK5IonO8xrndgJU0M7JXSb/AO/2Ip4WO+sUv0/cslViGHVQ2aqBp5GSMOseYda7T1hZjB2RtZsRTmRvogv23NHIOOdhuF1TYsIqXboXd9h7yuzFo5VXuGAHntWPsWnT4hltaShqvo1/fQzrcHFXuz0f2f8A6X4FSq1QwYlHvcx45OOf1gFnKWR5H4RmyeIBuPFalN29cxa+qM2ytQ6ST+h2URFORBERAEREAREQBERAEREAREQBERAEREAREQBERAderpmyN2Xdx5FVmohcxxa7f7+tW5dHEoGOYS7K2YPJVcmhTW5dUWMe5wenZlIxefdGO0/cFjguWpa4PO3vJv1HsXwvk7ZOUm2fTVxUYpIIvlCoyQ+l8lZbDdHp5cyNhvNwzPYFaaDAIIs9nad6zs/Abgr+P4dddz0Xxf8AHUo359VXC5fy/noU6jwmol8yM25u6I9qzlHokN80h7GZe0q12RbFPhVEOZe0/mZdviV0/d4Xy6mMpcBpo90YJ5u6R9qyLGAZAW7F9otCFcILSK0KMpyk9ZNsiyWUouzkKLKUQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAWKx2azA31j7Bmsqq9jb7yW5D3/APxVsuW2p/MnxobrF8jFVEDXizh2dSw1TTOYc93A8/6rOrv0WFmQXeLMPA7z8FiSxne9I9f71NlZHkrWXQq1Bh0szrRt7XHJo71csJ0fihs49N/rHcOwcFk6amZG0MY0NA3ALmC08Tw6unmXMjNyc+dvsrhABSiLRKIREQBERAEREAREQBERAEREAREQBERAEREARQVxTTtYC57g0DeSQAO8oDmRVOu1h4ZEbGo2z+ja5/tAXS+VPDecv2TlKqLX0iyJ3Vrq0XlFXsA0voq15jp5SXhpeWlrmnZBAJzHNw8VYFHKLi9GiSMlJaolEReHoREQBERAFVsQfeV567eAAVoKxFFh93ukePSNge3eVVyq5WbYr4lnHnGGsn8D4w3DL9OQdjfvKzQCWUqauqNa0iQ2WSm9WERFIcBERAEREAREQBERAERRdASi43vAzJA7TZcbKuMnZEjCeQcCfBAdhFAUoAiIgCIoQEoigoDEaTY5FRU7qiXMDJrRvc47mj48FobSHSSqrXl08h2b9GIE+TaOQHE9ZzVz121jjNTwX6IY+Qjm4kNB7gD4rWq2MGiKh5j6syc26TnsXRElfPlG8x4ramqrRekmp3VU8bZXmRzGh2bWNaB6O65JJv1hbEdglKW7Jp4rcthtvcvbc+MJuOjeh5XgucVJvqaj1Ln/AB8n/jP/AN2JbsCw+H6N0cExqIIGxvLCwlmQLSQ49HdvaFmVm5FqsnuRo49TrhtYUEoSta6wNYBhc6koyPKDKSXIiM+q0cX+5cVVSsltid2WRrWsi9YpjFNTDaqJmRj84gHuCrkus7C2mwle7rbE8jxstIVM75HGSR7nvO9zjc+JXEXDmtOHhsEvabZmzz5a+yjfVHrGwuQ2/tGwf0jHMHiRZWamqWSND43tc07i0gjxC8vAgrJYJjVTSPD6aQtN8272OHJzf/SubPDlp7D9TqvPf516HpZLKu6G6Tx18G20bMjbNlZ6rrbxzac7FdfTnS5lBELAOmffybOGW9zuTRdZqrm57NOTQ8yO3frwWSoqWRjake1o5uIA8SsDUad4Yw2NWwn827vcFovF8YqKp+3USued9ibNHYwZALogLSh4avzP0M+fiHPsr1PQNPp7hjzYVbB9K7feFnqaqjkbtRva5p4tII9i8wFdvC8UnpnbdPK6M9R6J7WnIhLPDVp7L9RDxB6+0j02CpVP0C0wbXsLXgMnYBttG5wNwHs6ssxwv1q3hZk4OEtsupowmprVErH4xisVLC6ondsxttcgF1rkAZDPeVkFUtaX5Ln/AGP9xq9rjukl8TyyW2La7HwzWVhZ/wCoI7Y5APaFm8M0gpKj8RURvPJrhfw3rzYvphIIcCQRuIyI7wtWXhsOzZmxz5d0j1KChK1Pq507kMjaOsftB5DYpXedtHIMceN+B7lcdOdKBQQbQG1K87MTeF7Zud+aFmzonGezTkvwvhKG87Gk2llLQtHln3eRdsbc3u7uA6ytV45rJrpyRCRTs4Bmb+95G/sCqVVVSSvMkzy97vOe7efh2BcTQSQACSTYAC5JPADiVq04VcFrLlmbblzm9I8I7NViM8hJlnleT6z3H71n9WI/5nD2SfwrKYBquqZgH1MghaRfZHSk7xuarto/q7pqSZlQyWZz2384t2TcWNwGrm/KpUHBfojqnHtclKX6lzClQpWMawREQBERAFBUogNWa6cKcRDWNHRZtRydQcQWHsuCO9aqXqGpp2SMLJGhzXAhzSLgg8CFq7SHVS7aL6GQbO8QyXy6mycu3xWph5cYx2T407mdlYspS3wKTo7pPV0JJp3jZJu6N42mOO69rixsBmOSvuH63WWtU0rgecTg4eDrEe1a9xPRytpzaalkA9YNLm/WasVtC9r58lblRTdzon80VY3XVcG/cL1gYbPYCo2HH0ZAWHxORVmila4bTXAg7iDceK8uELJYNj1VSODqeZzbeiTtMI5FhyVWzw5fkfr/ACWIZ/8AyRvPTvGzR0UkrfPP4OP6b8ge7M9y8+Ek3JNySSSd5JNySrpprpc2vo4OjsSNkd5Vl757Is5vNpuexUpT4VLrg9VyQ5lu+fHQsmgui5r6gtcSIowHSuG83vstB4E238gt3YfgNJA0Mip42i1vMFz2nietaHwLSqso2uZTPa0OdtOuxriTa28rJ/KTivz7fso/gosnHvtnw+O3JJj301x56mz9JtB6SrjIbGyKX0ZWNAIP51vOHUtEVdM+J7opRZ7HFrhyI9/PvVn+UnFfn2fZR/BVzE6+SolfPKQXvILiAGgkNDRkMtwCkxKra9VPTT6keTbVZzDqZrQDGXUtdE4E7EjhFIOBDyA09ziPautpnirqqtmlJ6IdsMHJkfRHiQT3rDA2zHcoJVny4+Z5nfTQg82WzZ2IW49E9W1MyJslYzysrgHFpPQZcX2QOJ5krVWBRh1VTtO4zxA9m2F6ZAVHxC2UdIxempcwaoy1k0UHSbVrSSxuNIwQygEt2fMcfVc3hfmFpl7C0lrhYgkEHgQbEL1IV5v0vjDa+qA3eXk9688PtnLWMnqe51UYpSR86L4maarhnBIDXgOztdjjZwPcV6PYQQCN29eWn7it5Y7pvFQ08Ldnyk7omERg2sNnznngL95TPpcpR2rl8DCtUYy3dEXa661bRxzMMc0bXsO9rgHNNsxcHrWiMT09xKYn/EGNvBsQDQP2rXKw78ZqzmaqY/vHfFRR8Ps+KRJLPr+DN14nq8w2YG0AicdzougQezce8LS+kODyUdQ+mkIJbYhwyDmu811uCmHSCsb5tXMP3jl1sQxCad3lJ5HSOA2dp2+w4K7j0W1v2par9ypfdXYuI6M64cQQQbEEEHkQbg+ICzWluPOrZxKSbNjYxo6w0F5t1uv4BYNSrLgm1Luv3Kyk1Fx7MLaOqHRtpBr5Wgm5ZCCN1vOf28B2FatXoDVrb+7Ke3qm/btG6p583GrRdy3gwUrNX2LPZSiLFNgIiIAiIgCIiAIigoAV0qDE4JwTBKx4aS07DgbEGxBstYax9OXPL6KkcQ1pLZpQSCSN7G5ZDmVr7Da+aneJaeR0bhbNpte3AjiO1X6sCU4bm9H2KVuZGE9q5+J6cICxtfgNJOLTU0b+1jffZa2wnW1K0BtVTB54vjdsn6hFr96zrda9BbOOYHlsfeDZQPFvg+j+xKsiqa6+pidM9W8McMlTRucwsaXuicdppa0XOwbXB77LVwK2DpdrKdUwvp6aExteC10jyNosIsQGgZX53WvVrYitUP8AZ9jMynW5f6yVCuWrDABVVEpkbeJkTmOyyLpRsgdoFz4LB6TaPy0M5glFxmY32yey+R7eYUqui7HX3RE6ZbFPsZjV7gdFWyPgqTI2QAOj2Hhoc30haxzG/sKv3yU4d60/2g/lWl4ZnscHscWuabtc0kEHqIV8wvWtVxtDZoWTW9LaMbu+wIJVXIqv3bq5PnsWse2nTSxFt+SnDvWn+0H8qj5KcO9af7QfyrN6F6QmvpzUGLyfTczZ29vzeN7D3KwLOlffF6OT1RoKqqS1SRr6q1XYeyN7wZ7ta4i8g3gE+qtNBencS/Eyfq3/AMJXmEK/gWTnu3PXoUM6uMdu1aHf0e/zdP8Ar4v4wvTAXmjR/wDzdP8Ar4v4wvS4UXiXvR+hL4f7sgV5y00/KFV+vf716NK85aZ/lCq/XP8AeufDfxH9P3R74h7i+phSOa7WI1r5pDLIbuNh2BoDQO4BdUldvFKB8Epik3gNdfgWvaHNI6rFa701XxMta6fIYTQuqJ46dhAdI8NBO4X3nuF1urC9W+HRNG3GZncXSm9+xosAO5aQpKl8T2yxus9jg5p5EFbSw7W5HsgVNK8OtmY3BzSedjYjszVLMhfLTy9dO+hdxJ1R139S3nQzDP8AsofqNWotZFBTQVvkaVgY1sbS5rd22bnxsrPi+tolpbSUxBO6SVwy69gb/FaynndI5z3uLnuJLnHMknfdcYdF0ZbrNfpqdZV1bjtgfBWRxnDDB5E5lssLJWk9fnDuPvCxpW5/+GG1+EUrAQ2RkTXRvIuAbZgjkQrORf5Ti30bK1FXmKSXVGmVs/VDpI1t6CU2JJfCTuN/OZ28R2la2rKSSJ5imYWPbk5rt4+I6wuIEjMEgjMEGxB5gjcV1dVG6G30OarHTPX1PUoUrSWAazquBojnYKhoyDi7YkA63WO0rpo3rFgrJ2U4gkY917ElpaNkX3g/csazEth1XBr15Nc+Ey8ooClViwEREAUIiAlQQiICr6U6E0lb0nN8nLwlZYO/aG5w7VrHGtW9fASY2idnAxnp262H7iVKKxTlWVvanx8yvdj1z5a5KrPRTMNnwyNt6zHD7lwHsKItuFjktWZM60mcsNLI/JkT3fRY4+4K26PauK2oIdMPIR8S/wDGH6LPvNkRVMrJnXxEs4+NCT5Nx4HhENJC2CFtmt8SeLieJJU4zhEFVEYaiMPaee8Hm0jMHrCIshN7tdeTU2rTTsawxrVPM07VHM149SXou7nAWPfZVio0JxNhsaOQ9bLOHiCiK7VnWrh6Mp24db5Nq6rcPmgovJzxOjd5V52XCxsbWKuKIqlkt0nJlquKjFJHXrWF0b2gZljgO0ggLRo1b4p8wz7RqhFLTkTq12kV1MbdN396ncwjV/iUdRDI+FoayWNzvwjfNa4E+xbvCIubr5WtOXY6ppjVqogrS+kugWIzVk80cTSx8rnNJkaCWk5ZcFKLyi6VUtY/AXVRsSUjFv1b4rY/gWfaNWzMa0LhrKaFkt45o42tEjbEizc2ng5t+CIpLMyybT6afA4rxq4JpdzXOJas8RiJ2GsmbwLHWPe1wFj2XWOZoPiZNv7G8dZsB43Uop459unYinhV69yxYJqpqHm9XK2Jvqxnbee8jZb7VyaY6v6h07RQ07fItia0dMA7QJve+ZPWiKFZtu/c+3bsSSxK1HboYM6uMU+Yb9o1bk0Wo3w0cEMos9kbWuF72I358VKLm/JnakpaHtVEam3E4NJ9F6auZszNs4eZI3J7ew8R1HJatx3VlXQkug2Z2cNnoyd7Dke4oi8pybKuIvg6tohZ1RUqjDKiM7MkErT1xuH3KwasmEYnDdpGT94I9FEWvOblS9fgZ1dSjYtDfgUoiwEbAREXoP/Z" alt="SENAC EAD">
+  <p class="topo-titulo">SENAC EAD</p>
+  <p class="topo-sub">Curso Técnico em Logística</p>
+</div>
+
+<div class="aluno">
+  <div class="aluno-item">
+    <label>Nome do(a) estudante</label>
+    <span>Paulo Sérgio de Andrade</span>
+  </div>
+  <div class="aluno-item" style="text-align:right">
+    <label>Empresa fictícia</label>
+    <span>Editora Z40</span>
+  </div>
+</div>
+
+
+<!-- ══ INTRODUÇÃO ══ -->
+<div class="intro">
+  <p class="secao-titulo">Introdução</p>
+  <p class="texto">O presente projeto apresenta o planejamento logístico da <strong>Editora Z40</strong>, empresa fictícia de serviços editoriais 100% digitais, desenvolvida no âmbito do Projeto Integrador I do Curso Técnico em Logística do SENAC EAD. A Editora Z40 é especializada em revisão, edição, formatação e produção de conteúdos online, atendendo pessoas físicas e jurídicas em todo o território nacional por meio de uma operação inteiramente virtual.</p>
+  <p class="texto">Nesta primeira etapa, são abordados os fundamentos da empresa: a definição do segmento de mercado, a construção da identidade da marca, a identificação do público-alvo e do portfólio de serviços, o mapeamento completo das necessidades logísticas e a descrição do fluxo operacional de recebimento, processamento e entrega de demandas. Por se tratar de uma empresa sem circulação de mercadorias físicas, o projeto destaca o conceito de <strong>logística digital</strong> — a organização e gestão de processos realizados totalmente no ambiente online, utilizando tecnologia para receber, armazenar, processar e entregar serviços com agilidade, segurança e eficiência.</p>
+  <p class="texto">Todo o conteúdo que se segue reflete as competências da UC01 (Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico), adaptadas à realidade de um negócio digital contemporâneo.</p>
+</div>
+
+
+<!-- ══ SOBRE A EMPRESA & LOGÍSTICA DIGITAL ══ -->
+<p class="secao-titulo">Sobre a empresa e a logística digital</p>
+
+<div class="logistica-bloco">
+  <p>A <strong>Editora Z40</strong> é uma empresa fictícia de serviços editoriais 100% digitais, especializada em revisão, edição, formatação e produção de conteúdos online para pessoas e empresas em todo o Brasil. Seu projeto destaca a <strong>logística digital</strong>, com processos totalmente online de recebimento, armazenamento, gestão e entrega de arquivos, além de planejamento logístico eficiente, baixo custo operacional, uso de tecnologia, organização em nuvem e foco em qualidade, inovação e sustentabilidade.</p>
+</div>
+
+<div class="logistica-def">
+  <p><strong>O que é logística digital?</strong> É a organização e gestão de processos realizados totalmente no ambiente online, usando tecnologia para receber, armazenar, processar e entregar serviços ou informações sem circulação física de mercadorias. Na Editora Z40, isso inclui o envio de arquivos pela internet, conferência digital, armazenamento em nuvem, edição online, controle por sistemas de gestão e entrega final ao cliente por plataformas digitais, garantindo agilidade, redução de custos e eficiência operacional.</p>
+</div>
+
+
+<!-- ══ DESENVOLVIMENTO DA ETAPA 1 ══ -->
+<div class="dev-barra">
+  <p class="dev-label">Desenvolvimento da Etapa 1</p>
+  <p class="dev-uc">UC01: Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico</p>
+</div>
+
+
+<!-- ══ ITEM 1 ══ -->
+<div class="item">
+  <p class="item-num">Item 1</p>
+  <h2>Segmento de mercado</h2>
+  <p class="texto">A empresa <strong>EDITORA Z40</strong> atua no segmento de <strong>e-commerce e serviços digitais</strong>, com foco em edição, revisão e publicação de conteúdo online. O mercado digital de conteúdo está em franca expansão no Brasil e no mundo, impulsionado pelo crescimento das plataformas digitais, redes sociais e pela crescente demanda por conteúdo de qualidade em todas as áreas do conhecimento.</p>
+  <p class="texto">A empresa opera exclusivamente no ambiente virtual, disponibilizando seus serviços pelo site <strong>https://z40.pages.dev/</strong>. Por ser um negócio 100% digital, o alcance geográfico é nacional, sem restrições de localidade para os clientes, qualquer pessoa ou empresa com acesso à internet pode contratar os serviços da EDITORA Z40, independentemente de onde esteja no Brasil.</p>
+  <p class="texto">O segmento de serviços digitais editoriais é altamente estratégico no cenário atual, pois empresas de todos os portes precisam de conteúdo bem escrito, revisado e publicado para se destacar nos meios digitais. Isso inclui desde textos para sites e blogs até materiais corporativos, e-books, artigos acadêmicos e roteiros de vídeo.</p>
+  <p class="texto">Empresas como a Rock Content e a Contentools são referências nacionais nesse mercado e demonstram que há grande espaço para negócios especializados em produção e edição de conteúdo digital. A EDITORA Z40 se diferencia por oferecer um serviço personalizado, com atenção individualizada a cada cliente e entrega com alto padrão de qualidade linguística e editorial.</p>
+  <p class="texto">A escolha por esse segmento se justifica pela baixa necessidade de estrutura física, pelo alto potencial de escala com poucos recursos iniciais e pela demanda crescente de criadores de conteúdo, empreendedores digitais e empresas que precisam de apoio profissional para se comunicar melhor com seu público.</p>
+</div>
+
+
+<!-- ══ ITEM 2 ══ -->
+<div class="item">
+  <p class="item-num">Item 2</p>
+  <h2>Nome da empresa</h2>
+  <p class="texto">O nome escolhido para a empresa é <strong>EDITORA Z40</strong>. Essa denominação moderna e marcante remete diretamente à atividade central do negócio: a edição de conteúdo. O termo "EDITOR" comunica de imediato o propósito da empresa — editar, revisar e aprimorar textos e conteúdos —, enquanto "Z40" representa uma identidade única, tecnológica e diferenciada no universo digital.</p>
+  <p class="texto">O "Z" no nome tem uma dupla simbologia: pode remeter à última letra do alfabeto, sugerindo que a empresa vai do início (A) ao fim (Z) na entrega do conteúdo, garantindo uma solução completa ao cliente; ao mesmo tempo, evoca a ideia de geração Z, conectada ao ambiente digital e às tendências do mercado contemporâneo de comunicação online.</p>
+  <p class="texto">O número "40" complementa a identidade com uma referência a solidez e maturidade, transmitindo confiança e experiência mesmo em um ambiente de negócios dinâmico e em constante evolução. Juntos, <strong>EDITORA e Z40</strong> formam um nome curto, fácil de memorizar, impactante e adequado ao posicionamento digital da empresa.</p>
+  <p class="texto">O site oficial da empresa é <strong>https://z40.pages.dev/</strong>, onde os clientes podem conhecer os serviços, solicitar orçamentos e entrar em contato com a equipe. O endereço digital reforça a identidade da marca, usando o mesmo código "z40" do nome comercial, o que facilita a associação e o reconhecimento da empresa pelos clientes.</p>
+  <p class="texto">A marca EDITORA Z40 foi construída para transmitir profissionalismo, agilidade e inovação, valores essenciais para uma empresa que atua na criação e aperfeiçoamento de conteúdo digital. O nome é versátil o suficiente para atender tanto profissionais autônomos e criadores de conteúdo quanto empresas de médio e grande porte que buscam parceiros editoriais confiáveis.</p>
+</div>
+
+
+<!-- ══ ITEM 3 ══ -->
+<div class="item">
+  <p class="item-num">Item 3</p>
+  <h2>Público-alvo, serviços oferecidos e localização</h2>
+  <p class="texto">O <strong>público-alvo</strong> da EDITORA Z40 é composto por escritores independentes, blogueiros, criadores de conteúdo digital, pequenas e médias empresas, estudantes universitários e profissionais liberais que necessitam de serviços qualificados de revisão e edição de textos. A empresa também atende agências de marketing digital, startups e empreendedores que precisam de conteúdo bem escrito e revisado para suas comunicações institucionais e campanhas digitais.</p>
+  <p class="texto">Os <strong>serviços oferecidos</strong> pela EDITORA Z40 incluem: revisão ortográfica, gramatical e estilística de textos; edição de conteúdo para blogs, sites e redes sociais; formatação e padronização de documentos acadêmicos e corporativos; produção de e-books e materiais digitais; e consultoria em estratégia de conteúdo para marcas que desejam fortalecer sua presença online. Cada serviço é personalizado de acordo com as necessidades e o perfil de cada cliente.</p>
+  <p class="texto">A <strong>localização da empresa</strong> é 100% online, com sede operacional no Brasil e atendimento a clientes em todo o território nacional. Todo o contato com os clientes acontece de forma digital, pelo site <strong>https://z40.pages.dev/</strong>, por e-mail e por aplicativos de mensagem, o que elimina barreiras geográficas e permite que a empresa atenda clientes de qualquer região do país com a mesma agilidade e qualidade.</p>
+  <p class="texto">O modelo de negócio digital permite à EDITORA Z40 manter custos operacionais reduzidos, pois não há necessidade de manter um espaço físico de atendimento ao público, estoque de produtos físicos ou logística de transporte de mercadorias. Isso possibilita oferecer preços competitivos ao mercado e reinvestir as margens em tecnologia e qualificação da equipe.</p>
+  <p class="texto">A decisão de operar exclusivamente no ambiente digital foi estratégica: o e-commerce de serviços tem crescido de forma acelerada no Brasil, especialmente após a pandemia de Covid-19, que acelerou a digitalização de pequenas e médias empresas. Esse contexto criou uma demanda crescente por serviços editoriais online, tornando o momento ideal para o lançamento e expansão da EDITORA Z40 no mercado nacional.</p>
+</div>
+
+
+<!-- ══ ITEM 4 ══ -->
+<div class="item">
+  <p class="item-num">Item 4</p>
+  <h2>Necessidades logísticas</h2>
+  <p class="texto">Os principais <strong>equipamentos</strong> necessários para a operação da EDITORA Z40 são: computadores de alta performance com processadores rápidos e memória RAM adequada para trabalhar com múltiplos documentos simultaneamente; monitores de boa resolução para facilitar a leitura e revisão de textos longos; nobreaks para proteção dos equipamentos contra oscilações de energia; roteadores de alta velocidade e conexão de internet fibra óptica para garantir comunicação ágil com os clientes; e dispositivos móveis (smartphones e tablets) para atendimento e comunicação em tempo real.</p>
+  <p class="texto">Os <strong>materiais e ferramentas digitais</strong> essenciais incluem: licenças de softwares de edição e revisão de texto (Microsoft Office 365, Google Workspace, Grammarly Pro); plataforma de hospedagem e domínio do site https://z40.pages.dev/; ferramentas de gestão de projetos e comunicação interna (Trello, Notion, Slack); sistemas de armazenamento e compartilhamento de arquivos em nuvem (Google Drive, OneDrive); e plataformas de pagamento online seguras (PayPal, Mercado Pago, PagBank) para receber os pagamentos dos clientes com comodidade e segurança.</p>
+  <p class="texto">Em relação aos <strong>produtos e serviços contratados externamente</strong>, a empresa necessita de: serviço de domínio e hospedagem estável do site; assinatura de ferramentas de marketing digital para divulgação dos serviços (Google Ads, Meta Ads); plataformas de reunião virtual (Google Meet, Zoom) para alinhamentos com os clientes; e eventualmente, serviços de tradução ou legendagem para atender demandas de conteúdo bilíngue de clientes que atuam em mercados internacionais.</p>
+  <p class="texto">O <strong>sistema de gestão de demandas e clientes</strong> (CRM) é uma necessidade fundamental para controlar todas as solicitações recebidas, acompanhar o andamento de cada projeto, registrar prazos de entrega e histórico de relacionamento com cada cliente. Sem esse controle, a empresa corre o risco de perder prazos, gerar retrabalho e comprometer a qualidade do atendimento.</p>
+  <p class="texto">Além disso, a empresa precisará investir em <strong>segurança digital</strong> desde o início, incluindo antivírus profissional, backup automático dos arquivos em nuvem e políticas claras de confidencialidade para proteger os documentos e informações dos clientes. Esse investimento inicial na infraestrutura logístico-digital é indispensável para garantir agilidade, qualidade e confiabilidade às operações da EDITORA Z40 desde o primeiro dia de funcionamento.</p>
+</div>
+
+
+<!-- ══ ITEM 5 ══ -->
+<div class="item">
+  <p class="item-num">Item 5</p>
+  <h2>Fluxo logístico básico (UC01)</h2>
+  <p class="texto"><strong>De onde vêm os insumos e demandas:</strong> por se tratar de uma empresa de serviços digitais, a EDITORA Z40 não recebe mercadorias físicas no sentido tradicional. O "insumo" principal da empresa são os arquivos de texto e documentos enviados pelos clientes para edição e revisão. Esses arquivos chegam por meio do formulário de solicitação disponível no site <strong>https://z40.pages.dev/</strong>, por e-mail ou por compartilhamento direto via Google Drive ou outro repositório em nuvem indicado pelo cliente.</p>
+  <p class="texto"><strong>Como são recebidos e conferidos:</strong> ao receber uma nova demanda, o responsável pelo atendimento realiza a conferência do pedido, verificando se todos os arquivos foram enviados corretamente, se as instruções do cliente estão claras (tipo de revisão solicitada, prazo, formato de entrega e referências de estilo) e se o pagamento foi confirmado na plataforma. Qualquer dúvida ou inconsistência é comunicada ao cliente antes do início do trabalho para evitar retrabalho e garantir alinhamento total.</p>
+  <p class="texto"><strong>Onde são armazenados:</strong> após a conferência, os arquivos recebidos são organizados em pastas específicas no sistema de armazenamento em nuvem da empresa, identificadas pelo nome do cliente, número do projeto e data de recebimento. Esse sistema de organização digital substitui o depósito físico de uma empresa tradicional e garante que qualquer membro da equipe possa acessar o material correto com agilidade, em qualquer momento e de qualquer dispositivo.</p>
+  <p class="texto"><strong>Como são processados e editados:</strong> após o registro e a organização dos arquivos, o projeto é distribuído ao editor responsável de acordo com a especialidade exigida (revisão gramatical, edição de estilo, formatação acadêmica, produção de conteúdo etc.). O editor realiza o trabalho aplicando os padrões de qualidade da EDITORA Z40, utilizando as ferramentas de revisão e os guias de estilo acordados com o cliente. Ao concluir, o arquivo revisado passa por uma verificação final antes de ser liberado para entrega.</p>
+  <p class="texto"><strong>Como chegam ao cliente:</strong> o arquivo finalizado é entregue ao cliente pelo canal combinado no início do projeto — geralmente por e-mail, Google Drive ou plataforma própria. O cliente recebe uma notificação com os detalhes da entrega e tem um prazo para solicitação de ajustes inclusos no serviço. Toda a operação é registrada no sistema de gestão da empresa para controle de qualidade, rastreabilidade dos projetos e histórico de relacionamento com cada cliente, garantindo transparência e confiança em todo o processo logístico digital.</p>
+</div>
+
+
+<!-- ══ DOI ══ -->
+<div class="doi">
+  <div class="doi-icone">📄</div>
+  <div class="doi-texto">
+    <label>Publicação vinculada — Zenodo</label>
+    <p class="doi-titulo">Projeto Integrador I · Etapa 1 · Editora Z40</p>
+    <p class="doi-autor">Paulo Sérgio de Andrade · SENAC EAD · Curso Técnico em Logística</p>
+    <a href="https://doi.org/10.5281/zenodo.20140521" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20140521 ↗</a>
+  </div>
+</div>
+
+<div class="rodape">
+  SENAC EAD · Curso Técnico em Logística · Projeto Integrador I · Etapa 1 · EDITORA Z40
+</div>
+
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--              ETAPA 2                      -->
+<!-- ══════════════════════════════════════════ -->
+
+<div class="intro" style="margin-top:48px;">
+  <p class="secao-titulo">Introdução da Etapa 2: Compras e Suprimentos</p>
+  <p class="texto">Após a definição dos fundamentos da empresa na primeira etapa, incluindo segmento de mercado, identidade da marca, público-alvo, portfólio de serviços e fluxo logístico básico, esta segunda etapa avança para o planejamento do setor de <strong>compras e suprimentos</strong> da EDITORA Z40. Embora a empresa opere exclusivamente no ambiente digital, sem aquisição de mercadorias físicas, a lógica de compras permanece essencial: é preciso garantir que todas as ferramentas, licenças, plataformas e serviços tecnológicos necessários estejam disponíveis no momento certo, com qualidade adequada e pelo melhor custo possível.</p>
+  <p class="texto">Um planejamento de compras bem estruturado evita interrupções na operação editorial, reduz desperdícios financeiros com contratações desnecessárias e permite à empresa negociar condições mais vantajosas com seus fornecedores. No contexto da EDITORA Z40, isso se traduz na gestão eficiente de assinaturas de software, serviços de hospedagem, ferramentas de marketing digital e demais insumos tecnológicos que sustentam toda a cadeia de valor da empresa.</p>
+  <p class="texto">Nesta etapa, são desenvolvidos quatro itens fundamentais: a elaboração de uma lista inicial de fornecedores digitais, organizados por categoria de serviço; a simulação completa do processo de compra, desde a solicitação até a conferência do recebimento; a montagem de um cronograma de compras que considera a periodicidade e a previsão de demanda de cada insumo; e a definição dos critérios objetivos que a empresa adotará para selecionar e negociar com seus fornecedores. Todo o conteúdo reflete as competências da UC02, aplicadas à realidade de uma empresa de serviços editoriais 100% digitais.</p>
+</div>
+
+<div class="dev-barra">
+  <p class="dev-label">Desenvolvimento da Etapa 2</p>
+  <p class="dev-uc">UC02: Compras e Suprimentos</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 1</p>
+  <h2>Lista inicial de fornecedores</h2>
+  <p class="texto">Por ser uma empresa de serviços editoriais 100% digitais, a <strong>EDITORA Z40</strong> não adquire matérias-primas físicas nem depende de fornecedores tradicionais de mercadorias. Os fornecedores da empresa são prestadores de serviços digitais e desenvolvedores de soluções tecnológicas que sustentam toda a operação editorial, desde a recepção dos arquivos dos clientes até a entrega final do conteúdo revisado e editado. A escolha de cada fornecedor leva em conta três critérios fundamentais: custo-benefício, qualidade do serviço e proximidade operacional. No contexto digital, esse critério se traduz em disponibilidade imediata de acesso, servidores localizados no Brasil ou com baixa latência e suporte em português, fatores que substituem com vantagem a proximidade geográfica tradicional.</p>
+  <p class="texto">O primeiro grupo de fornecedores é composto pelas <strong>empresas de software de produtividade e edição</strong>. A Microsoft, por meio do pacote Microsoft 365 (Word, Excel, OneDrive), é fornecedora essencial, pois oferece as ferramentas de edição de texto e armazenamento em nuvem mais utilizadas no mercado editorial. O Google, com o Google Workspace (Docs, Drive, Meet), complementa a operação com ferramentas colaborativas de alta disponibilidade e custo acessível. A Grammarly Inc., com o Grammarly Pro, fornece tecnologia de revisão gramatical e estilística baseada em inteligência artificial, fundamental para garantir a qualidade dos textos editados pela empresa.</p>
+  <p class="texto">O segundo grupo inclui os <strong>fornecedores de infraestrutura digital e hospedagem</strong>. A Cloudflare Pages é responsável pela hospedagem do site oficial da empresa (https://z40.pages.dev/), oferecendo alta velocidade de carregamento, segurança SSL e custo zero na camada gratuita. Para serviços de domínio e DNS, a empresa conta com o Registro.br ou a Namecheap, que oferecem preços competitivos e estabilidade comprovada. A Amazon Web Services (AWS) ou o Google Cloud Platform podem ser acionados futuramente para escalabilidade de armazenamento e processamento.</p>
+  <p class="texto">O terceiro grupo é formado pelos <strong>fornecedores de ferramentas de gestão e comunicação</strong>. A Atlassian, com o Trello, fornece a plataforma de gerenciamento de projetos e tarefas utilizada pela equipe editorial para acompanhar cada demanda do início ao fim. A Notion Labs oferece o Notion, ferramenta versátil para documentação interna, wikis de estilo editorial e bases de conhecimento. A Slack Technologies fornece a plataforma de comunicação interna da equipe, garantindo agilidade no atendimento e na troca de informações entre editores e gestores.</p>
+  <p class="texto">O quarto grupo abrange os <strong>fornecedores de marketing digital e pagamentos</strong>. O Google, por meio do Google Ads, e a Meta, com o Meta Ads (Facebook e Instagram), são os principais fornecedores de publicidade digital para captação de novos clientes. Para processamento de pagamentos, a empresa utiliza o Mercado Pago, o PayPal e o PagBank, plataformas consolidadas no mercado brasileiro que oferecem segurança nas transações, taxas competitivas e integração simples com o site da empresa. Por fim, a Zoom Video Communications fornece a plataforma de videoconferência utilizada para reuniões com clientes e alinhamentos de briefing.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 2</p>
+  <h2>Simulação do processo de compra</h2>
+  <p class="texto">O processo de compra da <strong>EDITORA Z40</strong> é inteiramente digital e segue um fluxo estruturado para garantir que todas as aquisições sejam feitas com planejamento, controle e aprovação adequados. Como a empresa não compra produtos físicos, o processo de compra se refere à contratação e renovação de licenças de software, assinaturas de plataformas, serviços de hospedagem, ferramentas de marketing digital e demais insumos tecnológicos necessários para a operação editorial.</p>
+  <p class="texto"><strong>Quem faz o pedido:</strong> a solicitação de compra é feita pelo responsável pela área que identifica a necessidade. Por exemplo, se a equipe editorial precisa de uma nova licença do Grammarly Pro, o editor-chefe preenche um formulário interno de solicitação de compra no Notion, descrevendo o item desejado, a justificativa da necessidade, o fornecedor indicado, o valor estimado e o prazo ideal de contratação. No caso de ferramentas de marketing, a solicitação parte do responsável pela área de captação de clientes.</p>
+  <p class="texto"><strong>Quem autoriza a compra:</strong> toda solicitação de compra passa pela aprovação do gestor administrativo-financeiro da empresa, que analisa o orçamento disponível, verifica se o item solicitado está previsto no planejamento de compras e avalia se há alternativas mais vantajosas no mercado. Para compras acima de um valor previamente estabelecido (por exemplo, R$ 500,00), a aprovação final cabe ao proprietário da empresa, garantindo controle total sobre os gastos.</p>
+  <p class="texto"><strong>Como o pedido é feito:</strong> após a aprovação, a compra é realizada diretamente no site do fornecedor, por meio de assinatura online ou contratação via e-mail. O comprovante de pagamento, a nota fiscal digital e o contrato de licença são imediatamente salvos na pasta de compras do Google Drive da empresa, organizada por mês e por fornecedor. Em caso de fornecedores que exigem negociação prévia (como serviços de tradução ou consultorias externas), o contato é feito por e-mail ou videoconferência antes da formalização.</p>
+  <p class="texto"><strong>Como os produtos são recebidos e conferidos:</strong> como se trata de compras digitais, o recebimento é imediato. Após a contratação, o responsável pela área verifica se o acesso à ferramenta ou plataforma está ativo e funcionando corretamente, testa as funcionalidades principais e confirma o recebimento no sistema de controle interno. Caso haja qualquer problema (licença não ativada, funcionalidade indisponível ou cobrança divergente), o gestor entra em contato com o suporte do fornecedor para resolução antes de registrar a compra como concluída.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 3</p>
+  <h2>Cronograma de compras</h2>
+  <p class="texto">O cronograma de compras da <strong>EDITORA Z40</strong> é organizado de acordo com a natureza e a periodicidade de cada insumo digital necessário para a operação da empresa. Como os serviços editoriais possuem demanda relativamente constante ao longo do ano, com picos em períodos acadêmicos e de final de ano fiscal, o planejamento de compras antecipa essas variações para garantir que nenhuma ferramenta ou licença fique indisponível em momentos críticos de alta demanda.</p>
+  <p class="texto"><strong>Compras anuais:</strong> no início de cada ano (janeiro), a empresa realiza a renovação das licenças anuais dos principais softwares de operação: Microsoft 365, Google Workspace, Grammarly Pro e Notion. Essas renovações são programadas para o mesmo período, facilitando o controle financeiro e evitando esquecimentos. Também em janeiro é renovado o domínio e mantida a configuração da hospedagem (Cloudflare Pages, que possui camada gratuita, mas exige renovação periódica do domínio e eventuais ajustes técnicos), garantindo que a presença online da empresa não sofra interrupções.</p>
+  <p class="texto"><strong>Compras mensais:</strong> todo mês, no primeiro dia útil, são pagas as assinaturas de ferramentas de comunicação e gestão de projetos (Trello Premium, Slack Pro) e as plataformas de pagamento online (taxas do Mercado Pago, PayPal e PagBank). As campanhas de marketing digital no Google Ads e Meta Ads são contratadas e renovadas mensalmente, com orçamento ajustado conforme a demanda de clientes projetada para o mês seguinte. Vale destacar que algumas plataformas operam em regime anual e outras em assinatura mensal, conforme o modelo comercial de cada fornecedor – o que explica, por exemplo, o Notion ser renovado anualmente enquanto o Trello Premium segue cobrança mensal.</p>
+  <p class="texto"><strong>Compras trimestrais:</strong> a cada três meses (março, junho, setembro e dezembro), a empresa avalia a necessidade de contratar serviços complementares, como tradução e legendagem para projetos bilíngues, consultorias externas de estratégia de conteúdo ou treinamentos para a equipe editorial. Também trimestralmente é feita a aquisição ou atualização de templates e guias de estilo editoriais utilizados na padronização dos trabalhos entregues aos clientes.</p>
+  <p class="texto"><strong>Compras sob demanda:</strong> alguns insumos são adquiridos conforme a necessidade específica de projetos. Por exemplo, se um cliente solicita um e-book com design gráfico elaborado, a empresa pode contratar pontualmente um designer freelancer ou adquirir uma licença temporária de software de diagramação (como o Canva Pro ou Adobe InDesign). Essas compras eventuais seguem o mesmo fluxo de solicitação e aprovação descrito no processo de compra, garantindo controle e rastreabilidade mesmo em aquisições não programadas.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 4</p>
+  <h2>Critérios para escolher e negociar com fornecedores</h2>
+  <p class="texto">A <strong>EDITORA Z40</strong> adota critérios claros e objetivos para selecionar seus fornecedores de serviços e ferramentas digitais. Esses critérios foram definidos para garantir que toda aquisição contribua diretamente para a qualidade dos serviços prestados aos clientes, a eficiência operacional e a saúde financeira da empresa. Os cinco critérios principais são: preço justo, qualidade comprovada do serviço, suporte técnico eficiente, flexibilidade contratual e reputação no mercado.</p>
+  <p class="texto"><strong>Preço justo e custo-benefício:</strong> a empresa prioriza fornecedores que ofereçam planos com boa relação custo-benefício, considerando não apenas o valor da mensalidade ou anuidade, mas também os recursos inclusos, os limites de uso e os custos adicionais de escala. São comparados no mínimo três fornecedores antes de cada contratação, e sempre que possível a empresa opta por planos anuais com desconto ou condições especiais para startups e pequenas empresas.</p>
+  <p class="texto"><strong>Qualidade e confiabilidade do serviço:</strong> o fornecedor deve apresentar histórico comprovado de estabilidade, com alto índice de disponibilidade (uptime acima de 99%) e atualizações frequentes que garantam segurança e compatibilidade com as demais ferramentas utilizadas pela empresa. A empresa consulta avaliações em plataformas especializadas (como G2, Capterra e Trustpilot) e verifica cases de uso antes de fechar qualquer contrato.</p>
+  <p class="texto"><strong>Suporte técnico e prazo de resposta:</strong> como a operação da EDITORA Z40 é inteiramente digital, qualquer falha em uma ferramenta pode paralisar a produção editorial. Por isso, a empresa exige que os fornecedores ofereçam suporte técnico ágil, preferencialmente com atendimento em português e tempo de resposta inferior a 24 horas. Fornecedores que disponibilizam chat ao vivo, base de conhecimento detalhada e comunidade ativa de usuários recebem prioridade na seleção.</p>
+  <p class="texto"><strong>Como será feita a negociação:</strong> a negociação com fornecedores é conduzida pelo gestor administrativo-financeiro, que entra em contato direto com os departamentos comerciais das empresas fornecedoras por e-mail ou videoconferência. A estratégia de negociação inclui solicitar períodos de teste gratuito antes da contratação definitiva, negociar descontos para pagamento antecipado ou planos plurianuais, buscar condições diferenciadas por volume de licenças e manter um cadastro atualizado de fornecedores alternativos para fortalecer o poder de barganha. Toda negociação é documentada e arquivada no sistema de gestão da empresa, assegurando transparência e possibilitando renegociações futuras com base em dados históricos.</p>
+</div>
+
+<!-- ══ DOI ETAPA 2 ══ -->
+<div class="doi">
+  <div class="doi-icone">📄</div>
+  <div class="doi-texto">
+    <label>Publicação vinculada — Zenodo</label>
+    <p class="doi-titulo">Projeto Integrador I · Etapa 2 · Editora Z40</p>
+    <p class="doi-autor">Paulo Sérgio de Andrade · SENAC EAD · Curso Técnico em Logística</p>
+    <a href="https://doi.org/10.5281/zenodo.20172507" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20172507 ↗</a>
+  </div>
+</div>
+
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--              ETAPA 3                      -->
+<!-- ══════════════════════════════════════════ -->
+
+<div class="intro" style="margin-top:48px;">
+  <p class="secao-titulo">Introdução da Etapa 3: Planejamento do Armazém e Estoques</p>
+  <p class="texto">Nas etapas anteriores, foram estabelecidos os pilares fundamentais da <strong>EDITORA Z40</strong>: o segmento de mercado, a identidade da marca, o público-alvo, o portfólio de serviços, o fluxo logístico básico de recebimento e entrega, além do planejamento completo de compras e suprimentos, com a seleção de fornecedores digitais e a definição de cronogramas e critérios de negociação. Com essa base sólida construída, chegou o momento de avançar para o próximo nível da operação: o <strong>planejamento do armazém e dos estoques</strong>, etapa essencial para garantir que todos os recursos, ferramentas e ativos digitais da empresa estejam sempre organizados, disponíveis e acessíveis no momento certo.</p>
+  <p class="texto">Por operar exclusivamente no ambiente digital, a EDITORA Z40 não possui armazém físico, prateleiras ou depósito de mercadorias no sentido convencional. No entanto, os princípios da logística de armazenagem e controle de estoques se aplicam plenamente à sua realidade: o "armazém" da empresa é o seu <strong>repositório em nuvem</strong>, composto pela estrutura organizada de pastas, plataformas e sistemas digitais que recebem, guardam, processam e disponibilizam todos os ativos necessários para a execução dos serviços editoriais. Gerir esse armazém digital com eficiência é tão importante quanto organizar um depósito físico em uma empresa tradicional.</p>
+  <p class="texto">Nesta terceira etapa, são desenvolvidos quatro itens fundamentais: o levantamento detalhado dos equipamentos, materiais e produtos que compõem o ambiente operacional da empresa; a proposta de um leiaute funcional para o armazém digital, com a definição de setores, fluxos e critérios de organização dos arquivos e recursos; o estabelecimento de uma política de controle de estoques digitais, com a escolha e justificativa do método mais adequado à realidade da empresa; e a definição da periodicidade de reposição e do nível de segurança de estoque para garantir a continuidade operacional sem falhas ou desperdícios. Todo o conteúdo está alinhado às competências da <strong>UC03</strong>, aplicadas à gestão de armazéns e estoques em um modelo de negócio 100% digital.</p>
+</div>
+
+<div class="dev-barra">
+  <p class="dev-label">Desenvolvimento da Etapa 3</p>
+  <p class="dev-uc">UC03: Planejamento do Armazém e Estoques</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 1</p>
+  <h2>Equipamentos, materiais e produtos necessários à organização do armazém</h2>
+  <p class="texto">O armazém da <strong>EDITORA Z40</strong> é inteiramente digital, o que não elimina, mas transforma, a necessidade de equipamentos, materiais e produtos para seu funcionamento eficiente. Os equipamentos físicos de suporte são a base que sustenta toda a operação: computadores de alta performance com processadores de múltiplos núcleos, memória RAM de no mínimo 16 GB e armazenamento SSD são indispensáveis para lidar com grandes volumes de arquivos simultaneamente, realizar edições complexas e manter múltiplas plataformas abertas sem perda de velocidade ou travamentos. Monitores de boa resolução (Full HD ou superior) facilitam a leitura e revisão de textos longos, reduzindo a fadiga visual da equipe e aumentando a produtividade. Nobreaks garantem a proteção dos equipamentos contra oscilações de energia elétrica, evitando a perda de dados em andamento.</p>
+  <p class="texto">A <strong>infraestrutura de conectividade</strong> é um equipamento tão crítico quanto qualquer prateleira em um armazém físico: roteadores de alta velocidade, conexão de internet por fibra óptica com velocidade mínima de 200 Mbps e, preferencialmente, um plano de internet de contingência (4G/5G) para garantir continuidade operacional em caso de falha na conexão principal. Dispositivos móveis, smartphones e tablets, complementam a estrutura de comunicação e permitem que a equipe responda a clientes, aprove entregas e acompanhe projetos em tempo real, de qualquer local. HDs externos e pen drives de alta capacidade servem como camada adicional de backup físico para os arquivos mais críticos da empresa.</p>
+  <p class="texto">Os <strong>materiais digitais que compõem o estoque operacional</strong> da empresa incluem: licenças ativas dos softwares de edição e revisão (Microsoft 365 com Word, Excel e OneDrive; Google Workspace com Docs, Drive e Meet; Grammarly Pro); banco de templates editoriais padronizados para diferentes tipos de projetos (documentos acadêmicos, e-books, posts de blog, materiais corporativos); guias de estilo e manuais de redação utilizados como referência técnica pelos editores; e modelos de contratos, formulários de solicitação de serviço e documentos administrativos digitais. Esses materiais equivalem, no contexto digital, às caixas, etiquetas e formulários de controle que um armazém físico utiliza para organizar e identificar seus produtos.</p>
+  <p class="texto">Os <strong>produtos armazenados</strong> no repositório digital da EDITORA Z40 podem ser classificados em quatro categorias principais: (1) arquivos recebidos de clientes que aguardam processamento, equivalentes ao estoque de matéria-prima; (2) projetos em edição ativa, equivalentes ao estoque em processo de fabricação; (3) projetos finalizados e aprovados que aguardam entrega, equivalentes ao estoque de produtos acabados; e (4) acervo histórico de projetos já entregues, mantido por prazo definido para fins de auditoria, consulta e retrabalhos eventuais. Cada categoria ocupa um setor específico no repositório em nuvem e possui regras próprias de acesso, organização e retenção de dados.</p>
+  <p class="texto">Por fim, os <strong>recursos de segurança e controle do armazém digital</strong> são componentes fundamentais do inventário operacional da empresa: software antivírus e antimalware profissional instalado em todos os equipamentos; sistema de backup automático configurado para gerar cópias de segurança diárias de todos os arquivos em nuvem; política de senhas fortes e autenticação em dois fatores para todos os sistemas e plataformas; e contratos de confidencialidade (NDAs) firmados com todos os colaboradores, garantindo que os documentos dos clientes estejam protegidos em todas as etapas do processo. Esses recursos não apenas protegem os ativos digitais da empresa como também reforçam a confiança dos clientes na EDITORA Z40 como parceira editorial segura e responsável.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 2</p>
+  <h2>Leiaute do armazém digital</h2>
+  <p class="texto">O leiaute do armazém da <strong>EDITORA Z40</strong> corresponde à <strong>arquitetura de organização do repositório em nuvem</strong>, estruturada para refletir com precisão o fluxo operacional da empresa: recebimento, processamento, revisão final, entrega e arquivamento. Assim como em um armazém físico bem planejado, cada "setor" do repositório digital possui uma função específica, acesso controlado e regras claras de entrada e saída de arquivos. A plataforma principal utilizada é o <strong>Google Drive Compartilhado</strong> (Google Workspace), que permite o acesso simultâneo de toda a equipe com controle granular de permissões, além de integração com as demais ferramentas utilizadas na operação.</p>
+  <p class="texto">A estrutura do repositório é dividida em <strong>seis setores principais</strong>, organizados de forma sequencial para espelhar o fluxo produtivo da empresa. O <strong>Setor de Entrada (01_RECEBIDOS)</strong> é onde chegam todos os arquivos enviados pelos clientes logo após a confirmação do pedido e do pagamento. Neste setor, o responsável pelo atendimento realiza a triagem inicial, verifica se os arquivos estão completos e em formato adequado, e registra o projeto no sistema de gestão. Nenhum arquivo permanece neste setor por mais de 24 horas: após a triagem, é imediatamente movido para o próximo setor ou devolvido ao cliente para correção de pendências. Essa agilidade na entrada evita o acúmulo desordenado de demandas e garante que nenhum projeto seja esquecido ou duplicado.</p>
+  <p class="texto">O <strong>Setor de Produção (02_EM_PRODUCAO)</strong> é o coração operacional do armazém digital, equivalente ao setor de estoque em processo de uma empresa manufatureira. Cada projeto em edição ativa é armazenado aqui, dentro de subpastas nomeadas com o código do projeto, o nome do cliente e a data de prazo de entrega, por exemplo: <em>PRJ-2025-047_ClienteABC_Prazo20jan</em>. Cada editor tem acesso apenas às subpastas dos projetos sob sua responsabilidade, garantindo organização e privacidade entre os membros da equipe. O <strong>Setor de Revisão Final (03_REVISAO_QA)</strong> recebe os projetos concluídos pelo editor antes de irem para entrega, onde passam por verificação de qualidade realizada pelo editor-chefe ou gestor de projeto.</p>
+  <p class="texto">O <strong>Setor de Expedição (04_PRONTOS_PARA_ENTREGA)</strong> reúne os arquivos aprovados na revisão final e aguardando envio ao cliente. Neste setor, os arquivos já estão no formato e na nomenclatura combinados com o cliente, prontos para serem compartilhados via Google Drive, enviados por e-mail ou disponibilizados pela plataforma acordada. O <strong>Setor de Arquivo (05_ENTREGUES_HISTORICO)</strong> armazena todos os projetos já concluídos e entregues, organizados por ano, mês e cliente. Os arquivos neste setor permanecem disponíveis por um período mínimo de 12 meses para consulta em caso de solicitações de ajuste, auditoria ou reaproveitamento de materiais. Por fim, a <strong>Biblioteca de Recursos (00_TEMPLATES_RECURSOS)</strong> centraliza todos os modelos, guias de estilo, checklists e materiais de referência utilizados pela equipe, com acesso liberado a todos os colaboradores e atualização periódica pelo gestor editorial.</p>
+  <p class="texto">O controle de acesso ao armazém digital segue uma hierarquia de três níveis: o <strong>gestor administrativo</strong> tem acesso completo a todos os setores, podendo criar, editar, mover e excluir arquivos em qualquer área do repositório; os <strong>editores</strong> têm acesso de leitura e edição apenas ao Setor de Produção (nas subpastas de seus projetos) e à Biblioteca de Recursos, sem permissão para acessar os setores de outros colaboradores; e os <strong>colaboradores externos eventuais</strong> (como freelancers contratados pontualmente) recebem acesso temporário e restrito a uma subpasta específica, revogado automaticamente após a conclusão do projeto. Esse modelo de leiaute e controle de acesso garante que o armazém digital da EDITORA Z40 funcione com a mesma eficiência, segurança e organização de um depósito físico bem gerido, sem os custos e limitações do espaço físico.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 3</p>
+  <h2>Política de controle de estoques</h2>
+  <p class="texto">A política de controle de estoques da <strong>EDITORA Z40</strong> foi definida considerando as particularidades de uma empresa de serviços digitais, em que o "estoque" não é composto por mercadorias físicas, mas por ativos intangíveis, como licenças de software, capacidade de armazenamento em nuvem, projetos em andamento e recursos operacionais digitais. Após análise dos métodos disponíveis, a empresa adotou a <strong>Curva ABC</strong> como método principal de gestão de estoques, complementada pela lógica do <strong>Just in Time</strong> para insumos de uso eventual. Essa combinação permite que a empresa concentre sua atenção e recursos nos ativos mais críticos para a operação, sem desperdiçar capital com licenças subutilizadas ou capacidade de armazenamento excessiva.</p>
+  <p class="texto">A <strong>Curva ABC</strong> classifica os itens do estoque em três categorias segundo sua criticidade e impacto para a operação. Os itens da <strong>Classe A</strong>, os mais críticos, que representam a maior parte do valor operacional, são as licenças dos softwares essenciais: Microsoft 365, Google Workspace e Grammarly Pro. Esses três itens sustentam diretamente 100% dos projetos editoriais da empresa e, portanto, não podem em hipótese alguma ficar indisponíveis. Também compõem a Classe A a hospedagem e o domínio do site (https://z40.pages.dev/), pois qualquer interrupção afeta diretamente a captação de novos clientes e a imagem da empresa. Esses itens são monitorados semanalmente, com alertas configurados para renovação com antecedência mínima de 30 dias do vencimento.</p>
+  <p class="texto">Os itens da <strong>Classe B</strong> têm importância operacional relevante, porém seu impacto imediato em caso de interrupção é menor, pois existem alternativas de curto prazo. Fazem parte desta categoria: Trello Premium e Notion (gestão de projetos), Slack Pro (comunicação interna), Zoom (videoconferências com clientes) e as plataformas de pagamento (Mercado Pago, PayPal, PagBank). A gestão desses itens é feita mensalmente, com revisão do uso real antes de cada renovação para verificar se o plano contratado ainda é adequado à demanda atual. Os itens da <strong>Classe C</strong> são insumos de uso ocasional e baixo impacto imediato: licenças pontuais de softwares de diagramação (Canva Pro, Adobe InDesign), serviços de tradução eventualmente terceirizados e ferramentas de análise de conteúdo contratadas por projeto. Esses itens são geridos pelo método <strong>Just in Time</strong>, adquiridos apenas quando há demanda concreta identificada, evitando gastos desnecessários com recursos que ficariam ociosos entre projetos.</p>
+  <p class="texto">Além da Curva ABC, a empresa aplica o conceito de <strong>PEPS (Primeiro a Entrar, Primeiro a Sair)</strong> para a gestão da fila de projetos no Setor de Produção do armazém digital. O conceito foi adaptado ao fluxo digital de projetos, garantindo que os trabalhos sejam processados na ordem em que chegam, salvo em casos de prioridade explicitamente acordada com o cliente mediante contrato específico. Esse critério garante equidade no atendimento, previsibilidade de prazo para os clientes e evita que projetos mais antigos fiquem represados enquanto novas demandas são priorizadas. A ordem de entrada de cada projeto é registrada no sistema de gestão (Trello/Notion) com data e hora de recebimento, gerando um histórico auditável de toda a fila de produção.</p>
+  <p class="texto">A política de controle de estoques da EDITORA Z40 também prevê uma <strong>revisão trimestral completa</strong> de todos os ativos digitais, na qual o gestor administrativo avalia quais ferramentas e licenças estão sendo efetivamente utilizadas, quais podem ser rebaixadas para planos mais econômicos e quais estão subutilizadas a ponto de justificar cancelamento ou substituição por alternativas mais eficientes. Essa revisão periódica evita o acúmulo de gastos com recursos desnecessários, o equivalente digital do "estoque encalhado" de uma empresa tradicional, e garante que o orçamento tecnológico da empresa esteja sempre alinhado à realidade operacional e às metas de crescimento da EDITORA Z40.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 4</p>
+  <h2>Frequência de reposição e nível de segurança do estoque</h2>
+  <p class="texto">A definição da <strong>frequência de reposição e do nível de segurança do estoque</strong> é uma das decisões mais estratégicas na gestão logística da <strong>EDITORA Z40</strong>, pois garante que nenhuma ferramenta, licença ou recurso digital fique indisponível durante a operação editorial, situação que poderia causar atrasos em projetos, prejudicar a experiência dos clientes e comprometer a reputação da empresa. Para cada categoria de ativo, foram definidos a periodicidade de reposição, o prazo de antecedência para renovação e o nível mínimo de segurança abaixo do qual a empresa não pode operar sem risco de interrupção. Esses parâmetros foram estabelecidos com base no histórico de uso, na criticidade de cada recurso e nas características contratuais de cada fornecedor.</p>
+  <p class="texto">Para os <strong>itens da Classe A</strong> (licenças essenciais e hospedagem), a frequência de reposição é anual, com renovação obrigatória realizada com <strong>antecedência mínima de 30 dias</strong> em relação ao vencimento. O nível de segurança exigido é de 100% de disponibilidade contínua: não há margem tolerável para interrupção desses recursos. Para garantir isso, a empresa adota duas medidas complementares: (1) configuração de alertas automáticos no sistema de gestão para notificar o gestor com 45 e 30 dias de antecedência do vencimento de cada licença; e (2) manutenção de uma reserva financeira equivalente a pelo menos um mês de custo das ferramentas da Classe A, garantindo que uma renovação emergencial possa ser realizada mesmo em cenários de restrição orçamentária temporária.</p>
+  <p class="texto">Os <strong>itens da Classe B</strong> são geridos com reposição mensal, renovada sempre no primeiro dia útil de cada mês. O nível de segurança para esses itens é de <strong>continuidade garantida por no mínimo 15 dias adicionais</strong> após o vencimento em caso de falha no processo de renovação, o que na prática significa que a empresa deve iniciar o processo de renovação com quinze dias de antecedência, não apenas no vencimento. As plataformas de pagamento (Mercado Pago, PayPal, PagBank) recebem atenção especial nesta categoria: como são o canal de recebimento de receitas da empresa, qualquer interrupção impacta diretamente o fluxo de caixa. Por isso, a empresa mantém contas ativas em todas as três plataformas simultaneamente, de forma que uma eventual falha em uma delas não comprometa a capacidade de receber pagamentos.</p>
+  <p class="texto">Em relação à <strong>capacidade de armazenamento em nuvem</strong>, que corresponde ao "espaço físico" do armazém digital, a EDITORA Z40 estabelece como nível de segurança a manutenção de no mínimo <strong>30% de espaço livre</strong> no repositório principal (Google Drive) em todos os momentos. Quando a ocupação superar 70% da capacidade contratada, o gestor deve iniciar imediatamente o processo de expansão do plano de armazenamento ou de arquivamento e exclusão de projetos antigos que já ultrapassaram o prazo de retenção definido na política interna. Esse monitoramento é feito semanalmente durante as reuniões de gestão operacional. Para o backup em nuvem secundário (OneDrive), o nível de segurança mínimo é de 40% de espaço livre, garantindo margem suficiente para absorver um eventual aumento repentino de volume de projetos.</p>
+  <p class="texto">Por fim, o <strong>nível de segurança do estoque de projetos em produção</strong>, ou seja, a capacidade de absorver novas demandas sem comprometer a qualidade e os prazos dos projetos já em andamento, é definido em função da capacidade produtiva da equipe editorial. A EDITORA Z40 estabelece como parâmetro de segurança que o Setor de Produção nunca deve ultrapassar <strong>80% da capacidade máxima de projetos simultâneos</strong> da equipe. Quando esse limite é atingido, o gestor ativa o protocolo de contenção de demanda: novos projetos recebem prazo de início estendido ou são encaminhados a editores parceiros previamente cadastrados, evitando sobrecarga da equipe e garantindo a qualidade de cada entrega. Esse indicador é monitorado diariamente pelo sistema de gestão de projetos (Trello), com atualização em tempo real do volume de projetos ativos por editor, assegurando visibilidade total sobre a saúde operacional do armazém digital da EDITORA Z40.</p>
+</div>
+
+<!-- ══ DOI ETAPA 3 ══ -->
+<div class="doi">
+  <div class="doi-icone">📄</div>
+  <div class="doi-texto">
+    <label>Publicação vinculada — Zenodo</label>
+    <p class="doi-titulo">Projeto Integrador I · Etapa 3 · Editora Z40</p>
+    <p class="doi-autor">Paulo Sérgio de Andrade · SENAC EAD · Curso Técnico em Logística</p>
+    <a href="https://doi.org/10.5281/zenodo.20211235" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20211235 ↗</a>
+  </div>
+</div>
+
+<div class="rodape">
+  SENAC EAD · Curso Técnico em Logística · Projeto Integrador I · Etapa 3 · EDITORA Z40
+</div>
+
+</body>
+</html>
