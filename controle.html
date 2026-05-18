@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Controle - Almoxarifado & Arquivo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161822;
+  --bg3: #1c1f2e;
+  --bg4: #242738;
+  --surface: #1e2133;
+  --border: #2a2d40;
+  --border2: #353850;
+  --text: #e8eaf0;
+  --text2: #9ca0b4;
+  --text3: #6b7090;
+  --accent: #3b82f6;
+  --accent2: #60a5fa;
+  --accent-bg: rgba(59,130,246,0.1);
+  --green: #22c55e;
+  --green-bg: rgba(34,197,94,0.1);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.1);
+  --orange: #f59e0b;
+  --orange-bg: rgba(245,158,11,0.1);
+  --purple: #a855f7;
+  --purple-bg: rgba(168,85,247,0.1);
+  --cyan: #06b6d4;
+  --cyan-bg: rgba(6,182,212,0.1);
+  --nf-color: #3b82f6;
+  --oc-color: #22c55e;
+  --rc-color: #f59e0b;
+  --fi-color: #a855f7;
+  --rd-color: #ef4444;
+  --rm-color: #06b6d4;
+  --fc-color: #ec4899;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --transition: 0.2s ease;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: 240px; background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+.sidebar-brand {
+  padding: 20px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-brand h1 {
+  font-size: 15px; font-weight: 700;
+  color: var(--accent2);
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+.sidebar-brand span {
+  font-size: 11px; color: var(--text3);
+  font-weight: 400; display: block; margin-top: 2px;
+}
+.sidebar-nav { flex:1; padding: 12px 10px; overflow-y: auto; }
+.nav-section {
+  font-size: 10px; font-weight: 600;
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: 1px; padding: 12px 10px 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  cursor: pointer; transition: all var(--transition);
+  font-size: 13.5px; font-weight: 500; color: var(--text2);
+  margin-bottom: 2px; border: 1px solid transparent;
+}
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active {
+  background: var(--accent-bg); color: var(--accent2);
+  border-color: rgba(59,130,246,0.2);
+}
+.nav-item .icon { font-size: 17px; width: 22px; text-align: center; }
+.nav-item .badge {
+  margin-left: auto; font-size: 11px; font-weight: 600;
+  background: var(--accent-bg); color: var(--accent2);
+  padding: 1px 7px; border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sidebar-footer {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--text3);
+}
+
+/* ===== MAIN ===== */
+.main { margin-left: 240px; min-height: 100vh; }
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(15,17,23,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  border: 1px solid transparent; transition: all var(--transition);
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+.btn-primary:hover { background: #2563eb; }
+.btn-ghost {
+  background: transparent; color: var(--text2);
+  border-color: var(--border);
+}
+.btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
+.btn-danger { background: var(--red-bg); color: var(--red); border-color: rgba(239,68,68,0.2); }
+.btn-danger:hover { background: rgba(239,68,68,0.2); }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+
+.content { padding: 24px 28px; }
+
+/* ===== CARDS ===== */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px; margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px;
+  transition: all var(--transition);
+}
+.stat-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.stat-label { font-size: 12px; color: var(--text3); font-weight: 500; margin-bottom: 6px; }
+.stat-value {
+  font-size: 28px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -1px;
+}
+.stat-sub { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+/* ===== TABLE ===== */
+.table-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.table-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; border-bottom: 1px solid var(--border);
+  flex-wrap: wrap; gap: 10px;
+}
+.table-header h3 { font-size: 14px; font-weight: 600; }
+.table-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.search-box {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 6px 12px;
+  color: var(--text); font-size: 13px; width: 220px;
+  font-family: 'DM Sans', sans-serif; outline: none;
+  transition: border-color var(--transition);
+}
+.search-box:focus { border-color: var(--accent); }
+.search-box::placeholder { color: var(--text3); }
+select.filter-select {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 6px 10px;
+  color: var(--text); font-size: 12px;
+  font-family: 'DM Sans', sans-serif; cursor: pointer;
+  outline: none;
+}
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  text-align: left; padding: 10px 14px;
+  font-size: 11px; font-weight: 600;
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: 0.5px; background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 11px 14px; font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: middle;
+}
+tbody tr { transition: background var(--transition); }
+tbody tr:hover { background: var(--bg3); }
+.tag {
+  display: inline-block; padding: 2px 8px;
+  border-radius: 4px; font-size: 11px; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tag-nf { background: rgba(59,130,246,0.15); color: var(--nf-color); }
+.tag-oc { background: rgba(34,197,94,0.15); color: var(--oc-color); }
+.tag-rc { background: rgba(245,158,11,0.15); color: var(--rc-color); }
+.tag-fi { background: rgba(168,85,247,0.15); color: var(--fi-color); }
+.tag-rd { background: rgba(239,68,68,0.15); color: var(--rd-color); }
+.tag-rm { background: rgba(6,182,212,0.15); color: var(--rm-color); }
+.tag-fc { background: rgba(236,72,153,0.15); color: var(--fc-color); }
+.tag-entrada { background: var(--green-bg); color: var(--green); }
+.tag-saida { background: var(--red-bg); color: var(--red); }
+.tag-devolucao { background: var(--orange-bg); color: var(--orange); }
+.tag-ajuste { background: var(--purple-bg); color: var(--purple); }
+.tag-alerta { background: var(--red-bg); color: var(--red); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+.empty-state {
+  padding: 48px; text-align: center; color: var(--text3);
+}
+.empty-state .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
+.empty-state p { font-size: 13px; }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6); z-index: 200;
+  backdrop-filter: blur(4px);
+  justify-content: center; align-items: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); width: 520px; max-width: 95vw;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.2s ease;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+.modal-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 20px; border-bottom: 1px solid var(--border);
+}
+.modal-head h3 { font-size: 15px; font-weight: 700; }
+.modal-close {
+  background: none; border: none; color: var(--text3);
+  font-size: 20px; cursor: pointer; padding: 4px;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 20px; }
+.form-row { margin-bottom: 14px; }
+.form-row label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--text2); margin-bottom: 5px;
+}
+.form-row input, .form-row select, .form-row textarea {
+  width: 100%; padding: 9px 12px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-size: 13px; font-family: 'DM Sans', sans-serif;
+  outline: none; transition: border-color var(--transition);
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+  border-color: var(--accent);
+}
+.form-row textarea { resize: vertical; min-height: 60px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-foot {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 8px;
+}
+
+/* ===== TABS ===== */
+.tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+.tab {
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  color: var(--text3); background: transparent;
+  border: 1px solid transparent;
+  transition: all var(--transition);
+}
+.tab:hover { color: var(--text2); background: var(--bg3); }
+.tab.active {
+  color: var(--accent2); background: var(--accent-bg);
+  border-color: rgba(59,130,246,0.2);
+}
+
+/* ===== ALERTS ===== */
+.alert-bar {
+  background: var(--red-bg); border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius-sm); padding: 10px 16px;
+  font-size: 12px; color: var(--red); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+.menu-toggle {
+  display: none; background: none; border: none;
+  color: var(--text); font-size: 22px; cursor: pointer;
+}
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .menu-toggle { display: block; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .search-box { width: 140px; }
+  .topbar { padding: 12px 16px; }
+  .content { padding: 16px; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+.page { display: none; }
+.page.active { display: block; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-orange { color: var(--orange); }
+.clickable { cursor: pointer; }
+.clickable:hover td { color: var(--text) !important; }
+.del-btn {
+  background: none; border: none; color: var(--text3);
+  cursor: pointer; font-size: 15px; padding: 2px 6px;
+  border-radius: 4px; transition: all var(--transition);
+}
+.del-btn:hover { background: var(--red-bg); color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>📦 Controle<br>Almoxarifado</h1>
+    <span style="font-weight:600;color:#60a5fa;display:block;margin-top:6px">Paulo Sérgio de Andrade</span>
+    <span style="display:block;margin-top:4px;line-height:1.4">Atividade 2 — Curso Técnico<br>em Logística — SENAC</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Principal</div>
+    <div class="nav-item active" data-page="dashboard" onclick="goTo('dashboard')">
+      <span class="icon">📊</span> Dashboard
+    </div>
+
+    <div class="nav-section">Documentos</div>
+    <div class="nav-item" data-page="documentos" onclick="goTo('documentos')">
+      <span class="icon">📄</span> Arquivo de Documentos
+      <span class="badge" id="badge-docs">0</span>
+    </div>
+
+    <div class="nav-section">Estoque</div>
+    <div class="nav-item" data-page="itens" onclick="goTo('itens')">
+      <span class="icon">📋</span> Cadastro de Itens
+      <span class="badge" id="badge-itens">0</span>
+    </div>
+    <div class="nav-item" data-page="movimentacoes" onclick="goTo('movimentacoes')">
+      <span class="icon">🔄</span> Movimentações
+      <span class="badge" id="badge-mov">0</span>
+    </div>
+    <div class="nav-item" data-page="inventario" onclick="goTo('inventario')">
+      <span class="icon">📝</span> Inventário
+    </div>
+
+    <div class="nav-section">Operacional</div>
+    <div class="nav-item" data-page="solicitacoes" onclick="goTo('solicitacoes')">
+      <span class="icon">📨</span> Solicitações
+      <span class="badge" id="badge-sol">0</span>
+    </div>
+    <div class="nav-item" data-page="devolucoes" onclick="goTo('devolucoes')">
+      <span class="icon">↩️</span> Devoluções
+      <span class="badge" id="badge-dev">0</span>
+    </div>
+  </nav>
+  <div class="sidebar-footer">v1.0 — Curso Técnico em Logística — SENAC</div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+      <span class="topbar-title" id="page-title">Dashboard</span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-ghost btn-sm" onclick="exportarDados()">⬇ Exportar</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importInput').click()">⬆ Importar</button>
+      <input type="file" id="importInput" accept=".json" style="display:none" onchange="importarDados(event)">
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ====== DASHBOARD ====== -->
+    <div class="page active" id="page-dashboard">
+      <div class="stats-grid" id="dash-stats"></div>
+      <div id="dash-alertas"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" id="dash-grid">
+        <div class="table-wrap">
+          <div class="table-header"><h3>📄 Últimos Documentos</h3></div>
+          <table><thead><tr><th>Data</th><th>Tipo</th><th>Nº</th><th>Fornecedor</th></tr></thead>
+          <tbody id="dash-docs"></tbody></table>
+        </div>
+        <div class="table-wrap">
+          <div class="table-header"><h3>🔄 Últimas Movimentações</h3></div>
+          <table><thead><tr><th>Data</th><th>Tipo</th><th>Item</th><th>Qtd</th></tr></thead>
+          <tbody id="dash-mov"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== DOCUMENTOS ====== -->
+    <div class="page" id="page-documentos">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Arquivo de Documentos</h3>
+          <div class="table-actions">
+            <input class="search-box" placeholder="Buscar documento..." id="doc-search" oninput="renderDocs()">
+            <select class="filter-select" id="doc-filter-tipo" onchange="renderDocs()">
+              <option value="">Todos os Tipos</option>
+              <option value="NF">NF - Nota Fiscal</option>
+              <option value="OC">OC - Ordem de Compra</option>
+              <option value="RC">RC - Romaneio</option>
+              <option value="FI">FI - Ficha Inspeção</option>
+              <option value="RD">RD - Rel. Devolução</option>
+              <option value="RM">RM - Requisição Material</option>
+              <option value="FC">FC - Ficha Cautela</option>
+            </select>
+            <select class="filter-select" id="doc-filter-setor" onchange="renderDocs()">
+              <option value="">Todos Setores</option>
+            </select>
+            <button class="btn btn-primary" onclick="openModal('modal-doc')">+ Novo Documento</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Data</th><th>Tipo</th><th>Número</th><th>Fornecedor/Origem</th>
+            <th>Valor (R$)</th><th>Setor</th><th>Obs</th><th></th>
+          </tr></thead>
+          <tbody id="tb-docs"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== ITENS ====== -->
+    <div class="page" id="page-itens">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Cadastro de Itens do Almoxarifado</h3>
+          <div class="table-actions">
+            <input class="search-box" placeholder="Buscar item..." id="item-search" oninput="renderItens()">
+            <button class="btn btn-primary" onclick="openModal('modal-item')">+ Novo Item</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Código</th><th>Descrição</th><th>Unidade</th><th>Localização</th>
+            <th>Mín</th><th>Máx</th><th>Saldo</th><th>Status</th><th></th>
+          </tr></thead>
+          <tbody id="tb-itens"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== MOVIMENTAÇÕES ====== -->
+    <div class="page" id="page-movimentacoes">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Movimentações de Estoque</h3>
+          <div class="table-actions">
+            <input class="search-box" placeholder="Buscar..." id="mov-search" oninput="renderMov()">
+            <select class="filter-select" id="mov-filter" onchange="renderMov()">
+              <option value="">Todos</option>
+              <option value="Entrada">Entrada</option>
+              <option value="Saída">Saída</option>
+              <option value="Devolução">Devolução</option>
+              <option value="Ajuste">Ajuste</option>
+            </select>
+            <button class="btn btn-primary" onclick="openModal('modal-mov')">+ Nova Movimentação</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Data</th><th>Tipo</th><th>Item</th><th>Documento</th>
+            <th>Qtd</th><th>Saldo Após</th><th>Responsável</th><th>Obs</th><th></th>
+          </tr></thead>
+          <tbody id="tb-mov"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== INVENTÁRIO ====== -->
+    <div class="page" id="page-inventario">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Inventário — Contagem Física vs. Contábil</h3>
+          <div class="table-actions">
+            <button class="btn btn-ghost" onclick="iniciarInventario()">🔄 Iniciar Contagem</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Código</th><th>Descrição</th><th>Saldo Sistema</th>
+            <th>Contagem Física</th><th>Diferença</th><th>Status</th><th>Ação</th>
+          </tr></thead>
+          <tbody id="tb-inv"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SOLICITAÇÕES ====== -->
+    <div class="page" id="page-solicitacoes">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Solicitações Internas (Encaminhamento entre Setores)</h3>
+          <div class="table-actions">
+            <input class="search-box" placeholder="Buscar..." id="sol-search" oninput="renderSol()">
+            <select class="filter-select" id="sol-filter-status" onchange="renderSol()">
+              <option value="">Todos Status</option>
+              <option value="Pendente">Pendente</option>
+              <option value="Atendida">Atendida</option>
+              <option value="Encaminhada">Encaminhada</option>
+              <option value="Cancelada">Cancelada</option>
+            </select>
+            <button class="btn btn-primary" onclick="openModal('modal-sol')">+ Nova Solicitação</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Nº</th><th>Data</th><th>Setor Solicitante</th><th>Tipo</th>
+            <th>Item/Descrição</th><th>Qtd</th><th>Encaminhado Para</th><th>Status</th><th></th>
+          </tr></thead>
+          <tbody id="tb-sol"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== DEVOLUÇÕES ====== -->
+    <div class="page" id="page-devolucoes">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Devoluções de Materiais e Equipamentos</h3>
+          <div class="table-actions">
+            <input class="search-box" placeholder="Buscar..." id="dev-search" oninput="renderDev()">
+            <select class="filter-select" id="dev-filter-tipo" onchange="renderDev()">
+              <option value="">Todos</option>
+              <option value="Interna">Devolução Interna</option>
+              <option value="Fornecedor">Devolução ao Fornecedor</option>
+            </select>
+            <button class="btn btn-primary" onclick="openModal('modal-dev')">+ Nova Devolução</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Nº</th><th>Data</th><th>Tipo</th><th>Item</th><th>Qtd</th>
+            <th>NF Ref.</th><th>Motivo</th><th>Inspeção</th><th>Status</th><th></th>
+          </tr></thead>
+          <tbody id="tb-dev"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="modal-overlay" id="modal-doc">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📄 Registrar Documento</h3>
+      <button class="modal-close" onclick="closeModal('modal-doc')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Tipo de Documento</label>
+          <select id="doc-tipo">
+            <option value="NF">NF - Nota Fiscal</option>
+            <option value="OC">OC - Ordem de Compra</option>
+            <option value="RC">RC - Romaneio de Carga</option>
+            <option value="FI">FI - Ficha de Inspeção</option>
+            <option value="RD">RD - Relatório Devolução</option>
+            <option value="RM">RM - Requisição Material</option>
+            <option value="FC">FC - Ficha de Cautela</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Data</label>
+          <input type="date" id="doc-data">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Número do Documento</label>
+          <input type="text" id="doc-numero" placeholder="Ex: 001234">
+        </div>
+        <div class="form-row">
+          <label>Valor (R$)</label>
+          <input type="number" step="0.01" id="doc-valor" placeholder="0,00">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Fornecedor / Origem</label>
+        <input type="text" id="doc-fornecedor" placeholder="Nome do fornecedor ou setor">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Setor Responsável</label>
+          <input type="text" id="doc-setor" placeholder="Ex: Compras, Financeiro">
+        </div>
+        <div class="form-row">
+          <label>Localização Física</label>
+          <input type="text" id="doc-local" placeholder="Ex: Pasta NF - Maio/2026">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Observações</label>
+        <textarea id="doc-obs" placeholder="Informações adicionais..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-doc')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarDoc()">Salvar Documento</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODAL ITEM ====== -->
+<div class="modal-overlay" id="modal-item">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📋 Cadastrar Item</h3>
+      <button class="modal-close" onclick="closeModal('modal-item')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Código</label>
+          <input type="text" id="item-codigo" placeholder="Ex: EXP-001">
+        </div>
+        <div class="form-row">
+          <label>Unidade</label>
+          <select id="item-unidade">
+            <option value="UN">UN - Unidade</option>
+            <option value="CX">CX - Caixa</option>
+            <option value="PC">PC - Pacote</option>
+            <option value="KG">KG - Quilograma</option>
+            <option value="LT">LT - Litro</option>
+            <option value="MT">MT - Metro</option>
+            <option value="RL">RL - Rolo</option>
+            <option value="FL">FL - Folha</option>
+            <option value="RS">RS - Resma</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Descrição</label>
+        <input type="text" id="item-desc" placeholder="Ex: Caneta Esferográfica Azul">
+      </div>
+      <div class="form-row">
+        <label>Localização (Corredor/Prateleira)</label>
+        <input type="text" id="item-local" placeholder="Ex: A3-P2">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Estoque Mínimo</label>
+          <input type="number" id="item-min" placeholder="0" value="0">
+        </div>
+        <div class="form-row">
+          <label>Estoque Máximo</label>
+          <input type="number" id="item-max" placeholder="0" value="0">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Saldo Inicial</label>
+        <input type="number" id="item-saldo" placeholder="0" value="0">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-item')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarItem()">Salvar Item</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODAL MOVIMENTAÇÃO ====== -->
+<div class="modal-overlay" id="modal-mov">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🔄 Registrar Movimentação</h3>
+      <button class="modal-close" onclick="closeModal('modal-mov')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Tipo de Movimentação</label>
+          <select id="mov-tipo">
+            <option value="Entrada">Entrada</option>
+            <option value="Saída">Saída</option>
+            <option value="Devolução">Devolução</option>
+            <option value="Ajuste">Ajuste (+/-)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Data</label>
+          <input type="date" id="mov-data">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Item</label>
+        <select id="mov-item"></select>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Quantidade</label>
+          <input type="number" id="mov-qtd" placeholder="0">
+        </div>
+        <div class="form-row">
+          <label>Documento de Referência</label>
+          <input type="text" id="mov-doc" placeholder="Ex: NF 1234, RM 0089">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Responsável</label>
+          <input type="text" id="mov-resp" placeholder="Nome do responsável">
+        </div>
+        <div class="form-row">
+          <label>Setor</label>
+          <input type="text" id="mov-setor" placeholder="Ex: Administrativo">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Observações</label>
+        <textarea id="mov-obs" placeholder="Informações adicionais..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-mov')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarMov()">Registrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODAL SOLICITAÇÃO ====== -->
+<div class="modal-overlay" id="modal-sol">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📨 Registrar Solicitação</h3>
+      <button class="modal-close" onclick="closeModal('modal-sol')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Data</label>
+          <input type="date" id="sol-data">
+        </div>
+        <div class="form-row">
+          <label>Tipo de Solicitação</label>
+          <select id="sol-tipo">
+            <option value="Requisição de Material">Requisição de Material (RM)</option>
+            <option value="Empréstimo/Cautela">Empréstimo / Cautela (FC)</option>
+            <option value="Devolução com Defeito">Devolução com Defeito</option>
+            <option value="Material Esgotado">Material Esgotado (encaminhar Compras)</option>
+            <option value="Inventário Extraordinário">Inventário Extraordinário</option>
+            <option value="NF para Lançamento">NF para Lançamento (Financeiro)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Setor Solicitante</label>
+          <input type="text" id="sol-setor-origem" placeholder="Ex: Produção, TI, Administrativo">
+        </div>
+        <div class="form-row">
+          <label>Encaminhar Para</label>
+          <input type="text" id="sol-encaminhar" placeholder="Ex: Almoxarifado, Compras, Financeiro">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Item / Descrição da Solicitação</label>
+        <input type="text" id="sol-desc" placeholder="Descreva o que foi solicitado">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Quantidade</label>
+          <input type="number" id="sol-qtd" placeholder="0">
+        </div>
+        <div class="form-row">
+          <label>Documento de Referência</label>
+          <input type="text" id="sol-doc" placeholder="Ex: RM-2026/0045">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Solicitante (nome)</label>
+        <input type="text" id="sol-solicitante" placeholder="Nome de quem solicitou">
+      </div>
+      <div class="form-row">
+        <label>Observações</label>
+        <textarea id="sol-obs" placeholder="Prioridade, justificativa, etc."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-sol')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarSol()">Registrar Solicitação</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODAL DEVOLUÇÃO ====== -->
+<div class="modal-overlay" id="modal-dev">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>↩️ Registrar Devolução</h3>
+      <button class="modal-close" onclick="closeModal('modal-dev')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Tipo de Devolução</label>
+          <select id="dev-tipo">
+            <option value="Interna">Interna (Setor → Almoxarifado)</option>
+            <option value="Fornecedor">Ao Fornecedor (Não conformidade)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Data</label>
+          <input type="date" id="dev-data">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Item / Material</label>
+        <input type="text" id="dev-item" placeholder="Descrição do item devolvido">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Quantidade Devolvida</label>
+          <input type="number" id="dev-qtd" placeholder="0">
+        </div>
+        <div class="form-row">
+          <label>NF de Referência</label>
+          <input type="text" id="dev-nf" placeholder="Ex: NF 005678">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Fornecedor / Setor de Origem</label>
+          <input type="text" id="dev-origem" placeholder="Nome do fornecedor ou setor">
+        </div>
+        <div class="form-row">
+          <label>OC de Referência</label>
+          <input type="text" id="dev-oc" placeholder="Ex: OC-2026/0034">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Motivo da Devolução</label>
+        <textarea id="dev-motivo" placeholder="Defeito, divergência de quantidade, especificação diferente..."></textarea>
+      </div>
+      <div class="form-row">
+        <label>Resultado da Inspeção</label>
+        <select id="dev-inspecao">
+          <option value="Reprovado">Reprovado — Material com defeito/divergência</option>
+          <option value="Aprovado parcial">Aprovado Parcial — Parte aceita, parte devolvida</option>
+          <option value="Devolvido íntegro">Devolvido Íntegro — Material em bom estado (retorno interno)</option>
+        </select>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Nº Ficha de Inspeção (FI)</label>
+          <input type="text" id="dev-fi" placeholder="Ex: FI 0098">
+        </div>
+        <div class="form-row">
+          <label>Resolução Esperada</label>
+          <select id="dev-resolucao">
+            <option value="Reposição">Reposição pelo fornecedor</option>
+            <option value="Crédito">Crédito financeiro</option>
+            <option value="Retorno ao estoque">Retorno ao estoque (interna)</option>
+            <option value="Descarte">Descarte autorizado</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Observações</label>
+        <textarea id="dev-obs" placeholder="Informações adicionais, prazo de resolução..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-dev')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarDev()">Registrar Devolução</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA STORE =====
+const STORAGE_KEY = 'almoxarifado_v1';
+let DB = loadDB();
+
+function defaultDB() {
+  return { documentos: [], itens: [], movimentacoes: [], solicitacoes: [], devolucoes: [],
+    nextDocId: 1, nextItemId: 1, nextMovId: 1, nextSolId: 1, nextDevId: 1 };
+}
+function loadDB() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (d && d.documentos) {
+      if (!d.solicitacoes) d.solicitacoes = [];
+      if (!d.devolucoes) d.devolucoes = [];
+      if (!d.nextSolId) d.nextSolId = 1;
+      if (!d.nextDevId) d.nextDevId = 1;
+      return d;
+    }
+  } catch(e) {}
+  return defaultDB();
+}
+function saveDB() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(DB));
+  updateBadges();
+}
+
+// ===== NAVIGATION =====
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+  const titles = { dashboard:'Dashboard', documentos:'Arquivo de Documentos', itens:'Cadastro de Itens', movimentacoes:'Movimentações', inventario:'Inventário', solicitacoes:'Solicitações Internas', devolucoes:'Devoluções' };
+  document.getElementById('page-title').textContent = titles[page] || page;
+  document.getElementById('sidebar').classList.remove('open');
+  if (page === 'dashboard') renderDashboard();
+  if (page === 'documentos') renderDocs();
+  if (page === 'itens') renderItens();
+  if (page === 'movimentacoes') { populateMovItemSelect(); renderMov(); }
+  if (page === 'inventario') renderInventario();
+  if (page === 'solicitacoes') renderSol();
+  if (page === 'devolucoes') renderDev();
+}
+
+// ===== BADGES =====
+function updateBadges() {
+  document.getElementById('badge-docs').textContent = DB.documentos.length;
+  document.getElementById('badge-itens').textContent = DB.itens.length;
+  document.getElementById('badge-mov').textContent = DB.movimentacoes.length;
+  document.getElementById('badge-sol').textContent = DB.solicitacoes.length;
+  document.getElementById('badge-dev').textContent = DB.devolucoes.length;
+}
+
+// ===== MODAL =====
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  if (id === 'modal-mov') populateMovItemSelect();
+}
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+// ===== HELPERS =====
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+function fmtMoney(v) {
+  return parseFloat(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function today() {
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+function tagHTML(type, label) {
+  const cls = 'tag-' + type.toLowerCase();
+  return `<span class="tag ${cls}">${label || type}</span>`;
+}
+
+// ===== DOCUMENTOS =====
+function salvarDoc() {
+  const tipo = document.getElementById('doc-tipo').value;
+  const data = document.getElementById('doc-data').value || today();
+  const numero = document.getElementById('doc-numero').value.trim();
+  const valor = document.getElementById('doc-valor').value;
+  const fornecedor = document.getElementById('doc-fornecedor').value.trim();
+  const setor = document.getElementById('doc-setor').value.trim();
+  const local = document.getElementById('doc-local').value.trim();
+  const obs = document.getElementById('doc-obs').value.trim();
+  if (!numero) return alert('Informe o número do documento.');
+  DB.documentos.push({ id: DB.nextDocId++, tipo, data, numero, valor: parseFloat(valor||0), fornecedor, setor, local, obs });
+  saveDB();
+  closeModal('modal-doc');
+  // reset
+  ['doc-numero','doc-valor','doc-fornecedor','doc-setor','doc-local','doc-obs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('doc-data').value = today();
+  renderDocs();
+  updateSetorFilter();
+}
+
+function renderDocs() {
+  const search = (document.getElementById('doc-search').value||'').toLowerCase();
+  const fTipo = document.getElementById('doc-filter-tipo').value;
+  const fSetor = document.getElementById('doc-filter-setor').value;
+  let docs = DB.documentos.slice().reverse();
+  if (fTipo) docs = docs.filter(d => d.tipo === fTipo);
+  if (fSetor) docs = docs.filter(d => d.setor === fSetor);
+  if (search) docs = docs.filter(d =>
+    (d.numero+d.fornecedor+d.setor+d.obs+d.tipo).toLowerCase().includes(search)
+  );
+  const tb = document.getElementById('tb-docs');
+  if (!docs.length) { tb.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="icon">📄</div><p>Nenhum documento encontrado</p></div></td></tr>'; return; }
+  tb.innerHTML = docs.map(d => `<tr>
+    <td class="mono">${fmtDate(d.data)}</td>
+    <td>${tagHTML(d.tipo)}</td>
+    <td class="mono">${d.numero}</td>
+    <td>${d.fornecedor||'—'}</td>
+    <td class="mono" style="text-align:right">R$ ${fmtMoney(d.valor)}</td>
+    <td>${d.setor||'—'}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.obs||''}">${d.obs||'—'}</td>
+    <td><button class="del-btn" onclick="delDoc(${d.id})" title="Excluir">🗑</button></td>
+  </tr>`).join('');
+}
+
+function delDoc(id) {
+  if (!confirm('Excluir este documento?')) return;
+  DB.documentos = DB.documentos.filter(d => d.id !== id);
+  saveDB(); renderDocs();
+}
+
+function updateSetorFilter() {
+  const setores = [...new Set(DB.documentos.map(d=>d.setor).filter(Boolean))];
+  const sel = document.getElementById('doc-filter-setor');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Todos Setores</option>' + setores.map(s => `<option value="${s}">${s}</option>`).join('');
+  sel.value = cur;
+}
+
+// ===== ITENS =====
+function salvarItem() {
+  const codigo = document.getElementById('item-codigo').value.trim();
+  const desc = document.getElementById('item-desc').value.trim();
+  const unidade = document.getElementById('item-unidade').value;
+  const local = document.getElementById('item-local').value.trim();
+  const min = parseInt(document.getElementById('item-min').value)||0;
+  const max = parseInt(document.getElementById('item-max').value)||0;
+  const saldo = parseInt(document.getElementById('item-saldo').value)||0;
+  if (!codigo || !desc) return alert('Informe código e descrição.');
+  if (DB.itens.find(i => i.codigo === codigo)) return alert('Código já existe!');
+  DB.itens.push({ id: DB.nextItemId++, codigo, desc, unidade, local, min, max, saldo });
+  saveDB();
+  closeModal('modal-item');
+  ['item-codigo','item-desc','item-local'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('item-min').value = '0';
+  document.getElementById('item-max').value = '0';
+  document.getElementById('item-saldo').value = '0';
+  renderItens();
+}
+
+function renderItens() {
+  const search = (document.getElementById('item-search').value||'').toLowerCase();
+  let itens = DB.itens.slice();
+  if (search) itens = itens.filter(i => (i.codigo+i.desc+i.local).toLowerCase().includes(search));
+  const tb = document.getElementById('tb-itens');
+  if (!itens.length) { tb.innerHTML = '<tr><td colspan="9"><div class="empty-state"><div class="icon">📋</div><p>Nenhum item cadastrado</p></div></td></tr>'; return; }
+  tb.innerHTML = itens.map(i => {
+    let status = '', cls = '';
+    if (i.min > 0 && i.saldo <= i.min) { status = 'BAIXO'; cls = 'tag-alerta'; }
+    else if (i.max > 0 && i.saldo >= i.max) { status = 'CHEIO'; cls = 'tag-ajuste'; }
+    else { status = 'OK'; cls = 'tag-entrada'; }
+    return `<tr>
+      <td><span class="mono" style="font-weight:600;color:var(--accent2)">${i.codigo}</span></td>
+      <td>${i.desc}</td>
+      <td class="mono">${i.unidade}</td>
+      <td class="mono">${i.local||'—'}</td>
+      <td class="mono">${i.min}</td>
+      <td class="mono">${i.max}</td>
+      <td class="mono" style="font-weight:700;font-size:14px">${i.saldo}</td>
+      <td><span class="tag ${cls}">${status}</span></td>
+      <td><button class="del-btn" onclick="delItem(${i.id})" title="Excluir">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function delItem(id) {
+  if (!confirm('Excluir este item e todas suas movimentações?')) return;
+  const item = DB.itens.find(i => i.id === id);
+  if (item) DB.movimentacoes = DB.movimentacoes.filter(m => m.itemId !== id);
+  DB.itens = DB.itens.filter(i => i.id !== id);
+  saveDB(); renderItens();
+}
+
+// ===== MOVIMENTAÇÕES =====
+function populateMovItemSelect() {
+  const sel = document.getElementById('mov-item');
+  sel.innerHTML = DB.itens.map(i => `<option value="${i.id}">${i.codigo} — ${i.desc} (Saldo: ${i.saldo})</option>`).join('');
+}
+
+function salvarMov() {
+  const tipo = document.getElementById('mov-tipo').value;
+  const data = document.getElementById('mov-data').value || today();
+  const itemId = parseInt(document.getElementById('mov-item').value);
+  const qtd = parseInt(document.getElementById('mov-qtd').value)||0;
+  const doc = document.getElementById('mov-doc').value.trim();
+  const resp = document.getElementById('mov-resp').value.trim();
+  const setor = document.getElementById('mov-setor').value.trim();
+  const obs = document.getElementById('mov-obs').value.trim();
+
+  if (!itemId) return alert('Selecione um item.');
+  if (qtd === 0) return alert('Quantidade deve ser diferente de zero.');
+
+  const item = DB.itens.find(i => i.id === itemId);
+  if (!item) return alert('Item não encontrado.');
+
+  let delta = qtd;
+  if (tipo === 'Saída') delta = -Math.abs(qtd);
+  else if (tipo === 'Entrada' || tipo === 'Devolução') delta = Math.abs(qtd);
+  // Ajuste pode ser + ou - conforme digitado
+
+  if (item.saldo + delta < 0) return alert('Saldo insuficiente! Saldo atual: ' + item.saldo);
+
+  item.saldo += delta;
+  const saldoApos = item.saldo;
+
+  DB.movimentacoes.push({ id: DB.nextMovId++, tipo, data, itemId, itemCodigo: item.codigo, itemDesc: item.desc, qtd: delta, saldoApos, doc, resp, setor, obs });
+  saveDB();
+  closeModal('modal-mov');
+  ['mov-qtd','mov-doc','mov-resp','mov-setor','mov-obs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('mov-data').value = today();
+  renderMov();
+}
+
+function renderMov() {
+  const search = (document.getElementById('mov-search').value||'').toLowerCase();
+  const fTipo = document.getElementById('mov-filter').value;
+  let movs = DB.movimentacoes.slice().reverse();
+  if (fTipo) movs = movs.filter(m => m.tipo === fTipo);
+  if (search) movs = movs.filter(m => (m.itemCodigo+m.itemDesc+m.doc+m.resp+m.obs).toLowerCase().includes(search));
+  const tb = document.getElementById('tb-mov');
+  if (!movs.length) { tb.innerHTML = '<tr><td colspan="9"><div class="empty-state"><div class="icon">🔄</div><p>Nenhuma movimentação encontrada</p></div></td></tr>'; return; }
+  tb.innerHTML = movs.map(m => {
+    const tipoTag = m.tipo === 'Entrada' ? 'entrada' : m.tipo === 'Saída' ? 'saida' : m.tipo === 'Devolução' ? 'devolucao' : 'ajuste';
+    const sign = m.qtd > 0 ? '+' : '';
+    const clr = m.qtd > 0 ? 'text-green' : 'text-red';
+    return `<tr>
+      <td class="mono">${fmtDate(m.data)}</td>
+      <td>${tagHTML(tipoTag, m.tipo)}</td>
+      <td><span class="mono" style="color:var(--accent2)">${m.itemCodigo}</span> ${m.itemDesc}</td>
+      <td class="mono">${m.doc||'—'}</td>
+      <td class="mono ${clr}" style="font-weight:700">${sign}${m.qtd}</td>
+      <td class="mono" style="font-weight:600">${m.saldoApos}</td>
+      <td>${m.resp||'—'}</td>
+      <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${m.obs||''}">${m.obs||'—'}</td>
+      <td><button class="del-btn" onclick="delMov(${m.id})" title="Excluir">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function delMov(id) {
+  if (!confirm('Excluir esta movimentação? O saldo do item será recalculado.')) return;
+  const mov = DB.movimentacoes.find(m => m.id === id);
+  if (mov) {
+    const item = DB.itens.find(i => i.id === mov.itemId);
+    if (item) item.saldo -= mov.qtd;
+  }
+  DB.movimentacoes = DB.movimentacoes.filter(m => m.id !== id);
+  // Recalculate subsequent saldos
+  recalcSaldos(mov ? mov.itemId : null);
+  saveDB(); renderMov(); renderItens();
+}
+
+function recalcSaldos(itemId) {
+  if (!itemId) return;
+  const item = DB.itens.find(i => i.id === itemId);
+  if (!item) return;
+  // Get all movs for this item, ordered by id (chronological)
+  const movs = DB.movimentacoes.filter(m => m.itemId === itemId).sort((a,b) => a.id - b.id);
+  // Recalculate saldo from item base (saldo = current item.saldo is already correct from the deletion)
+  let running = item.saldo;
+  // Actually, we need to rebuild from scratch. Item saldo was already adjusted.
+  // So recalc the saldoApos for each remaining mov... we need base saldo.
+  // Easier: sum all deltas to get current saldo
+  // (item.saldo is already correct), just update saldoApos on remaining movs
+  let base = item.saldo;
+  // Walk backwards to find base
+  // Actually base = item.saldo - sum(all remaining deltas)
+  const totalDelta = movs.reduce((s,m) => s + m.qtd, 0);
+  base = item.saldo - totalDelta; // saldo before any movs... but item.saldo was set when item was created + all movs
+  // Hmm, let me just walk forward
+  let s = base;
+  movs.forEach(m => { s += m.qtd; m.saldoApos = s; });
+}
+
+// ===== INVENTÁRIO =====
+let invData = [];
+function iniciarInventario() {
+  invData = DB.itens.map(i => ({ itemId: i.id, codigo: i.codigo, desc: i.desc, saldoSistema: i.saldo, contagem: null, diferenca: null }));
+  renderInventario();
+}
+
+function renderInventario() {
+  if (!invData.length) invData = DB.itens.map(i => ({ itemId: i.id, codigo: i.codigo, desc: i.desc, saldoSistema: i.saldo, contagem: null, diferenca: null }));
+  const tb = document.getElementById('tb-inv');
+  if (!invData.length) { tb.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="icon">📝</div><p>Cadastre itens primeiro para realizar inventário</p></div></td></tr>'; return; }
+  tb.innerHTML = invData.map((inv, idx) => {
+    const diff = inv.contagem !== null ? inv.contagem - inv.saldoSistema : null;
+    const diffStr = diff !== null ? (diff > 0 ? `<span class="text-green">+${diff}</span>` : diff < 0 ? `<span class="text-red">${diff}</span>` : '<span style="color:var(--green)">0 ✓</span>') : '—';
+    const status = diff === null ? '—' : diff === 0 ? tagHTML('entrada','OK') : tagHTML('alerta','DIVERGÊNCIA');
+    return `<tr>
+      <td class="mono" style="color:var(--accent2);font-weight:600">${inv.codigo}</td>
+      <td>${inv.desc}</td>
+      <td class="mono" style="font-weight:600">${inv.saldoSistema}</td>
+      <td><input type="number" style="width:80px;padding:4px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center" value="${inv.contagem !== null ? inv.contagem : ''}" onchange="setContagem(${idx}, this.value)"></td>
+      <td class="mono" style="font-weight:700">${diffStr}</td>
+      <td>${status}</td>
+      <td>${diff !== null && diff !== 0 ? `<button class="btn btn-sm btn-primary" onclick="ajustarInv(${idx})">Ajustar</button>` : ''}</td>
+    </tr>`;
+  }).join('');
+}
+
+function setContagem(idx, val) {
+  invData[idx].contagem = val !== '' ? parseInt(val) : null;
+  invData[idx].diferenca = invData[idx].contagem !== null ? invData[idx].contagem - invData[idx].saldoSistema : null;
+  renderInventario();
+}
+
+function ajustarInv(idx) {
+  const inv = invData[idx];
+  const diff = inv.contagem - inv.saldoSistema;
+  if (diff === 0) return;
+  const item = DB.itens.find(i => i.id === inv.itemId);
+  if (!item) return;
+  const motivo = prompt(`Ajuste de ${diff > 0 ? '+' : ''}${diff} un. em "${inv.desc}".\nInforme o motivo do ajuste:`);
+  if (motivo === null) return;
+  item.saldo = inv.contagem;
+  DB.movimentacoes.push({
+    id: DB.nextMovId++, tipo: 'Ajuste', data: today(), itemId: item.id,
+    itemCodigo: item.codigo, itemDesc: item.desc, qtd: diff, saldoApos: item.saldo,
+    doc: 'INV-' + today().replace(/-/g,''), resp: 'Inventário', setor: 'Almoxarifado',
+    obs: motivo || 'Ajuste de inventário'
+  });
+  inv.saldoSistema = inv.contagem;
+  inv.diferenca = 0;
+  saveDB();
+  renderInventario();
+}
+
+// ===== DASHBOARD =====
+function renderDashboard() {
+  const totalDocs = DB.documentos.length;
+  const totalItens = DB.itens.length;
+  const totalMov = DB.movimentacoes.length;
+  const itensAlerta = DB.itens.filter(i => i.min > 0 && i.saldo <= i.min).length;
+  const valorNF = DB.documentos.filter(d => d.tipo === 'NF').reduce((s,d) => s + (d.valor||0), 0);
+
+  document.getElementById('dash-stats').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">📄 Documentos Arquivados</div>
+      <div class="stat-value" style="color:var(--accent2)">${totalDocs}</div>
+      <div class="stat-sub">Total registrado</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">📋 Itens Cadastrados</div>
+      <div class="stat-value" style="color:var(--green)">${totalItens}</div>
+      <div class="stat-sub">No almoxarifado</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🔄 Movimentações</div>
+      <div class="stat-value" style="color:var(--cyan)">${totalMov}</div>
+      <div class="stat-sub">Entradas e saídas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">⚠️ Itens em Alerta</div>
+      <div class="stat-value" style="color:${itensAlerta > 0 ? 'var(--red)' : 'var(--green)'}">${itensAlerta}</div>
+      <div class="stat-sub">${itensAlerta > 0 ? 'Estoque abaixo do mínimo' : 'Todos dentro do limite'}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">💰 Valor Total NFs</div>
+      <div class="stat-value" style="color:var(--orange);font-size:22px">R$ ${fmtMoney(valorNF)}</div>
+      <div class="stat-sub">Notas fiscais registradas</div>
+    </div>
+  `;
+
+  // Alertas
+  const alertas = DB.itens.filter(i => i.min > 0 && i.saldo <= i.min);
+  document.getElementById('dash-alertas').innerHTML = alertas.length ? `<div class="alert-bar">⚠️ <strong>Atenção:</strong> ${alertas.map(i => `${i.codigo} (${i.desc}) — Saldo: ${i.saldo}, Mín: ${i.min}`).join(' | ')}</div>` : '';
+
+  // Últimos docs
+  const lastDocs = DB.documentos.slice(-5).reverse();
+  document.getElementById('dash-docs').innerHTML = lastDocs.length
+    ? lastDocs.map(d => `<tr><td class="mono">${fmtDate(d.data)}</td><td>${tagHTML(d.tipo)}</td><td class="mono">${d.numero}</td><td>${d.fornecedor||'—'}</td></tr>`).join('')
+    : '<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:24px">Nenhum documento</td></tr>';
+
+  // Últimas movs
+  const lastMov = DB.movimentacoes.slice(-5).reverse();
+  document.getElementById('dash-mov').innerHTML = lastMov.length
+    ? lastMov.map(m => {
+      const tipoTag = m.tipo === 'Entrada' ? 'entrada' : m.tipo === 'Saída' ? 'saida' : m.tipo === 'Devolução' ? 'devolucao' : 'ajuste';
+      const sign = m.qtd > 0 ? '+' : '';
+      const clr = m.qtd > 0 ? 'text-green' : 'text-red';
+      return `<tr><td class="mono">${fmtDate(m.data)}</td><td>${tagHTML(tipoTag, m.tipo)}</td><td>${m.itemCodigo}</td><td class="mono ${clr}" style="font-weight:700">${sign}${m.qtd}</td></tr>`;
+    }).join('')
+    : '<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:24px">Nenhuma movimentação</td></tr>';
+}
+
+// ===== EXPORT / IMPORT =====
+function exportarDados() {
+  const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `almoxarifado_backup_${today()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importarDados(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.documentos && data.itens && data.movimentacoes) {
+        if (confirm('Isso substituirá todos os dados atuais. Continuar?')) {
+          DB = data;
+          saveDB();
+          renderDashboard();
+          alert('Dados importados com sucesso!');
+        }
+      } else {
+        alert('Arquivo inválido.');
+      }
+    } catch(err) {
+      alert('Erro ao ler o arquivo.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ===== SOLICITAÇÕES =====
+function salvarSol() {
+  const data = document.getElementById('sol-data').value || today();
+  const tipo = document.getElementById('sol-tipo').value;
+  const setorOrigem = document.getElementById('sol-setor-origem').value.trim();
+  const encaminhar = document.getElementById('sol-encaminhar').value.trim();
+  const desc = document.getElementById('sol-desc').value.trim();
+  const qtd = parseInt(document.getElementById('sol-qtd').value) || 0;
+  const doc = document.getElementById('sol-doc').value.trim();
+  const solicitante = document.getElementById('sol-solicitante').value.trim();
+  const obs = document.getElementById('sol-obs').value.trim();
+  if (!desc) return alert('Informe a descrição da solicitação.');
+  if (!setorOrigem) return alert('Informe o setor solicitante.');
+  const numero = 'SOL-' + String(DB.nextSolId).padStart(4, '0');
+  DB.solicitacoes.push({ id: DB.nextSolId++, numero, data, tipo, setorOrigem, encaminhar, desc, qtd, doc, solicitante, obs, status: 'Pendente' });
+  saveDB();
+  closeModal('modal-sol');
+  ['sol-setor-origem','sol-encaminhar','sol-desc','sol-qtd','sol-doc','sol-solicitante','sol-obs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('sol-data').value = today();
+  renderSol();
+}
+
+function renderSol() {
+  const search = (document.getElementById('sol-search').value||'').toLowerCase();
+  const fStatus = document.getElementById('sol-filter-status').value;
+  let sols = DB.solicitacoes.slice().reverse();
+  if (fStatus) sols = sols.filter(s => s.status === fStatus);
+  if (search) sols = sols.filter(s => (s.numero+s.desc+s.setorOrigem+s.solicitante+s.tipo).toLowerCase().includes(search));
+  const tb = document.getElementById('tb-sol');
+  if (!sols.length) { tb.innerHTML = '<tr><td colspan="9"><div class="empty-state"><div class="icon">📨</div><p>Nenhuma solicitação registrada</p></div></td></tr>'; return; }
+  tb.innerHTML = sols.map(s => {
+    const stCls = s.status === 'Atendida' ? 'tag-entrada' : s.status === 'Pendente' ? 'tag-rc' : s.status === 'Encaminhada' ? 'tag-fi' : 'tag-rd';
+    return `<tr>
+      <td class="mono" style="color:var(--accent2);font-weight:600">${s.numero}</td>
+      <td class="mono">${fmtDate(s.data)}</td>
+      <td>${s.setorOrigem}</td>
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${s.tipo}">${s.tipo}</td>
+      <td>${s.desc}</td>
+      <td class="mono">${s.qtd || '—'}</td>
+      <td>${s.encaminhar || '—'}</td>
+      <td>
+        <select class="filter-select" style="font-size:11px;padding:3px 6px" onchange="updateSolStatus(${s.id}, this.value)">
+          <option value="Pendente" ${s.status==='Pendente'?'selected':''}>Pendente</option>
+          <option value="Atendida" ${s.status==='Atendida'?'selected':''}>Atendida</option>
+          <option value="Encaminhada" ${s.status==='Encaminhada'?'selected':''}>Encaminhada</option>
+          <option value="Cancelada" ${s.status==='Cancelada'?'selected':''}>Cancelada</option>
+        </select>
+      </td>
+      <td><button class="del-btn" onclick="delSol(${s.id})" title="Excluir">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateSolStatus(id, status) {
+  const sol = DB.solicitacoes.find(s => s.id === id);
+  if (sol) { sol.status = status; saveDB(); }
+}
+
+function delSol(id) {
+  if (!confirm('Excluir esta solicitação?')) return;
+  DB.solicitacoes = DB.solicitacoes.filter(s => s.id !== id);
+  saveDB(); renderSol();
+}
+
+// ===== DEVOLUÇÕES =====
+function salvarDev() {
+  const tipo = document.getElementById('dev-tipo').value;
+  const data = document.getElementById('dev-data').value || today();
+  const item = document.getElementById('dev-item').value.trim();
+  const qtd = parseInt(document.getElementById('dev-qtd').value) || 0;
+  const nf = document.getElementById('dev-nf').value.trim();
+  const origem = document.getElementById('dev-origem').value.trim();
+  const oc = document.getElementById('dev-oc').value.trim();
+  const motivo = document.getElementById('dev-motivo').value.trim();
+  const inspecao = document.getElementById('dev-inspecao').value;
+  const fi = document.getElementById('dev-fi').value.trim();
+  const resolucao = document.getElementById('dev-resolucao').value;
+  const obs = document.getElementById('dev-obs').value.trim();
+  if (!item) return alert('Informe o item devolvido.');
+  if (!motivo) return alert('Informe o motivo da devolução.');
+  const numero = 'RD-' + String(DB.nextDevId).padStart(4, '0');
+  DB.devolucoes.push({ id: DB.nextDevId++, numero, tipo, data, item, qtd, nf, origem, oc, motivo, inspecao, fi, resolucao, obs, status: 'Em andamento' });
+  saveDB();
+  closeModal('modal-dev');
+  ['dev-item','dev-qtd','dev-nf','dev-origem','dev-oc','dev-motivo','dev-fi','dev-obs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('dev-data').value = today();
+  renderDev();
+}
+
+function renderDev() {
+  const search = (document.getElementById('dev-search').value||'').toLowerCase();
+  const fTipo = document.getElementById('dev-filter-tipo').value;
+  let devs = DB.devolucoes.slice().reverse();
+  if (fTipo) devs = devs.filter(d => d.tipo === fTipo);
+  if (search) devs = devs.filter(d => (d.numero+d.item+d.origem+d.motivo+d.nf).toLowerCase().includes(search));
+  const tb = document.getElementById('tb-dev');
+  if (!devs.length) { tb.innerHTML = '<tr><td colspan="10"><div class="empty-state"><div class="icon">↩️</div><p>Nenhuma devolução registrada</p></div></td></tr>'; return; }
+  tb.innerHTML = devs.map(d => {
+    const tipoCls = d.tipo === 'Interna' ? 'tag-oc' : 'tag-rd';
+    const inspCls = d.inspecao === 'Reprovado' ? 'tag-rd' : d.inspecao === 'Devolvido íntegro' ? 'tag-oc' : 'tag-rc';
+    return `<tr>
+      <td class="mono" style="color:var(--accent2);font-weight:600">${d.numero}</td>
+      <td class="mono">${fmtDate(d.data)}</td>
+      <td><span class="tag ${tipoCls}">${d.tipo}</span></td>
+      <td>${d.item}</td>
+      <td class="mono">${d.qtd || '—'}</td>
+      <td class="mono">${d.nf || '—'}</td>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.motivo}">${d.motivo}</td>
+      <td><span class="tag ${inspCls}">${d.inspecao}</span></td>
+      <td>
+        <select class="filter-select" style="font-size:11px;padding:3px 6px" onchange="updateDevStatus(${d.id}, this.value)">
+          <option value="Em andamento" ${d.status==='Em andamento'?'selected':''}>Em andamento</option>
+          <option value="Resolvida" ${d.status==='Resolvida'?'selected':''}>Resolvida</option>
+          <option value="Aguardando fornecedor" ${d.status==='Aguardando fornecedor'?'selected':''}>Aguardando fornecedor</option>
+        </select>
+      </td>
+      <td><button class="del-btn" onclick="delDev(${d.id})" title="Excluir">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateDevStatus(id, status) {
+  const dev = DB.devolucoes.find(d => d.id === id);
+  if (dev) { dev.status = status; saveDB(); }
+}
+
+function delDev(id) {
+  if (!confirm('Excluir esta devolução?')) return;
+  DB.devolucoes = DB.devolucoes.filter(d => d.id !== id);
+  saveDB(); renderDev();
+}
+
+// ===== INIT =====
+document.getElementById('doc-data').value = today();
+document.getElementById('mov-data').value = today();
+document.getElementById('sol-data').value = today();
+document.getElementById('dev-data').value = today();
+updateBadges();
+updateSetorFilter();
+renderDashboard();
+</script>
+</body>
+</html>
