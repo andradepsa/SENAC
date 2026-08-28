@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade 2 | Análise de Quebras e Faltas de Estoque | SENAC Logística</title>
+<meta name="description" content="Trabalho completo da Atividade 2 (UC0) do Curso Técnico em Logística do SENAC, por Paulo Sérgio de Andrade: cálculo de quebras e faltas de estoque, estratégias de melhoria e plano de ação 5W2H.">
+<meta property="og:title" content="Atividade 2 • Análise de Quebras e Faltas de Estoque">
+<meta property="og:description" content="SENAC • Curso Técnico em Logística • Cálculo de perdas, estratégias e plano 5W2H. Aluno: Paulo Sérgio de Andrade.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#0A4D8C; --azul-escuro:#083a6b; --azul-fundo:#EAF2FA;
+  --laranja:#F26522; --laranja-claro:#FDEFE6;
+  --tinta:#1F2937; --cinza:#5B6B7C; --cinza-claro:#EDF1F5;
+  --verde:#1B7D46; --verde-bg:#E8F5E9;
+  --ambar:#B45309; --ambar-bg:#FEF3C7;
+  --verm:#C0392B; --verm-bg:#FDEDEC;
+  --raio:14px; --sombra:0 6px 24px rgba(8,58,107,.08);
+  --fonte-titulo:'Sora',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --fonte-corpo:'Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fonte-corpo);color:var(--tinta);background:#fff;line-height:1.65;font-size:16.5px}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:var(--fonte-titulo);line-height:1.25;color:var(--azul-escuro)}
+p{margin:0 0 14px}
+a{color:var(--azul)}
+
+/* ===== Barra de navegação ===== */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--cinza-claro)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.nav-brand{display:flex;align-items:center;gap:10px;font-family:var(--fonte-titulo);font-weight:800;color:var(--azul-escuro);text-decoration:none;font-size:15px;white-space:nowrap}
+.nav-brand .logo{background:var(--laranja);color:#fff;font-size:12px;font-weight:800;letter-spacing:.5px;padding:6px 9px;border-radius:8px}
+.nav-links{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{text-decoration:none;color:var(--cinza);font-size:13.5px;font-weight:600;padding:8px 11px;border-radius:8px;white-space:nowrap;transition:.2s}
+.nav-links a:hover{background:var(--azul-fundo);color:var(--azul-escuro)}
+.nav-links a.ativo{background:var(--azul);color:#fff}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,var(--azul-escuro) 0%,var(--azul) 62%,#1163a8 100%);color:#fff;padding:84px 0 70px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;background:rgba(242,101,34,.18)}
+.hero::before{content:"";position:absolute;right:60px;bottom:-180px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero .container{position:relative;z-index:1}
+.eyebrow{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{color:#fff;font-size:clamp(30px,4.6vw,48px);font-weight:800;max-width:820px;margin-bottom:18px}
+.hero h1 .destaque{color:#FFC69E}
+.hero .lead{font-size:clamp(16px,2vw,19px);color:#DCE9F5;max-width:760px;margin-bottom:26px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:500}
+.chip strong{font-weight:700}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;padding:13px 26px;border-radius:11px;transition:.2s;border:2px solid transparent}
+.btn-primario{background:var(--laranja);color:#fff}
+.btn-primario:hover{background:#d9531a;transform:translateY(-1px)}
+.btn-fantasma{border-color:rgba(255,255,255,.5);color:#fff}
+.btn-fantasma:hover{background:rgba(255,255,255,.12)}
+.hero-nota{margin-top:26px;font-size:13px;color:#B9CFE4}
+
+/* ===== KPIs ===== */
+.kpis{margin-top:-42px;position:relative;z-index:5}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.kpi{background:#fff;border:1px solid var(--cinza-claro);border-radius:var(--raio);box-shadow:var(--sombra);padding:20px 18px;text-align:center}
+.kpi .num{font-family:var(--fonte-titulo);font-size:clamp(24px,2.6vw,32px);font-weight:800;color:var(--azul)}
+.kpi .num.alerta{color:var(--verm)}
+.kpi .rot{font-size:12.5px;color:var(--cinza);font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:.4px}
+
+/* ===== Seções ===== */
+section{padding:72px 0}
+section.alt{background:var(--azul-fundo)}
+.cab{max-width:780px;margin-bottom:38px}
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--laranja);font-weight:800;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+.kicker::before{content:"";width:26px;height:3px;background:var(--laranja);border-radius:2px;display:inline-block}
+.cab h2{font-size:clamp(24px,3.2vw,34px);margin-bottom:12px}
+.cab p{color:var(--cinza);font-size:17px}
+
+.card{background:#fff;border:1px solid var(--cinza-claro);border-radius:var(--raio);box-shadow:var(--sombra);padding:28px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+/* Tarefas do enunciado */
+.tarefa{display:flex;gap:16px;align-items:flex-start}
+.tarefa .n{flex:0 0 44px;height:44px;border-radius:12px;background:var(--azul);color:#fff;font-family:var(--fonte-titulo);font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center}
+.tarefa h3{font-size:17px;margin-bottom:6px}
+.tarefa p{font-size:14.5px;color:var(--cinza);margin:0}
+
+/* Metodologia */
+.formula-box{background:linear-gradient(135deg,var(--azul-escuro),var(--azul));color:#fff;border-radius:var(--raio);padding:34px;text-align:center}
+.formula-box .rotulo{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:#A9CBE8;font-weight:700;margin-bottom:12px}
+.formula{font-family:var(--fonte-titulo);font-size:clamp(19px,2.6vw,26px);font-weight:700}
+.formula .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 8px}
+.formula .frac .topo{display:block;border-bottom:2px solid #fff;padding:0 10px 3px}
+.formula .frac .base{display:block;padding-top:3px}
+.passos{margin-top:22px;display:grid;gap:12px}
+.passo{display:flex;gap:14px;align-items:center;background:#fff;border:1px dashed #B9CFE4;border-radius:11px;padding:14px 18px;font-size:15.5px}
+.passo .seta{color:var(--laranja);font-weight:800}
+.badges-faixa{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.faixa{flex:1;min-width:200px;border-radius:11px;padding:16px 18px;font-size:14px}
+.faixa strong{display:block;font-size:15px;margin-bottom:3px}
+.faixa.crit{background:var(--verm-bg);color:var(--verm);border:1px solid #F5C6C0}
+.faixa.aten{background:var(--ambar-bg);color:var(--ambar);border:1px solid #F2DFAE}
+.faixa.adeq{background:var(--verde-bg);color:var(--verde);border:1px solid #BFE3CC}
+
+/* Tabela de resultados */
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filtro{border:1.5px solid var(--cinza-claro);background:#fff;color:var(--cinza);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:.2s;font-family:var(--fonte-corpo)}
+.filtro:hover{border-color:var(--azul);color:var(--azul)}
+.filtro.ativo{background:var(--azul);border-color:var(--azul);color:#fff}
+.tabela-wrap{overflow-x:auto;border-radius:var(--raio);border:1px solid var(--cinza-claro);box-shadow:var(--sombra);background:#fff}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+caption{text-align:left;padding:16px 20px 4px;font-weight:700;color:var(--cinza);font-size:13.5px}
+th,td{padding:13px 18px;text-align:left;border-bottom:1px solid var(--cinza-claro)}
+th{background:var(--azul);color:#fff;font-family:var(--fonte-titulo);font-size:13.5px;letter-spacing:.3px;white-space:nowrap}
+th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#F7FAFD}
+tbody tr.oculto{display:none}
+tbody tr.destaque-linha{background:var(--verm-bg)}
+tfoot td{background:var(--azul-escuro);color:#fff;font-weight:700;border-bottom:none}
+.badge{display:inline-block;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:700}
+.b-crit{background:var(--verm-bg);color:var(--verm)}
+.destaque-linha .b-crit{background:#fff;border:1.5px solid #F0B9B2}
+.b-aten{background:var(--ambar-bg);color:var(--ambar)}
+.b-adeq{background:var(--verde-bg);color:var(--verde)}
+td .pct{font-weight:700}
+
+/* Ranking de barras */
+.rank{list-style:none;display:grid;gap:11px;margin-top:26px}
+.rank li{display:grid;grid-template-columns:150px 1fr 74px;align-items:center;gap:12px}
+.rank .nome{font-size:14px;font-weight:600;color:var(--tinta);text-align:right}
+.rank .trilha{background:var(--cinza-claro);border-radius:999px;height:22px;overflow:hidden}
+.rank .barra{display:block;height:100%;border-radius:999px;background:var(--azul);min-width:3px;animation:crescer 1s ease both}
+.rank .barra.crit{background:var(--verm)}
+.rank .barra.aten{background:#D4820A}
+.rank .valor{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--azul-escuro)}
+@keyframes crescer{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.rank li.crit .valor{color:var(--verm)}
+
+/* Estratégias */
+.est-card{border-top:4px solid var(--azul)}
+.est-card:nth-child(2){border-top-color:var(--laranja)}
+.est-card:nth-child(3){border-top-color:var(--verde)}
+.est-card:nth-child(4){border-top-color:#7C5CBF}
+.est-card h3{font-size:16.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.est-card h3 .ico{flex:0 0 34px;height:34px;border-radius:9px;background:var(--azul-fundo);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--azul)}
+.est-card ul{list-style:none;display:grid;gap:9px}
+.est-card li{position:relative;padding-left:20px;font-size:14.5px;color:#37424F}
+.est-card li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--laranja)}
+
+/* Acuracidade */
+.acur-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:stretch}
+.exemplo{background:var(--azul-fundo);border:1px solid #C9DCEF;border-radius:var(--raio);padding:28px}
+.exemplo .titulo{font-family:var(--fonte-titulo);font-weight:700;color:var(--azul-escuro);margin-bottom:12px;font-size:16px}
+.exemplo .conta{font-family:var(--fonte-titulo);font-size:22px;font-weight:800;color:var(--azul);margin:14px 0;text-align:center}
+.exemplo p{font-size:14.5px;color:#37424F}
+.check-lista{list-style:none;display:grid;gap:12px;margin-top:6px}
+.check-lista li{display:flex;gap:11px;font-size:15px;color:#37424F}
+.check-lista .ok{flex:0 0 22px;height:22px;border-radius:50%;background:var(--verde-bg);color:var(--verde);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+
+/* 5W2H */
+.plano-aviso{background:var(--laranja-claro);border-left:5px solid var(--laranja);border-radius:0 var(--raio) var(--raio) 0;padding:20px 24px;margin-bottom:22px;font-size:15.5px}
+.plano-aviso strong{color:#B4470F}
+.tabela-5w2h th:first-child{width:210px}
+.tabela-5w2h td b{color:var(--azul-escuro)}
+.meta-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.meta-chip{background:#fff;border:1.5px solid #C9DCEF;color:var(--azul-escuro);border-radius:11px;padding:12px 16px;font-size:13.5px;font-weight:600;flex:1;min-width:210px}
+.meta-chip b{display:block;font-size:15px;margin-bottom:2px}
+
+/* Conclusão */
+.conclusao{background:linear-gradient(135deg,var(--azul-escuro),var(--azul));border-radius:var(--raio);color:#fff;padding:44px;position:relative;overflow:hidden}
+.conclusao::after{content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;background:rgba(242,101,34,.16)}
+.conclusao h2{color:#fff;margin-bottom:16px}
+.conclusao p{color:#DCE9F5;max-width:840px;position:relative;z-index:1}
+.conclusao .fecho{margin-top:10px}
+
+/* Footer */
+footer{background:#082743;color:#9FB6CC;padding:56px 0 34px;font-size:14.5px}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:34px;margin-bottom:34px}
+footer h4{color:#fff;font-size:15px;margin-bottom:14px}
+footer a{color:#FFC69E;text-decoration:none}
+footer ul{list-style:none;display:grid;gap:9px}
+footer li{display:flex;gap:9px;align-items:flex-start}
+footer li::before{content:"›";color:var(--laranja);font-weight:800}
+.footer-base{border-top:1px solid rgba(255,255,255,.12);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px}
+.btn-imprimir{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:#fff;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;font-family:var(--fonte-corpo)}
+.btn-imprimir:hover{background:rgba(255,255,255,.1)}
+
+/* Utilidades */
+.voltar-topo{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;background:var(--laranja);color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 8px 20px rgba(242,101,34,.4);opacity:0;pointer-events:none;transition:.3s;z-index:60}
+.voltar-topo.visivel{opacity:1;pointer-events:auto}
+.revelar{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.revelar.visto{opacity:1;transform:none}
+.luz{font-size:13px;color:var(--cinza);margin-top:14px}
+
+/* Responsivo */
+@media (max-width:960px){
+  .kpi-grid{grid-template-columns:repeat(3,1fr)}
+  .grid4{grid-template-columns:1fr 1fr}
+  .acur-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .grid2,.grid4{grid-template-columns:1fr}
+  .rank li{grid-template-columns:104px 1fr 64px}
+  .rank .nome{font-size:12.5px}
+  section{padding:54px 0}
+  .conclusao{padding:30px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .revelar{opacity:1;transform:none;transition:none}
+  .rank .barra{animation:none}
+}
+@media print{
+  .nav,.voltar-topo,.filtros,.btn-imprimir,.hero-ctas{display:none!important}
+  .hero{background:var(--azul-escuro)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{padding:34px 0}
+  body{font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navegação principal">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="#inicio"><span class="logo">SENAC</span> Atividade 2 • UC0</a>
+    <div class="nav-links" id="menu">
+      <a href="#inicio" class="ativo">Início</a>
+      <a href="#contexto">O Desafio</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#estrategias">Estratégias</a>
+      <a href="#acuracidade">Acuracidade</a>
+      <a href="#plano">Plano 5W2H</a>
+      <a href="#conclusao">Conclusão</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="container">
+    <span class="eyebrow">SENAC • Curso Técnico em Logística • UC0</span>
+    <h1>Análise de Quebras e Faltas de Estoque:<span class="destaque"> do diagnóstico ao plano de ação</span></h1>
+    <p class="lead">Estudo completo do relatório de estoque de uma empresa do setor atacadista. O trabalho calcula o percentual de perdas de cada produto, propõe estratégias de melhoria nos quatro fatores críticos da operação e detalha um plano de ação 5W2H para o item mais prejudicado.</p>
+    <div class="hero-chips">
+      <span class="chip"><strong>Aluno:</strong> Paulo Sérgio de Andrade</span>
+      <span class="chip"><strong>Disciplina:</strong> UC0 • Logística</span>
+      <span class="chip"><strong>Período:</strong> Agosto de 2026</span>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-primario" href="#resultados">Ver resultados da análise</a>
+      <a class="btn btn-fantasma" href="#plano">Conhecer o plano 5W2H</a>
+    </div>
+    <p class="hero-nota">Página complementar ao trabalho entregue à professora, junto com o relatório em PDF e a planilha Excel com cálculos automatizados.</p>
+  </div>
+</header>
+
+<div class="kpis">
+  <div class="container">
+    <div class="kpi-grid">
+      <div class="kpi"><div class="num">10</div><div class="rot">Produtos analisados</div></div>
+      <div class="kpi"><div class="num">704</div><div class="rot">Unidades em estoque</div></div>
+      <div class="kpi"><div class="num alerta">121</div><div class="rot">Unidades perdidas</div></div>
+      <div class="kpi"><div class="num alerta">17,19%</div><div class="rot">Perda global</div></div>
+      <div class="kpi"><div class="num alerta">69,23%</div><div class="rot">Pior item • Sofá 3 Lugares</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="contexto">
+  <div class="container">
+    <div class="cab revelar">
+      <span class="kicker">O Desafio</span>
+      <h2>O problema que o trabalho resolve</h2>
+      <p>Uma empresa do setor atacadista identificou perdas recorrentes de mercadorias e precisava entender onde estavam os maiores problemas antes de investir em correções.</p>
+    </div>
+    <div class="card revelar">
+      <p>A empresa simulada trabalha com dez produtos de giro diversificado, que vão de eletrônicos de alto valor, como celulares e televisores, até itens de volume bulky, como sofás e geladeiras. O relatório de estoque revelou que parte dessas mercadorias estava avariada ou faltando, e que essa perda comprometia tanto o faturamento quanto a confiabilidade das informações de inventário. Sem um diagnóstico quantitativo, a equipe não sabia em quais produtos focar primeiro nem quais causas atacar com prioridade.</p>
+      <p>Foi nesse contexto que a Atividade 2 da UC0 propôs três entregas complementares, que estruturam todo o conteúdo desta página e dos anexos do trabalho:</p>
+      <div class="grid" style="display:grid;gap:18px;margin-top:20px">
+        <div class="tarefa">
+          <div class="n">1</div>
+          <div><h3>Calcular o percentual de quebras e faltas</h3><p>Analisar o relatório de estoque e calcular, produto por produto, o percentual de quebras e faltas, dividindo a quebra pela quantidade em estoque e multiplicando o resultado por 100.</p></div>
+        </div>
+        <div class="tarefa">
+          <div class="n">2</div>
+          <div><h3>Propor estratégias de redução</h3><p>Sugerir ações práticas para evitar faltas e excessos, considerando armazenamento, manuseio, previsibilidade de demanda e logística interna.</p></div>
+        </div>
+        <div class="tarefa">
+          <div class="n">3</div>
+          <div><h3>Elaborar um plano de ação detalhado</h3><p>Escolher um produto do relatório e construir um plano de ação estruturado em 5W2H, justificando a estratégia com base nos dados apresentados.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metodologia" class="alt">
+  <div class="container">
+    <div class="cab revelar">
+      <span class="kicker">Metodologia</span>
+      <h2>Como o percentual de perda foi calculado</h2>
+      <p>O cálculo segue exatamente a orientação do enunciado e foi automatizado na planilha Excel entregue em anexo, célula por célula.</p>
+    </div>
+    <div class="grid2">
+      <div class="formula-box revelar">
+        <div class="rotulo">Fórmula do percentual de quebra</div>
+        <div class="formula">% de quebra =
+          <span class="frac"><span class="topo">quebras ÷ faltas</span><span class="base">qtde. em estoque</span></span>
+          × 100
+        </div>
+      </div>
+      <div class="card revelar">
+        <h3 style="font-size:16.5px;margin-bottom:14px">Exemplo do enunciado, passo a passo</h3>
+        <div class="passos">
+          <div class="passo"><span><strong>Televisor 40":</strong> 27 quebras ÷ 200 unidades em estoque</span><span class="seta">=</span><span><strong>0,135</strong></span></div>
+          <div class="passo"><span>Multiplicando o resultado por 100</span><span class="seta">=</span><span><strong>13,5%</strong> de quebra</span></div>
+          <div class="passo"><span>O mesmo processo foi aplicado aos <strong>outros 9 produtos</strong>, com fórmulas automatizadas <code style="background:var(--azul-fundo);padding:2px 7px;border-radius:5px;font-size:13.5px">=(D/C)*100</code> na planilha</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="badges-faixa revelar">
+      <div class="faixa crit"><strong>Crítico • acima de 30%</strong>Perda severa: exige plano de ação imediato com metas e responsáveis definidos.</div>
+      <div class="faixa aten"><strong>Atenção • 15% a 30%</strong>Perda relevante: monitorar de perto e aplicar correções pontuais.</div>
+      <div class="faixa adeq"><strong>Adequado • abaixo de 15%</strong>Nível controlado: manter as práticas atuais e acompanhar a evolução.</div>
+    </div>
+  </div>
+</section>
+
+<section id="resultados">
+  <div class="container">
+    <div class="cab revelar">
+      <span class="kicker">Resultados</span>
+      <h2>Relatório de estoque analisado</h2>
+      <p>Todos os percentuais abaixo foram conferidos um a um e refletem a planilha entregue. Use os filtros para visualizar os produtos por nível de criticidade.</p>
+    </div>
+    <div class="filtros revelar" role="group" aria-label="Filtrar produtos por classificação">
+      <button class="filtro ativo" data-cat="todos" aria-pressed="true">Todos (10)</button>
+      <button class="filtro" data-cat="critico" aria-pressed="false">Crítico (3)</button>
+      <button class="filtro" data-cat="atencao" aria-pressed="false">Atenção (1)</button>
+      <button class="filtro" data-cat="adequado" aria-pressed="false">Adequado (6)</button>
+    </div>
+    <div class="tabela-wrap revelar">
+      <table id="tabela">
+        <caption>Tabela 1 • Percentual de quebras e faltas por produto (dados do relatório da empresa)</caption>
+        <thead>
+          <tr><th>Produto</th><th class="num">Qtde. em estoque</th><th class="num">Quebras / Faltas</th><th class="num">% de quebra do item</th><th>Classificação</th></tr>
+        </thead>
+        <tbody>
+          <tr data-cat="adequado"><td>Televisor 40"</td><td class="num">200</td><td class="num">27</td><td class="num pct">13,50%</td><td><span class="badge b-adeq">Adequado</span></td></tr>
+          <tr data-cat="adequado"><td>Ave Natalina</td><td class="num">128</td><td class="num">13</td><td class="num pct">10,16%</td><td><span class="badge b-adeq">Adequado</span></td></tr>
+          <tr data-cat="critico" class="destaque-linha"><td>Micro-ondas</td><td class="num">115</td><td class="num">41</td><td class="num pct">35,65%</td><td><span class="badge b-crit">Crítico</span></td></tr>
+          <tr data-cat="adequado"><td>Fogões</td><td class="num">51</td><td class="num">2</td><td class="num pct">3,92%</td><td><span class="badge b-adeq">Adequado</span></td></tr>
+          <tr data-cat="adequado"><td>Som Automotivo</td><td class="num">115</td><td class="num">5</td><td class="num pct">4,35%</td><td><span class="badge b-adeq">Adequado</span></td></tr>
+          <tr data-cat="critico" class="destaque-linha"><td>Celulares</td><td class="num">30</td><td class="num">16</td><td class="num pct">53,33%</td><td><span class="badge b-crit">Crítico</span></td></tr>
+          <tr data-cat="adequado"><td>Geladeiras</td><td class="num">29</td><td class="num">4</td><td class="num pct">13,79%</td><td><span class="badge b-adeq">Adequado</span></td></tr>
+          <tr data-cat="critico" class="destaque-linha"><td>Sofá 3 Lugares</td><td class="num">13</td><td class="num">9</td><td class="num pct">69,23%</td><td><span class="badge b-crit">Crítico</span></td></tr>
+          <tr data-cat="adequado"><td>Forno Elétrico</td><td class="num">12</td><td class="num">1</td><td class="num pct">8,33%</td><td><span class="badge b-adeq">Adequado</span></td></tr>
+          <tr data-cat="atencao"><td>Material de Limpeza</td><td class="num">11</td><td class="num">3</td><td class="num pct">27,27%</td><td><span class="badge b-aten">Atenção</span></td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>TOTAL GERAL</td><td class="num">704</td><td class="num">121</td><td class="num">17,19%</td><td>Perda global</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="cab revelar" style="margin-top:56px">
+      <span class="kicker">Ranking</span>
+      <h2>Os produtos mais problemáticos</h2>
+      <p>Em vermelho, os três itens em nível crítico, que concentram a maior parte do prejuízo da empresa.</p>
+    </div>
+    <div class="card revelar">
+      <ol class="rank">
+        <li class="crit"><span class="nome">Sofá 3 Lugares</span><span class="trilha"><span class="barra crit" style="width:99%"></span></span><span class="valor">69,23%</span></li>
+        <li class="crit"><span class="nome">Celulares</span><span class="trilha"><span class="barra crit" style="width:76%"></span></span><span class="valor">53,33%</span></li>
+        <li class="crit"><span class="nome">Micro-ondas</span><span class="trilha"><span class="barra crit" style="width:51%"></span></span><span class="valor">35,65%</span></li>
+        <li><span class="nome">Material de Limpeza</span><span class="trilha"><span class="barra aten" style="width:39%"></span></span><span class="valor">27,27%</span></li>
+        <li><span class="nome">Geladeiras</span><span class="trilha"><span class="barra" style="width:20%"></span></span><span class="valor">13,79%</span></li>
+        <li><span class="nome">Televisor 40"</span><span class="trilha"><span class="barra" style="width:19%"></span></span><span class="valor">13,50%</span></li>
+        <li><span class="nome">Ave Natalina</span><span class="trilha"><span class="barra" style="width:15%"></span></span><span class="valor">10,16%</span></li>
+        <li><span class="nome">Forno Elétrico</span><span class="trilha"><span class="barra" style="width:12%"></span></span><span class="valor">8,33%</span></li>
+        <li><span class="nome">Som Automotivo</span><span class="trilha"><span class="barra" style="width:6%"></span></span><span class="valor">4,35%</span></li>
+        <li><span class="nome">Fogões</span><span class="trilha"><span class="barra" style="width:6%"></span></span><span class="valor">3,92%</span></li>
+      </ol>
+    </div>
+
+    <div class="grid2 revelar" style="margin-top:20px">
+      <div class="card">
+        <h3 style="font-size:16.5px;margin-bottom:10px">Concentração das perdas</h3>
+        <p style="font-size:15px;margin-bottom:8px">Os três produtos críticos (Sofá 3 Lugares, Celulares e Micro-ondas) respondem juntos por <strong>66 das 121 unidades perdidas</strong>, o equivalente a <strong>54,5% de todo o prejuízo</strong> da empresa. Isso significa que corrigir apenas três linhas do relatório já eliminaria mais da metade do problema.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16.5px;margin-bottom:10px">Volume versus proporção</h3>
+        <p style="font-size:15px;margin-bottom:8px">O Micro-ondas tem a <strong>maior perda em quantidade absoluta</strong> (41 unidades), enquanto o Sofá 3 Lugares tem a <strong>maior perda proporcional</strong> (9 de 13 unidades, quase 7 em cada 10). Os dois recortes mostram que o problema tem causas diferentes e exigem tratamentos complementares.</p>
+      </div>
+    </div>
+    <p class="luz revelar">Observação: na planilha Excel entregue, esses percentuais são fórmulas vivas. Se qualquer quantidade for atualizada, os valores, o total e o gráfico se recalculam automaticamente.</p>
+  </div>
+</section>
+
+<section id="estrategias" class="alt">
+  <div class="container">
+    <div class="cab revelar">
+      <span class="kicker">Tarefa 2</span>
+      <h2>Estratégias para reduzir as perdas</h2>
+      <p>Ações práticas para evitar faltas e excessos de produtos no estoque, organizadas nos quatro fatores indicados no enunciado.</p>
+    </div>
+    <div class="grid4">
+      <div class="card est-card revelar">
+        <h3><span class="ico">1</span>Armazenamento adequado</h3>
+        <ul>
+          <li>Endereçar o estoque pela curva ABC, mantendo itens frágeis e de alto valor em áreas protegidas e de fácil acesso.</li>
+          <li>Usar porta-pallets, pallets e proteção de cantos, com destaque para sofás embalados em plástico e sem empilhamento.</li>
+          <li>Fazer inspeção semanal com checklist de avarias e controlar umidade e temperatura do armazém.</li>
+        </ul>
+      </div>
+      <div class="card est-card revelar">
+        <h3><span class="ico">2</span>Correto manuseio</h3>
+        <ul>
+          <li>Treinar periodicamente a equipe em técnicas de movimentação, empilhamento e uso de EPIs.</li>
+          <li>Padronizar procedimentos (POPs) de recebimento, armazenagem e separação de pedidos.</li>
+          <li>Utilizar equipamentos adequados, como transpaleteira e empilhadeira, e sinalizar limites de peso e altura das pilhas.</li>
+        </ul>
+      </div>
+      <div class="card est-card revelar">
+        <h3><span class="ico">3</span>Previsibilidade da demanda</h3>
+        <ul>
+          <li>Analisar o histórico de vendas com curva ABC e giro de estoque para dimensionar o estoque de segurança.</li>
+          <li>Revisar mensalmente estoque mínimo, máximo e lote de reposição, evitando excesso de itens parados que avariam ou obsoletam.</li>
+          <li>Usar o ERP para gerar alertas automáticos de ruptura e de excesso antes que virem perdas.</li>
+        </ul>
+      </div>
+      <div class="card est-card revelar">
+        <h3><span class="ico">4</span>Logística interna</h3>
+        <ul>
+          <li>Mapear os fluxos internos e eliminar movimentações desnecessárias, distâncias longas e retrabalho.</li>
+          <li>Implantar inventário cíclico, com contagens rotativas, para detectar quebras e faltas rapidamente.</li>
+          <li>Acompanhar KPIs semanais de taxa de quebra, acuracidade de inventário e tempo de atendimento.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="acuracidade">
+  <div class="container">
+    <div class="cab revelar">
+      <span class="kicker">Indicador complementar</span>
+      <h2>Acuracidade físico e contábil</h2>
+      <p>Além do percentual de quebra, o trabalho analisa a confiabilidade das informações de inventário, comparando o estoque físico real com o saldo do sistema.</p>
+    </div>
+    <div class="acur-grid">
+      <div class="card revelar">
+        <p>A acuracidade de inventário mede o quanto o sistema confia no estoque registrado. Ela compara a quantidade física contada no armazém com a quantidade contábil registrada no ERP, e o resultado revela a qualidade da gestão como um todo. Quando a acuracidade é baixa, a empresa compra demais ou de menos, planeja reposições erradas e descobre rupturas apenas no momento do atendimento, quando o cliente já está esperando.</p>
+        <p>A fórmula utilizada no relatório é simples e direta: divide-se a quantidade que confere pela quantidade registrada e multiplica-se por 100. Quanto mais próximo de 100%, mais confiável é o controle de estoque da operação.</p>
+        <ul class="check-lista">
+          <li><span class="ok">✓</span><span><strong>Confiabilidade:</strong> saldos corretos permitem reposição no momento certo.</span></li>
+          <li><span class="ok">✓</span><span><strong>Planejamento:</strong> previsões de demanda deixam de ser distorcidas por saldos falsos.</span></li>
+          <li><span class="ok">✓</span><span><strong>Atendimento:</strong> menos vendas perdidas por ruptura não detectada.</span></li>
+        </ul>
+      </div>
+      <div class="exemplo revelar">
+        <div class="titulo">Exemplo aplicado: Sofá 3 Lugares</div>
+        <p>Imagine que, na contagem física, apenas 4 dos 13 sofás registrados no sistema foram encontrados em condição de venda. A acuracidade do item seria:</p>
+        <div class="conta">(4 ÷ 13) × 100 = 30,77%</div>
+        <p>Enquanto o percentual de quebra mostra <strong>quanto se perdeu</strong> (69,23%), a acuracidade mostra <strong>em quanto o sistema pode confiar</strong> (30,77%). Os dois indicadores se completam: um mede a perda física, o outro mede a qualidade da informação que sustenta todas as decisões de compra e reposição.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plano" class="alt">
+  <div class="container">
+    <div class="cab revelar">
+      <span class="kicker">Tarefa 3</span>
+      <h2>Plano de ação 5W2H • Sofá 3 Lugares</h2>
+      <p>O produto escolhido foi o Sofá 3 Lugares, o item com a maior perda proporcional do relatório: 9 de 13 unidades avariadas ou faltando (69,23%).</p>
+    </div>
+    <div class="plano-aviso revelar">
+      <strong>Por que este produto?</strong> Trata-se de item volumoso, de alto valor unitário e com impacto direto no atendimento ao cliente. A perda de quase 70% do lote indica falha grave de manuseio e armazenagem, e é justamente onde a correção gera o maior retorno imediato entre os dez produtos analisados.
+    </div>
+    <div class="tabela-wrap revelar">
+      <table class="tabela-5w2h">
+        <caption>Tabela 2 • Plano de ação 5W2H para redução da quebra do Sofá 3 Lugares</caption>
+        <thead>
+          <tr><th>Pergunta (5W2H)</th><th>Resposta e ação planejada</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>What</b> • O quê?</td><td>Programa de redução de quebras do Sofá 3 Lugares, com embalagem reforçada, manuseio padronizado e inspeções periódicas no almoxarifado.</td></tr>
+          <tr><td><b>Why</b> • Por quê?</td><td>69,23% do lote está avariado ou faltando (9 de 13 unidades), a maior perda do relatório; há risco financeiro e de ruptura no atendimento às vendas.</td></tr>
+          <tr><td><b>Who</b> • Quem?</td><td>Líder de almoxarifado como responsável pela execução, equipe de movimentação na operação e supervisor de logística no monitoramento dos indicadores.</td></tr>
+          <tr><td><b>When</b> • Quando?</td><td>Início imediato, primeira medição do indicador em 30 dias e meta de reduzir a quebra para 15% ou menos em 90 dias, com revisão mensal do plano.</td></tr>
+          <tr><td><b>Where</b> • Onde?</td><td>Almoxarifado e centro de distribuição, na área de produtos volumosos e na linha de expedição.</td></tr>
+          <tr><td><b>How</b> • Como?</td><td>Embalagem plástica com proteção de cantos, proibição de empilhamento dos sofás, treinamento de manuseio, inspeção semanal com checklist e inventário cíclico mensal.</td></tr>
+          <tr><td><b>How much</b> • Quanto?</td><td>Custo estimado de R$ 800,00 em embalagens e treinamento, valor muito inferior ao prejuízo já gerado pelas 9 unidades perdidas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="meta-chips revelar">
+      <div class="meta-chip"><b>Meta de 30 dias</b>Primeira medição formal da taxa de quebra após embalagem reforçada e treinamento inicial.</div>
+      <div class="meta-chip"><b>Meta de 90 dias</b>Taxa de quebra do item igual ou inferior a 15%, mantida por dois ciclos consecutivos.</div>
+      <div class="meta-chip"><b>Indicador de controle</b>Inventário cíclico mensal da linha de volumosos, com acuracidade acima de 95%.</div>
+    </div>
+  </div>
+</section>
+
+<section id="conclusao">
+  <div class="container">
+    <div class="conclusao revelar">
+      <h2>Conclusão</h2>
+      <p>A análise do relatório de estoque mostrou que a empresa perde 17,19% de seu inventário, o equivalente a 121 unidades em 704 disponíveis, e que mais da metade desse prejuízo se concentra em apenas três produtos: Sofá 3 Lugares, Celulares e Micro-ondas. O diagnóstico quantitativo cumpriu seu papel de transformar um problema genérico de "mercadoria avariada" em alvos concretos, com percentuais, classificações e prioridades claras.</p>
+      <p>As estratégias propostas nos quatro fatores do enunciado formam um conjunto coerente de prevenção: armazenamento correto e manuseio padronizado atacam as causas físicas das avarias, enquanto a previsibilidade da demanda e a otimização da logística interna reduzem excessos, movimentações desnecessárias e o tempo em que o produto fica exposto ao risco. O plano 5W2H do Sofá 3 Lugares demonstra, na prática, como transformar o diagnóstico em ação: responsáveis definidos, prazos curtos, investimento de R$ 800,00 e meta de reduzir a quebra para 15% ou menos em 90 dias.</p>
+      <p class="fecho">Com execução disciplinada e acompanhamento mensal dos indicadores, a empresa tende a reduzir sua perda global para patamares compatíveis com uma operação saudável, aumentando a confiabilidade do inventário, liberando capital de giro e melhorando o nível de serviço ao cliente.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Atividade 2 • UC0 • Logística</h4>
+        <p style="font-size:14px">Página oficial do trabalho "Análise de Quebras e Faltas de Estoque", elaborada como complemento à entrega acadêmica. Todo o conteúdo desta página foi revisado e confere com o relatório e a planilha anexos.</p>
+      </div>
+      <div>
+        <h4>Entregáveis do trabalho</h4>
+        <ul>
+          <li>Relatório completo em PDF (8 páginas, formato ABNT)</li>
+          <li>Planilha Excel com fórmulas automatizadas</li>
+          <li>Esta página web de apresentação</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ficha técnica</h4>
+        <ul>
+          <li>Aluno: Paulo Sérgio de Andrade</li>
+          <li>Curso: Técnico em Logística (SENAC)</li>
+          <li>Unidade curricular: UC0 • Agosto de 2026</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Paulo Sérgio de Andrade • SENAC • Todos os direitos reservados</span>
+      <button class="btn-imprimir" onclick="window.print()">Imprimir ou salvar esta página em PDF</button>
+    </div>
+  </div>
+</footer>
+
+<button class="voltar-topo" id="voltarTopo" aria-label="Voltar ao topo">↑</button>
+
+<script>
+// Filtro da tabela de resultados
+var filtros = document.querySelectorAll('.filtro');
+var linhas = document.querySelectorAll('#tabela tbody tr');
+filtros.forEach(function (f) {
+  f.addEventListener('click', function () {
+    filtros.forEach(function (x) { x.classList.remove('ativo'); x.setAttribute('aria-pressed', 'false'); });
+    f.classList.add('ativo'); f.setAttribute('aria-pressed', 'true');
+    var cat = f.dataset.cat;
+    linhas.forEach(function (l) {
+      l.classList.toggle('oculto', cat !== 'todos' && l.dataset.cat !== cat);
+    });
+  });
+});
+
+// Destaque do menu conforme a seção visível
+var secoes = document.querySelectorAll('section[id], header[id]');
+var links = document.querySelectorAll('#menu a');
+var obs = new IntersectionObserver(function (entradas) {
+  entradas.forEach(function (e) {
+    if (e.isIntersecting) {
+      links.forEach(function (a) { a.classList.toggle('ativo', a.getAttribute('href') === '#' + e.target.id); });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+secoes.forEach(function (s) { obs.observe(s); });
+
+// Animação de entrada
+var revelar = new IntersectionObserver(function (entradas) {
+  entradas.forEach(function (e) {
+    if (e.isIntersecting) { e.target.classList.add('visto'); revelar.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.revelar').forEach(function (el) { revelar.observe(el); });
+
+// Botão voltar ao topo
+var topo = document.getElementById('voltarTopo');
+window.addEventListener('scroll', function () {
+  topo.classList.toggle('visivel', window.scrollY > 600);
+});
+topo.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+</script>
+</body>
+</html>
