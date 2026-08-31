@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade 3 - Curva ABC - MAXPREÇOS</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== DESIGN SYSTEM ===== */
+:root {
+  --primary: #1B2A4A;
+  --primary-light: #D6E4F0;
+  --primary-dark: #0F1A2E;
+  --accent-red: #C0392B;
+  --accent-amber: #D4820A;
+  --accent-green: #1B7D46;
+  --neutral-900: #37352F;
+  --neutral-600: #8C8A84;
+  --neutral-200: #E9E9E8;
+  --neutral-100: #F7F7F5;
+  --neutral-50: #FAFAF9;
+  --neutral-0: #FFFFFF;
+  --shadow-sm: 0 1px 2px rgba(15, 26, 46, 0.06), 0 1px 3px rgba(15, 26, 46, 0.04);
+  --shadow-md: 0 4px 8px rgba(15, 26, 46, 0.06), 0 2px 4px rgba(15, 26, 46, 0.04);
+  --shadow-lg: 0 12px 32px rgba(15, 26, 46, 0.10), 0 4px 12px rgba(15, 26, 46, 0.06);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--neutral-900);
+  background: var(--neutral-50);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== HERO / HEADER ===== */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--neutral-0);
+  padding: 80px 24px 100px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(214, 228, 240, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100px;
+  background: var(--neutral-50);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+  line-height: 1.05;
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, #D6E4F0 0%, #B0C8E0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 700px;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+/* Identification block in hero */
+.hero-ident {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 720px;
+  margin-bottom: 40px;
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+}
+.hero-ident-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 2px solid rgba(214, 228, 240, 0.4);
+  padding-left: 12px;
+}
+.hero-ident-item:first-child { border-left: none; padding-left: 0; }
+.hero-ident-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+}
+.hero-ident-value {
+  font-size: 0.98rem;
+  color: var(--neutral-0);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  max-width: 800px;
+}
+.hero-stat {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+.hero-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--neutral-0);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 80px 0;
+  position: relative;
+}
+.section-header {
+  margin-bottom: 48px;
+}
+.section-tag {
+  display: inline-block;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--neutral-600);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+/* ===== ABC DEFINITION CARDS ===== */
+.abc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.abc-card {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.abc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.abc-card.a { border-top-color: var(--accent-red); }
+.abc-card.b { border-top-color: var(--accent-amber); }
+.abc-card.c { border-top-color: var(--accent-green); }
+.abc-card-letter {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.abc-card.a .abc-card-letter { color: var(--accent-red); }
+.abc-card.b .abc-card-letter { color: var(--accent-amber); }
+.abc-card.c .abc-card-letter { color: var(--accent-green); }
+.abc-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.abc-card-desc {
+  font-size: 0.95rem;
+  color: var(--neutral-900);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.abc-card-stats {
+  display: flex;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--neutral-200);
+}
+.abc-card-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+.abc-card-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--neutral-600);
+  margin-top: 4px;
+}
+
+/* ===== TABLE ===== */
+.table-wrapper {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.data-table thead {
+  background: var(--primary);
+  color: var(--neutral-0);
+}
+.data-table th {
+  padding: 16px 12px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.data-table th:first-child { text-align: left; }
+.data-table th:last-child { text-align: center; }
+.data-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--neutral-100);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.data-table td:first-child { text-align: left; font-weight: 500; }
+.data-table td:last-child { text-align: center; }
+.data-table tbody tr:nth-child(even) { background: var(--neutral-50); }
+.data-table tbody tr:hover { background: var(--primary-light); }
+.data-table tr.total-row {
+  background: var(--primary-light) !important;
+  font-weight: 700;
+}
+.data-table tr.total-row td {
+  border-top: 2px solid var(--primary);
+  border-bottom: none;
+  color: var(--primary);
+}
+
+/* ABC badge */
+.abc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--neutral-0);
+}
+.abc-badge.a { background: var(--accent-red); }
+.abc-badge.b { background: var(--accent-amber); }
+.abc-badge.c { background: var(--accent-green); }
+
+/* Row highlight by ABC */
+.data-table tr.row-a { border-left: 3px solid var(--accent-red); }
+.data-table tr.row-b { border-left: 3px solid var(--accent-amber); }
+.data-table tr.row-c { border-left: 3px solid var(--accent-green); }
+
+/* ===== CHARTS ===== */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.chart-card {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-md);
+}
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.chart-subtitle {
+  font-size: 0.88rem;
+  color: var(--neutral-600);
+  margin-bottom: 20px;
+}
+.chart-container {
+  position: relative;
+  height: 380px;
+}
+.chart-container.dual { height: 280px; }
+
+/* ===== PRODUCTS SECTION ===== */
+.product-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+.product-card {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border-left: 6px solid var(--primary);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+.product-card.curva-a { border-left-color: var(--accent-red); }
+.product-card.curva-c { border-left-color: var(--accent-green); }
+.product-card-side {
+  background: linear-gradient(135deg, var(--primary-light) 0%, #E8EFF7 100%);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.product-card.curva-a .product-card-side {
+  background: linear-gradient(135deg, rgba(192, 57, 43, 0.08) 0%, rgba(192, 57, 43, 0.04) 100%);
+}
+.product-card.curva-c .product-card-side {
+  background: linear-gradient(135deg, rgba(27, 125, 70, 0.08) 0%, rgba(27, 125, 70, 0.04) 100%);
+}
+.product-num {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neutral-600);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.product-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.product-abc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+  color: var(--neutral-0);
+}
+.product-abc-tag.a { background: var(--accent-red); }
+.product-abc-tag.c { background: var(--accent-green); }
+.product-card-body { padding: 28px 28px; }
+.product-justification {
+  font-size: 0.95rem;
+  color: var(--neutral-900);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.product-stock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stock-box {
+  background: var(--neutral-50);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  border-left: 3px solid;
+}
+.stock-box.min { border-left-color: var(--accent-amber); }
+.stock-box.max { border-left-color: var(--accent-green); }
+.stock-box-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--neutral-600);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.stock-box-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.stock-box-note {
+  font-size: 0.82rem;
+  color: var(--neutral-600);
+}
+
+/* ===== METHODOLOGY ===== */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.method-step {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.method-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--neutral-0);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+.method-step-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.method-step-desc {
+  font-size: 0.92rem;
+  color: var(--neutral-900);
+  line-height: 1.6;
+}
+.method-step-formula {
+  display: block;
+  background: var(--neutral-100);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--primary);
+  overflow-x: auto;
+}
+
+/* ===== CONCLUSIONS ===== */
+.conclusions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.conclusion-card {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--primary);
+}
+.conclusion-card.a { border-left-color: var(--accent-red); }
+.conclusion-card.b { border-left-color: var(--accent-amber); }
+.conclusion-card.c { border-left-color: var(--accent-green); }
+.conclusion-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.conclusion-card-title .abc-badge { width: 32px; height: 32px; font-size: 14px; }
+.conclusion-card-text {
+  font-size: 0.95rem;
+  color: var(--neutral-900);
+  line-height: 1.7;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--primary);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 48px 24px 32px;
+  text-align: center;
+}
+.footer-inner { max-width: 800px; margin: 0 auto; }
+.footer h3 {
+  color: var(--neutral-0);
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.footer p {
+  font-size: 0.92rem;
+  margin-bottom: 8px;
+}
+.footer-meta {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero { padding: 60px 20px 80px; }
+  .product-card { grid-template-columns: 1fr; }
+  .product-card-side { padding: 24px; }
+  .product-stock { grid-template-columns: 1fr; }
+  .data-table { font-size: 0.82rem; }
+  .data-table th, .data-table td { padding: 10px 8px; }
+}
+
+/* Print */
+@media print {
+  .hero { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .abc-badge, .product-abc-tag, .data-table thead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  section { page-break-inside: avoid; }
+  .product-card { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Atividade 3 · UC04 · Gestão de Estoque</span>
+    <h1>Análise Curva <span class="accent">ABC</span><br>MAXPREÇOS</h1>
+    <p class="hero-subtitle">
+      Classificação dos 15 itens do estoque do supermercado Atacadão MAXPREÇOS por meio da
+      ferramenta Curva ABC, com dimensionamento de estoque mínimo e máximo para produtos prioritários.
+    </p>
+    <div class="hero-ident">
+      <div class="hero-ident-item">
+        <span class="hero-ident-label">Escola</span>
+        <span class="hero-ident-value">SENAC</span>
+      </div>
+      <div class="hero-ident-item">
+        <span class="hero-ident-label">Curso</span>
+        <span class="hero-ident-value">Técnico em Logística</span>
+      </div>
+      <div class="hero-ident-item">
+        <span class="hero-ident-label">Aluno</span>
+        <span class="hero-ident-value">Paulo Sérgio de Andrade</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value">15</div>
+        <div class="hero-stat-label">Itens Analisados</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">R$ 8,9 Mi</div>
+        <div class="hero-stat-label">Custo Total</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">3 / 5 / 7</div>
+        <div class="hero-stat-label">Curvas A · B · C</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">79,96%</div>
+        <div class="hero-stat-label">Concentrado na Curva A</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== SEÇÃO 1: CONTEXTO E DEFINIÇÃO ===== -->
+<section id="contexto">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">01 · Contexto</span>
+      <h2 class="section-title">O que é a Curva ABC?</h2>
+      <p class="section-subtitle">
+        A Curva ABC é uma ferramenta de gestão de estoques baseada no Princípio de Pareto (regra do 80/20),
+        que classifica os itens em três categorias de importância conforme o impacto no custo total do estoque.
+      </p>
+    </div>
+    <div class="abc-cards">
+      <div class="abc-card a">
+        <div class="abc-card-letter">A</div>
+        <h3 class="abc-card-title">Produtos prioritários</h3>
+        <p class="abc-card-desc">
+          Itens de alta rotatividade e grande impacto financeiro. <strong>Nunca podem faltar</strong>
+          no estoque. Exigem controle rigoroso e monitoramento diário.
+        </p>
+        <div class="abc-card-stats">
+          <div>
+            <div class="abc-card-stat-value">20%</div>
+            <div class="abc-card-stat-label">dos itens</div>
+          </div>
+          <div>
+            <div class="abc-card-stat-value">80%</div>
+            <div class="abc-card-stat-label">do custo</div>
+          </div>
+        </div>
+      </div>
+      <div class="abc-card b">
+        <div class="abc-card-letter">B</div>
+        <h3 class="abc-card-title">Situação intermediária</h3>
+        <p class="abc-card-desc">
+          Produtos que também não podem faltar, mas com impacto financeiro moderado.
+          Controle intermediário e revisões semanais.
+        </p>
+        <div class="abc-card-stats">
+          <div>
+            <div class="abc-card-stat-value">30%</div>
+            <div class="abc-card-stat-label">dos itens</div>
+          </div>
+          <div>
+            <div class="abc-card-stat-value">15%</div>
+            <div class="abc-card-stat-label">do custo</div>
+          </div>
+        </div>
+      </div>
+      <div class="abc-card c">
+        <div class="abc-card-letter">C</div>
+        <h3 class="abc-card-title">Menor saída</h3>
+        <p class="abc-card-desc">
+          Produtos com grandes quantidades em estoque e baixo impacto financeiro.
+          <strong>Não podem ficar parados</strong>. Controle simplificado e mensal.
+        </p>
+        <div class="abc-card-stats">
+          <div>
+            <div class="abc-card-stat-value">50%</div>
+            <div class="abc-card-stat-label">dos itens</div>
+          </div>
+          <div>
+            <div class="abc-card-stat-value">5%</div>
+            <div class="abc-card-stat-label">do custo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 2: METODOLOGIA ===== -->
+<section id="metodologia" style="background: var(--neutral-100); padding-top: 80px; padding-bottom: 80px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">02 · Metodologia</span>
+      <h2 class="section-title">Como a análise foi conduzida</h2>
+      <p class="section-subtitle">
+        O procedimento seguiu três etapas sequenciais para classificar os itens e dimensionar os estoques.
+      </p>
+    </div>
+    <div class="method-grid">
+      <div class="method-step">
+        <div class="method-step-number">1</div>
+        <h3 class="method-step-title">Cálculo do Valor Consumido</h3>
+        <p class="method-step-desc">
+          Para cada item, multiplicou-se o custo unitário pelo consumo do período.
+          O total geral é a soma de todos os valores consumidos.
+        </p>
+        <code class="method-step-formula">Valor = Custo × Consumo</code>
+      </div>
+      <div class="method-step">
+        <div class="method-step-number">2</div>
+        <h3 class="method-step-title">Percentual e Acumulado</h3>
+        <p class="method-step-desc">
+          Aplicando regra de três, calculou-se o percentual de cada item sobre o total geral.
+          Itens foram ordenados de forma decrescente para obter o acumulado.
+        </p>
+        <code class="method-step-formula">% = (Valor Item / Total) × 100</code>
+      </div>
+      <div class="method-step">
+        <div class="method-step-number">3</div>
+        <h3 class="method-step-title">Classificação ABC</h3>
+        <p class="method-step-desc">
+          A: acumulado ≤ 80% do custo · B: 80% a 95% · C: acima de 95%.
+          Em seguida, dimensionaram-se estoques mínimo e máximo para 3 produtos selecionados.
+        </p>
+        <code class="method-step-formula">A ≤ 80% · B ≤ 95% · C &gt; 95%</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 3: ANÁLISE DOS DADOS ===== -->
+<section id="analise">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">03 · Análise dos Dados</span>
+      <h2 class="section-title">Tabela completa da Curva ABC</h2>
+      <p class="section-subtitle">
+        Os 15 itens do estoque do MAXPREÇOS ordenados em ordem decrescente de valor consumido,
+        com o percentual individual, o percentual acumulado e a respectiva classificação ABC.
+      </p>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Custo Unit.</th>
+            <th>Consumo</th>
+            <th>Valor Consumido</th>
+            <th>%</th>
+            <th>% Acum.</th>
+            <th>ABC</th>
+          </tr>
+        </thead>
+        <tbody id="data-tbody">
+          <!-- Dados serão inseridos via JS -->
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td>Total Geral</td>
+            <td></td>
+            <td></td>
+            <td>R$ 8.911.000,00</td>
+            <td>100,00%</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 4: GRÁFICOS ===== -->
+<section id="graficos" style="background: var(--neutral-100); padding-top: 80px; padding-bottom: 80px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">04 · Visualização</span>
+      <h2 class="section-title">Gráficos interativos da análise</h2>
+      <p class="section-subtitle">
+        O Gráfico de Pareto mostra a concentração do custo nos itens da Curva A.
+        Os gráficos de distribuição comparam a quantidade de itens com a representatividade no custo.
+      </p>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3 class="chart-title">Gráfico de Pareto — Valor Consumido e % Acumulado</h3>
+        <p class="chart-subtitle">As barras representam o valor consumido (eixo esquerdo); a linha tracejada mostra o % acumulado (eixo direito).</p>
+        <div class="chart-container">
+          <canvas id="paretoChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Distribuição por Classe ABC</h3>
+        <p class="chart-subtitle">Comparação entre quantidade de itens e representatividade no custo total.</p>
+        <div class="chart-container dual">
+          <canvas id="distributionChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 5: DIMENSIONAMENTO DE ESTOQUE ===== -->
+<section id="produtos">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">05 · Dimensionamento</span>
+      <h2 class="section-title">Estoque mínimo e máximo — 3 produtos</h2>
+      <p class="section-subtitle">
+        Foram escolhidos três produtos com perfis distintos (Curva A e Curva C, perecível e não perecível)
+        para demonstrar como o dimensionamento varia conforme a classificação ABC e o prazo de validade.
+      </p>
+    </div>
+    <div class="product-cards">
+
+      <!-- Produto 1: Banana -->
+      <div class="product-card curva-c">
+        <div class="product-card-side">
+          <div class="product-num">Produto 1</div>
+          <h3 class="product-name">Cacho de Banana</h3>
+          <span class="product-abc-tag c">Curva C · Perecível</span>
+          <div style="margin-top: 16px; font-size: 0.82rem; color: var(--neutral-600);">
+            Consumo mensal: 10.000 unidades<br>
+            Valor consumido: R$ 100.000,00 (1,12%)
+          </div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-justification">
+            <strong>Justificativa:</strong> Trata-se de um produto perecível, com baixo prazo de validade
+            (shelf life de aproximadamente 5 a 7 dias). Como frutas estragam rapidamente, não é recomendado
+            manter grandes quantidades em estoque para evitar perdas. Apesar de estar classificado na
+            Curva C, possui demanda constante (10.000 unidades no período), o que exige reposição
+            frequente em lotes menores. A alta perecibilidade justifica um estoque máximo limitado a
+            aproximadamente uma semana de consumo.
+          </p>
+          <div class="product-stock">
+            <div class="stock-box min">
+              <div class="stock-box-label">Estoque Mínimo</div>
+              <div class="stock-box-value">1.000 un.</div>
+              <div class="stock-box-note">≈ 3 dias de consumo</div>
+            </div>
+            <div class="stock-box max">
+              <div class="stock-box-label">Estoque Máximo</div>
+              <div class="stock-box-value">2.500 un.</div>
+              <div class="stock-box-note">≈ 7 dias (1 semana)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 2: Arroz -->
+      <div class="product-card curva-a">
+        <div class="product-card-side">
+          <div class="product-num">Produto 2</div>
+          <h3 class="product-name">Saco de Arroz — 1 Kg</h3>
+          <span class="product-abc-tag a">Curva A · Alta Rotatividade</span>
+          <div style="margin-top: 16px; font-size: 0.82rem; color: var(--neutral-600);">
+            Consumo mensal: 95.000 unidades<br>
+            Valor consumido: R$ 1.425.000,00 (15,99%)
+          </div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-justification">
+            <strong>Justificativa:</strong> Produto de Curva A, com altíssima representatividade no custo
+            total (aproximadamente 16% do valor consumido) e elevada rotatividade (95.000 unidades no
+            período). Por ser um alimento seco e não perecível, possui shelf life longo (até 12 meses),
+            permitindo estocagem em maior quantidade sem risco de perdas. Porém, por se tratar de item
+            prioritário da Curva A, <strong>nunca pode faltar</strong>, justificando um estoque mínimo
+            elevado. O estoque máximo cobre aproximadamente duas semanas de demanda.
+          </p>
+          <div class="product-stock">
+            <div class="stock-box min">
+              <div class="stock-box-label">Estoque Mínimo</div>
+              <div class="stock-box-value">15.000 un.</div>
+              <div class="stock-box-note">≈ 5 dias de consumo</div>
+            </div>
+            <div class="stock-box max">
+              <div class="stock-box-label">Estoque Máximo</div>
+              <div class="stock-box-value">50.000 un.</div>
+              <div class="stock-box-note">≈ 15 dias de consumo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 3: Papel Higiênico -->
+      <div class="product-card curva-a">
+        <div class="product-card-side">
+          <div class="product-num">Produto 3</div>
+          <h3 class="product-name">Pacote de Papel Higiênico</h3>
+          <span class="product-abc-tag a">Curva A · 2º maior valor</span>
+          <div style="margin-top: 16px; font-size: 0.82rem; color: var(--neutral-600);">
+            Consumo mensal: 45.000 unidades<br>
+            Valor consumido: R$ 2.700.000,00 (30,30%)
+          </div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-justification">
+            <strong>Justificativa:</strong> Produto de Curva A, sendo o
+            <strong>segundo maior item em valor consumido</strong> (aproximadamente 30% do custo total,
+            totalizando R$ 2.700.000,00), com alta demanda (45.000 unidades no período). É um produto
+            não perecível, com shelf life muito longo (geralmente superior a 24 meses), permitindo
+            estocagem ampla. Sendo item de Curva A, <strong>não pode faltar em hipótese alguma</strong>,
+            pois sua falta geraria grande insatisfação nos clientes (minimercados e padarias).
+          </p>
+          <div class="product-stock">
+            <div class="stock-box min">
+              <div class="stock-box-label">Estoque Mínimo</div>
+              <div class="stock-box-value">10.000 un.</div>
+              <div class="stock-box-note">≈ 7 dias de consumo</div>
+            </div>
+            <div class="stock-box max">
+              <div class="stock-box-label">Estoque Máximo</div>
+              <div class="stock-box-value">30.000 un.</div>
+              <div class="stock-box-note">≈ 20 dias de consumo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 6: CONCLUSÕES ===== -->
+<section id="conclusoes" style="background: var(--neutral-100); padding-top: 80px; padding-bottom: 80px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">06 · Conclusões</span>
+      <h2 class="section-title">Recomendações por classe ABC</h2>
+      <p class="section-subtitle">
+        A análise revelou o desequilíbrio característico entre quantidade de itens e impacto financeiro.
+        As recomendações são específicas para cada classe e direcionam as ações de gestão.
+      </p>
+    </div>
+    <div class="conclusions-grid">
+      <div class="conclusion-card a">
+        <h3 class="conclusion-card-title">
+          <span class="abc-badge a">A</span>
+          Curva A — Controle rigoroso e monitoramento diário
+        </h3>
+        <p class="conclusion-card-text">
+          Os 3 itens de Curva A (Bifes de coxão de fora, Papel Higiênico e Arroz 1 Kg) representam
+          apenas 20% do total de itens, mas concentram <strong>aproximadamente 80% do custo total</strong>.
+          Devem receber controle rigoroso e monitoramento diário, com estoque mínimo elevado e gatilhos
+          automáticos de pedido quando o estoque se aproxima do mínimo. Para itens perecíveis como carnes,
+          o dimensionamento deve atentar ao prazo de validade para evitar congelamento prolongado em excesso.
+        </p>
+      </div>
+      <div class="conclusion-card b">
+        <h3 class="conclusion-card-title">
+          <span class="abc-badge b">B</span>
+          Curva B — Controle intermediário com revisões semanais
+        </h3>
+        <p class="conclusion-card-text">
+          Os 5 itens de Curva B (Sabão em pó, Café, Refrigerante, Sobre coxa de frango e Feijão) merecem
+          controle intermediário, com revisões semanais e políticas de reposição baseadas em pontos de
+          pedido predefinidos. Como têm impacto financeiro moderado (14,70% do custo), mas contribuem
+          com um terço do mix de itens, a gestão eficiente evita rupturas sem demandar o mesmo nível
+          de monitoramento da Curva A. Recomenda-se estabelecer lotes econômicos que equilibrem custo
+          de aquisição, custo de manutenção e prazo de entrega do fornecedor.
+        </p>
+      </div>
+      <div class="conclusion-card c">
+        <h3 class="conclusion-card-title">
+          <span class="abc-badge c">C</span>
+          Curva C — Controle simplificado e atenção ao shelf life
+        </h3>
+        <p class="conclusion-card-text">
+          Os 7 itens de Curva C representam apenas 5,34% do custo total. Recomenda-se controle
+          simplificado, com revisões quinzenais ou mensais. O foco deve ser evitar o excesso de estoque
+          parado, especialmente para itens perecíveis como banana, maçã e água com gás. Para produtos
+          não perecíveis com baixa rotatividade, pode-se adotar política de <em>just-in-time</em>.
+          A atenção especial fica por conta do prazo de validade — muitos itens dessa classe podem
+          ficar parados por longos períodos, gerando perdas por vencimento que comprometem a margem.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <h3>MAXPREÇOS — Análise Curva ABC</h3>
+    <p><strong>Escola SENAC</strong> · Curso Técnico em Logística</p>
+    <p><strong>Aluno:</strong> Paulo Sérgio de Andrade</p>
+    <p>Atividade 3 · UC04 — Gestão de Estoque</p>
+    <p>15 itens analisados · R$ 8.911.000,00 de custo total · 3 produtos com estoque dimensionado</p>
+    <div class="footer-meta">
+      Documento gerado para entrega acadêmica · Curva ABC aplicada ao supermercado Atacadão MAXPREÇOS
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DATA =====
+const items = [
+  { nome: "1 kg Bifes de coxão de fora",     custo: 60.00, consumo: 50000, valor: 3000000, pct: 33.67, acum: 33.67,  abc: "A" },
+  { nome: "Pacote papel Higiênico",          custo: 60.00, consumo: 45000, valor: 2700000, pct: 30.30, acum: 63.97,  abc: "A" },
+  { nome: "Saco de arroz — 1 Kg",            custo: 15.00, consumo: 95000, valor: 1425000, pct: 15.99, acum: 79.96,  abc: "A" },
+  { nome: "Sabão em pó — 2 Kg",             custo: 35.00, consumo: 10000, valor: 350000,  pct: 3.93,  acum: 83.89,  abc: "B" },
+  { nome: "Café em pó — 500g",              custo: 30.00, consumo: 11000, valor: 330000,  pct: 3.70,  acum: 87.59,  abc: "B" },
+  { nome: "Refrigerante 2 litros",          custo: 15.00, consumo: 15000, valor: 225000,  pct: 2.52,  acum: 90.11,  abc: "B" },
+  { nome: "Sobre coxa de frango — 1 Kg",     custo: 15.00, consumo: 15000, valor: 225000,  pct: 2.52,  acum: 92.64,  abc: "B" },
+  { nome: "Saco de feijão — 1 Kg",          custo: 10.00, consumo: 18000, valor: 180000,  pct: 2.02,  acum: 94.66,  abc: "B" },
+  { nome: "Óleo de soja — 900 ml",          custo: 10.00, consumo: 12000, valor: 120000,  pct: 1.35,  acum: 96.00,  abc: "C" },
+  { nome: "Cacho de Banana",                 custo: 10.00, consumo: 10000, valor: 100000,  pct: 1.12,  acum: 97.13,  abc: "C" },
+  { nome: "Água com gás 2 litros",          custo: 5.00,  consumo: 15000, valor: 75000,   pct: 0.84,  acum: 97.97,  abc: "C" },
+  { nome: "Álcool em gel 500ml",            custo: 10.00, consumo: 7000,  valor: 70000,   pct: 0.79,  acum: 98.75,  abc: "C" },
+  { nome: "Maçã Pacote 850g",                custo: 10.00, consumo: 6000,  valor: 60000,   pct: 0.67,  acum: 99.43,  abc: "C" },
+  { nome: "Pacote de biscoito 300g",        custo: 15.00, consumo: 3000,  valor: 45000,   pct: 0.50,  acum: 99.93,  abc: "C" },
+  { nome: "Pacote orégano 10g",             custo: 2.00,  consumo: 3000,  valor: 6000,    pct: 0.07,  acum: 100.00, abc: "C" },
+];
+
+const fmtMoeda = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+const fmtInt = (v) => v.toLocaleString('pt-BR');
+const fmtPct = (v) => v.toFixed(2).replace('.', ',') + '%';
+
+// ===== POPULATE TABLE =====
+const tbody = document.getElementById('data-tbody');
+items.forEach(it => {
+  const tr = document.createElement('tr');
+  tr.className = `row-${it.abc.toLowerCase()}`;
+  tr.innerHTML = `
+    <td>${it.nome}</td>
+    <td>${fmtMoeda(it.custo)}</td>
+    <td>${fmtInt(it.consumo)}</td>
+    <td>${fmtMoeda(it.valor)}</td>
+    <td>${fmtPct(it.pct)}</td>
+    <td>${fmtPct(it.acum)}</td>
+    <td><span class="abc-badge ${it.abc.toLowerCase()}">${it.abc}</span></td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// ===== CHART 1: PARETO =====
+const ctxPareto = document.getElementById('paretoChart').getContext('2d');
+
+// Plugin: draw threshold lines at 80% and 95%
+const thresholdPlugin = {
+  id: 'thresholdLines',
+  afterDraw: (chart) => {
+    const yAxis = chart.scales.y1;
+    const xAxis = chart.scales.x;
+    const ctx = chart.ctx;
+    
+    [80, 95].forEach((threshold, i) => {
+      const y = yAxis.getPixelForValue(threshold);
+      if (y >= yAxis.top && y <= yAxis.bottom) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = i === 0 ? '#C0392B' : '#D4820A';
+        ctx.lineWidth = 1.2;
+        ctx.globalAlpha = 0.5;
+        ctx.moveTo(xAxis.left, y);
+        ctx.lineTo(xAxis.right, y);
+        ctx.stroke();
+        ctx.restore();
+      }
+    });
+  }
+};
+
+const colors = items.map(it => it.abc === 'A' ? '#C0392B' : it.abc === 'B' ? '#D4820A' : '#1B7D46');
+const labels = items.map(it => it.nome);
+
+new Chart(ctxPareto, {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Valor Consumido (R$)',
+        data: items.map(it => it.valor),
+        backgroundColor: colors,
+        borderColor: colors.map(c => c),
+        borderWidth: 0,
+        yAxisID: 'y',
+        order: 2,
+      },
+      {
+        type: 'line',
+        label: '% Acumulado',
+        data: items.map(it => it.acum),
+        borderColor: '#1B2A4A',
+        backgroundColor: '#1B2A4A',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#FFFFFF',
+        pointBorderColor: '#1B2A4A',
+        pointBorderWidth: 2.5,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        tension: 0.1,
+        yAxisID: 'y1',
+        order: 1,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          font: { size: 12, family: 'sans-serif' },
+          color: '#37352F',
+          usePointStyle: true,
+          padding: 20,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            if (ctx.dataset.label.includes('Acumulado')) {
+              return `% Acumulado: ${ctx.parsed.y.toFixed(2).replace('.', ',')}%`;
+            }
+            return `Valor: ${ctx.parsed.y.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: { size: 10, family: 'sans-serif' },
+          color: '#37352F',
+          maxRotation: 50,
+          minRotation: 50,
+        },
+        grid: { display: false },
+      },
+      y: {
+        type: 'linear',
+        position: 'left',
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Valor Consumido (R$)',
+          font: { size: 12, weight: 'bold' },
+          color: '#1B2A4A',
+        },
+        ticks: {
+          font: { size: 10 },
+          color: '#1B2A4A',
+          callback: (v) => 'R$ ' + (v/1000000).toFixed(1) + 'M',
+        },
+        grid: { color: 'rgba(15, 26, 46, 0.06)' },
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        beginAtZero: true,
+        max: 110,
+        title: {
+          display: true,
+          text: '% Acumulado',
+          font: { size: 12, weight: 'bold' },
+          color: '#1B2A4A',
+        },
+        ticks: {
+          font: { size: 10 },
+          color: '#1B2A4A',
+          callback: (v) => v + '%',
+        },
+        grid: { display: false },
+      },
+    },
+  },
+  plugins: [thresholdPlugin],
+});
+
+// ===== CHART 2: DISTRIBUTION =====
+const ctxDist = document.getElementById('distributionChart').getContext('2d');
+new Chart(ctxDist, {
+  type: 'bar',
+  data: {
+    labels: ['Curva A', 'Curva B', 'Curva C'],
+    datasets: [
+      {
+        label: '% de Itens',
+        data: [20.0, 33.3, 46.7],
+        backgroundColor: ['#C0392B', '#D4820A', '#1B7D46'],
+        borderColor: ['#C0392B', '#D4820A', '#1B7D46'],
+        borderWidth: 0,
+        yAxisID: 'y',
+      },
+      {
+        label: '% do Custo',
+        data: [79.96, 14.70, 5.34],
+        backgroundColor: ['rgba(192, 57, 43, 0.35)', 'rgba(212, 130, 10, 0.35)', 'rgba(27, 125, 70, 0.35)'],
+        borderColor: ['#C0392B', '#D4820A', '#1B7D46'],
+        borderWidth: 1.5,
+        yAxisID: 'y',
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          font: { size: 12 },
+          color: '#37352F',
+          usePointStyle: true,
+          padding: 20,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2).replace('.', ',')}%`,
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: { font: { size: 13, weight: 'bold' }, color: '#1B2A4A' },
+        grid: { display: false },
+      },
+      y: {
+        beginAtZero: true,
+        max: 100,
+        title: {
+          display: true,
+          text: 'Percentual (%)',
+          font: { size: 12, weight: 'bold' },
+          color: '#1B2A4A',
+        },
+        ticks: {
+          font: { size: 10 },
+          color: '#1B2A4A',
+          callback: (v) => v + '%',
+        },
+        grid: { color: 'rgba(15, 26, 46, 0.06)' },
+      },
+    },
+  },
+});
+
+// ===== SMOOTH SCROLL FOR NAV (if added later) =====
+console.log('%cAtividade 3 - Curva ABC - MAXPREÇOS', 'font-size:14px;font-weight:bold;color:#1B2A4A;');
+console.log('%c15 itens analisados | R$ 8.911.000,00 de custo total | 3A + 5B + 7C', 'color:#37352F;');
+</script>
+
+</body>
+</html>
