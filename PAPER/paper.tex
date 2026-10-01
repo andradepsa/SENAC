@@ -1,0 +1,397 @@
+% ============================================================
+% Projeto Integrador I · Editora Z40 · Etapas 1 a 4
+% SENAC EAD · Curso Técnico em Logística
+% Paulo Sérgio de Andrade
+% Compilar com: xelatex paper.tex
+% ============================================================
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,left=108.2pt,right=108.2pt,top=40pt,bottom=52pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Sans}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\usepackage{needspace}
+
+\hypersetup{
+  hidelinks,
+  pdftitle={Projeto Integrador I · Etapas 1 a 4 · Editora Z40},
+  pdfauthor={Paulo Sérgio de Andrade},
+  pdfsubject={SENAC EAD · Curso Técnico em Logística · Projeto Integrador I},
+  pdfcreator={XeTeX}}
+
+% ---------- cores (idênticas ao site) ----------
+\definecolor{navy}{HTML}{0F4761}      % azul-marinho
+\definecolor{midblue}{HTML}{156082}   % azul médio (réguas)
+\definecolor{lightbg}{HTML}{EBF3FA}   % fundo caixa clara
+\definecolor{lighttxt}{HTML}{B0C8D8}  % texto claro sobre navy
+\definecolor{graylab}{HTML}{AAAAAA}   % rótulos cinza
+\definecolor{bodytxt}{HTML}{272727}   % texto
+\definecolor{borderlt}{HTML}{D6E4ED}  % borda da caixa DOI
+\definecolor{doibg}{HTML}{FAFCFE}     % fundo caixa DOI
+\definecolor{rulegray}{HTML}{E6E6E6}  % separador de itens
+\definecolor{grayaut}{HTML}{666666}   % autor no box DOI
+
+\color{bodytxt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+% sem hifenização (o modelo justifica sem dividir palavras)
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\emergencystretch=2.5em
+
+% URL do site com pontos de quebra (como no navegador)
+\newcommand{\zsiteplain}{https://\allowbreak{}z40.pages\allowbreak{}.dev/\allowbreak{}}
+\newcommand{\zsite}{\textbf{\zsiteplain}}
+
+% ---------- tamanhos do modelo ----------
+\newcommand{\bodyfont}{\fontsize{8.6}{15.5}\selectfont}
+\newcommand{\boxfont}{\fontsize{8.1}{14.2}\selectfont}
+\newcommand{\labelfont}{\fontsize{5.8}{7.5}\selectfont\bfseries\addfontfeatures{LetterSpace=15}}
+\newcommand{\labelfontsm}{\fontsize{5.2}{7}\selectfont\bfseries\addfontfeatures{LetterSpace=15}}
+\newcommand{\headingfont}{\fontsize{9.8}{12}\selectfont\bfseries\color{navy}}
+\newcommand{\footerfont}{\fontsize{6.3}{8}\selectfont}
+
+% ---------- comandos de bloco ----------
+\newcommand{\separador}{\vspace{16pt}{\color{rulegray}\rule{\linewidth}{0.6pt}}\vspace{10pt}}
+
+\newcommand{\secao}[1]{\needspace{5\baselineskip}\vspace{10pt}{\headingfont #1}\par\vspace{4pt}}
+
+\newcommand{\itemh}[2]{\needspace{6\baselineskip}%
+  {\labelfont\color{graylab}ITEM #1}\par\vspace{5pt}%
+  {\headingfont #2}\par\vspace{8pt}}
+
+\newtcolorbox{logisticabloco}{
+  enhanced, breakable, colback=lightbg, frame hidden, boxrule=0pt,
+  borderline west={3pt}{0pt}{midblue}, arc=4pt,
+  left=12pt, right=12pt, top=9pt, bottom=9pt}
+
+\newtcolorbox{navybox}{
+  enhanced, breakable, colback=navy, colframe=navy, boxrule=0pt, arc=5pt,
+  left=12pt, right=12pt, top=9pt, bottom=9pt}
+
+\newcommand{\devbarra}[2]{%
+  \begin{navybox}\boxfont
+    {\labelfont\color{lighttxt}#1}\par\vspace{4pt}%
+    {\fontsize{8.6}{13}\selectfont\bfseries\color{white}#2\par}
+  \end{navybox}\vspace{22pt}}
+
+\newcommand{\zenodobox}[2]{%
+  \vspace{16pt}
+  \begin{tcolorbox}[enhanced, colback=doibg, colframe=borderlt, boxrule=0.6pt, arc=4pt,
+                    left=14pt, right=14pt, top=11pt, bottom=11pt]
+    {\labelfontsm\color{graylab}PUBLICAÇÃO VINCULADA — ZENODO}\par\vspace{5pt}%
+    {\fontsize{8.1}{10}\selectfont\bfseries\color{navy}Projeto Integrador I · Etapa #1 · Editora Z40\par}%
+    \vspace{3pt}{\fontsize{6.9}{9}\selectfont\color{grayaut}Paulo Sérgio de Andrade · SENAC EAD · Curso Técnico em Logística\par}%
+    \vspace{8pt}\href{https://doi.org/10.5281/zenodo.#2}{%
+      \tcbox[enhanced, colback=navy, colframe=navy, boxrule=0pt, arc=3pt,
+             left=8pt, right=8pt, top=4pt, bottom=4pt]{\fontsize{6.9}{9}\selectfont\color{white}DOI: 10.5281/zenodo.#2 ↗}}
+  \end{tcolorbox}}
+
+\newcommand{\rodapeetapa}[1]{%
+  \vspace{24pt}{\color{midblue}\rule{\linewidth}{1.2pt}}\par
+  \vspace{7pt}\begin{center}{\footerfont\color{graylab}SENAC EAD · Curso Técnico em Logística · Projeto Integrador I · Etapa #1 · EDITORA Z40}\end{center}}
+
+% fim de etapa: caixa DOI + rodapé inseparáveis (nunca quebram entre páginas)
+\newcommand{\fimdetapa}[2]{%
+  \noindent\begin{minipage}{\linewidth}
+    \zenodobox{#1}{#2}
+    \rodapeetapa{#1}
+  \end{minipage}\par\clearpage}
+
+\begin{document}
+\bodyfont
+
+% ══════════════ TOPO / CAPA ══════════════
+\vspace*{30pt}
+\begin{center}
+  \includegraphics*[height=30pt]{senac_logo_0.png}\par
+  \vspace{6pt}{\fontsize{10.4}{13}\selectfont\bfseries\color{navy}SENAC EAD\par}
+  \vspace{2pt}{\headingfont Curso Técnico em Logística\par}
+\end{center}
+\vspace{8pt}
+{\color{midblue}\rule{\linewidth}{1.2pt}}\par
+\vspace{12pt}
+\noindent
+\begin{minipage}[t]{0.5\linewidth}
+  {\labelfont\color{graylab}NOME DO(A) ESTUDANTE}\par\vspace{3pt}%
+  {\fontsize{8.6}{11}\selectfont\bfseries Paulo Sérgio de Andrade\par}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+  \raggedleft
+  {\labelfont\color{graylab}EMPRESA FICTÍCIA}\par\vspace{3pt}%
+  {\fontsize{8.6}{11}\selectfont\bfseries Editora Z40\par}
+\end{minipage}
+\vspace{6pt}
+
+% ══════════════ ETAPA 1 ══════════════
+\secao{Introdução}
+
+O presente projeto apresenta o planejamento logístico da \textbf{Editora Z40}, empresa fictícia de serviços editoriais 100\% digitais, desenvolvida no âmbito do Projeto Integrador I do Curso Técnico em Logística do SENAC EAD. A Editora Z40 é especializada em revisão, edição, formatação e produção de conteúdos online, atendendo pessoas físicas e jurídicas em todo o território nacional por meio de uma operação inteiramente virtual.
+
+Nesta primeira etapa, são abordados os fundamentos da empresa: a definição do segmento de mercado, a construção da identidade da marca, a identificação do público-alvo e do portfólio de serviços, o mapeamento completo das necessidades logísticas e a descrição do fluxo operacional de recebimento, processamento e entrega de demandas. Por se tratar de uma empresa sem circulação de mercadorias físicas, o projeto destaca o conceito de \textbf{logística digital}, a organização e gestão de processos realizados totalmente no ambiente online, utilizando tecnologia para receber, armazenar, processar e entregar serviços com agilidade, segurança e eficiência.
+
+Todo o conteúdo que se segue reflete as competências da UC01 (Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico), adaptadas à realidade de um negócio digital contemporâneo.
+
+\secao{Sobre a empresa e a logística digital}
+
+\begin{logisticabloco}\boxfont
+A \textbf{Editora Z40} é uma empresa fictícia de serviços editoriais 100\% digitais, especializada em revisão, edição, formatação e produção de conteúdos online para pessoas e empresas em todo o Brasil. Seu projeto destaca a \textbf{logística digital}, com processos totalmente online de recebimento, armazenamento, gestão e entrega de arquivos, além de planejamento logístico eficiente, baixo custo operacional, uso de tecnologia, organização em nuvem e foco em qualidade, inovação e sustentabilidade.
+\end{logisticabloco}
+
+\vspace{4pt}
+\begin{navybox}\boxfont
+\textbf{\textcolor{white}{O que é logística digital?}} \textcolor{lighttxt}{É a organização e gestão de processos realizados totalmente no ambiente online, usando tecnologia para receber, armazenar, processar e entregar serviços ou informações sem circulação física de mercadorias. Na Editora Z40, isso inclui o envio de arquivos pela internet, conferência digital, armazenamento em nuvem, edição online, controle por sistemas de gestão e entrega final ao cliente por plataformas digitais, garantindo agilidade, redução de custos e eficiência operacional.}
+\end{navybox}
+
+\vspace{22pt}
+\devbarra{DESENVOLVIMENTO DA ETAPA 1}{UC01: Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico}
+
+\itemh{1}{Segmento de mercado}
+
+A empresa \textbf{EDITORA Z40} atua no segmento de \textbf{e-commerce e serviços digitais}, com foco em edição, revisão e publicação de conteúdo online. O mercado digital de conteúdo está em franca expansão no Brasil e no mundo, impulsionado pelo crescimento das plataformas digitais, redes sociais e pela crescente demanda por conteúdo de qualidade em todas as áreas do conhecimento.
+
+A empresa opera exclusivamente no ambiente virtual, disponibilizando seus serviços pelo site \zsite. Por ser um negócio 100\% digital, o alcance geográfico é nacional, sem restrições de localidade para os clientes, qualquer pessoa ou empresa com acesso à internet pode contratar os serviços da EDITORA Z40, independentemente de onde esteja no Brasil.
+
+O segmento de serviços digitais editoriais é altamente estratégico no cenário atual, pois empresas de todos os portes precisam de conteúdo bem escrito, revisado e publicado para se destacar nos meios digitais. Isso inclui desde textos para sites e blogs até materiais corporativos, e-books, artigos acadêmicos e roteiros de vídeo.
+
+Empresas como a Rock Content e a Contentools são referências nacionais nesse mercado e demonstram que há grande espaço para negócios especializados em produção e edição de conteúdo digital. A EDITORA Z40 se diferencia por oferecer um serviço personalizado, com atenção individualizada a cada cliente e entrega com alto padrão de qualidade linguística e editorial.
+
+A escolha por esse segmento se justifica pela baixa necessidade de estrutura física, pelo alto potencial de escala com poucos recursos iniciais e pela demanda crescente de criadores de conteúdo, empreendedores digitais e empresas que precisam de apoio profissional para se comunicar melhor com seu público.
+
+\separador
+\itemh{2}{Nome da empresa}
+
+O nome escolhido para a empresa é \textbf{EDITORA Z40}. Essa denominação moderna e marcante remete diretamente à atividade central do negócio: a edição de conteúdo. O termo "EDITOR" comunica de imediato o propósito da empresa: editar, revisar e aprimorar textos e conteúdos, enquanto "Z40" representa uma identidade única, tecnológica e diferenciada no universo digital.
+
+O "Z" no nome tem uma dupla simbologia: pode remeter à última letra do alfabeto, sugerindo que a empresa vai do início (A) ao fim (Z) na entrega do conteúdo, garantindo uma solução completa ao cliente; ao mesmo tempo, evoca a ideia de geração Z, conectada ao ambiente digital e às tendências do mercado contemporâneo de comunicação online.
+
+O número "40" complementa a identidade com uma referência a solidez e maturidade, transmitindo confiança e experiência mesmo em um ambiente de negócios dinâmico e em constante evolução. Juntos, \textbf{EDITOR e Z40} formam um nome curto, fácil de memorizar, impactante e adequado ao posicionamento digital da empresa.
+
+O site oficial da empresa é \zsite, onde os clientes podem conhecer os serviços, solicitar orçamentos e entrar em contato com a equipe. O endereço digital reforça a identidade da marca, usando o mesmo código "z40" do nome comercial, o que facilita a associação e o reconhecimento da empresa pelos clientes.
+
+A marca EDITORA Z40 foi construída para transmitir profissionalismo, agilidade e inovação, valores essenciais para uma empresa que atua na criação e aperfeiçoamento de conteúdo digital. O nome é versátil o suficiente para atender tanto profissionais autônomos e criadores de conteúdo quanto empresas de médio e grande porte que buscam parceiros editoriais confiáveis.
+
+\separador
+\itemh{3}{Público-alvo, serviços oferecidos e localização}
+
+O \textbf{público-alvo} da EDITORA Z40 é composto por escritores independentes, blogueiros, criadores de conteúdo digital, pequenas e médias empresas, estudantes universitários e profissionais liberais que necessitam de serviços qualificados de revisão e edição de textos. A empresa também atende agências de marketing digital, startups e empreendedores que precisam de conteúdo bem escrito e revisado para suas comunicações institucionais e campanhas digitais.
+
+Os \textbf{serviços oferecidos} pela EDITORA Z40 incluem: revisão ortográfica, gramatical e estilística de textos; edição de conteúdo para blogs, sites e redes sociais; formatação e padronização de documentos acadêmicos e corporativos; produção de e-books e materiais digitais; e consultoria em estratégia de conteúdo para marcas que desejam fortalecer sua presença online. Cada serviço é personalizado de acordo com as necessidades e o perfil de cada cliente.
+
+A \textbf{localização da empresa} é 100\% online, com sede operacional no Brasil e atendimento a clientes em todo o território nacional. Todo o contato com os clientes acontece de forma digital, pelo site \zsite, por e-mail e por aplicativos de mensagem, o que elimina barreiras geográficas e permite que a empresa atenda clientes de qualquer região do país com a mesma agilidade e qualidade.
+
+O modelo de negócio digital permite à EDITORA Z40 manter custos operacionais reduzidos, pois não há necessidade de manter um espaço físico de atendimento ao público, estoque de produtos físicos ou logística de transporte de mercadorias. Isso possibilita oferecer preços competitivos ao mercado e reinvestir as margens em tecnologia e qualificação da equipe.
+
+A decisão de operar exclusivamente no ambiente digital foi estratégica: o e-commerce de serviços tem crescido de forma acelerada no Brasil, especialmente após a pandemia de Covid-19, que acelerou a digitalização de pequenas e médias empresas. Esse contexto criou uma demanda crescente por serviços editoriais online, tornando o momento ideal para o lançamento e expansão da EDITORA Z40 no mercado nacional.
+
+\separador
+\itemh{4}{Necessidades logísticas}
+
+Os principais \textbf{equipamentos} necessários para a operação da EDITORA Z40 são: computadores de alta performance com processadores rápidos e memória RAM adequada para trabalhar com múltiplos documentos simultaneamente; monitores de boa resolução para facilitar a leitura e revisão de textos longos; nobreaks para proteção dos equipamentos contra oscilações de energia; roteadores de alta velocidade e conexão de internet fibra óptica para garantir comunicação ágil com os clientes; e dispositivos móveis (smartphones e tablets) para atendimento e comunicação em tempo real.
+
+Os \textbf{materiais e ferramentas digitais} essenciais incluem: licenças de softwares de edição e revisão de texto (Microsoft Office 365, Google Workspace, Grammarly Pro); plataforma de hospedagem e domínio do site \zsiteplain{}; ferramentas de gestão de projetos e comunicação interna (Trello, Notion, Slack); sistemas de armazenamento e compartilhamento de arquivos em nuvem (Google Drive, OneDrive); e plataformas de pagamento online seguras (PayPal, Mercado Pago, PagBank) para receber os pagamentos dos clientes com comodidade e segurança.
+
+Em relação aos \textbf{produtos e serviços contratados externamente}, a empresa necessita de: serviço de domínio e hospedagem estável do site; assinatura de ferramentas de marketing digital para divulgação dos serviços (Google Ads, Meta Ads); plataformas de reunião virtual (Google Meet, Zoom) para alinhamentos com os clientes; e eventualmente, serviços de tradução ou legendagem para atender demandas de conteúdo bilíngue de clientes que atuam em mercados internacionais.
+
+O \textbf{sistema de gestão de demandas e clientes} (CRM) é uma necessidade fundamental para controlar todas as solicitações recebidas, acompanhar o andamento de cada projeto, registrar prazos de entrega e histórico de relacionamento com cada cliente. Sem esse controle, a empresa corre o risco de perder prazos, gerar retrabalho e comprometer a qualidade do atendimento.
+
+Além disso, a empresa precisará investir em \textbf{segurança digital} desde o início, incluindo antivírus profissional, backup automático dos arquivos em nuvem e políticas claras de confidencialidade para proteger os documentos e informações dos clientes. Esse investimento inicial na infraestrutura logístico-digital é indispensável para garantir agilidade, qualidade e confiabilidade às operações da EDITORA Z40 desde o primeiro dia de funcionamento.
+
+\separador
+\itemh{5}{Fluxo logístico básico (UC01)}
+
+\textbf{De onde vêm os insumos e demandas:} por se tratar de uma empresa de serviços digitais, a EDITORA Z40 não recebe mercadorias físicas no sentido tradicional. O "insumo" principal da empresa são os arquivos de texto e documentos enviados pelos clientes para edição e revisão. Esses arquivos chegam por meio do formulário de solicitação disponível no site \zsite, por e-mail ou por compartilhamento direto via Google Drive ou outro repositório em nuvem indicado pelo cliente.
+
+\textbf{Como são recebidos e conferidos:} ao receber uma nova demanda, o responsável pelo atendimento realiza a conferência do pedido, verificando se todos os arquivos foram enviados corretamente, se as instruções do cliente estão claras (tipo de revisão solicitada, prazo, formato de entrega e referências de estilo) e se o pagamento foi confirmado na plataforma. Qualquer dúvida ou inconsistência é comunicada ao cliente antes do início do trabalho para evitar retrabalho e garantir alinhamento total.
+
+\textbf{Onde são armazenados:} após a conferência, os arquivos recebidos são organizados em pastas específicas no sistema de armazenamento em nuvem da empresa, identificadas pelo nome do cliente, número do projeto e data de recebimento. Esse sistema de organização digital substitui o depósito físico de uma empresa tradicional e garante que qualquer membro da equipe possa acessar o material correto com agilidade, em qualquer momento e de qualquer dispositivo.
+
+\textbf{Como são processados e editados:} após o registro e a organização dos arquivos, o projeto é distribuído ao editor responsável de acordo com a especialidade exigida (revisão gramatical, edição de estilo, formatação acadêmica, produção de conteúdo etc.). O editor realiza o trabalho aplicando os padrões de qualidade da EDITORA Z40, utilizando as ferramentas de revisão e os guias de estilo acordados com o cliente. Ao concluir, o arquivo revisado passa por uma verificação final antes de ser liberado para entrega.
+
+\textbf{Como chegam ao cliente:} o arquivo finalizado é entregue ao cliente pelo canal combinado no início do projeto, geralmente por e-mail, Google Drive ou plataforma própria. O cliente recebe uma notificação com os detalhes da entrega e tem um prazo para solicitação de ajustes inclusos no serviço. Toda a operação é registrada no sistema de gestão da empresa para controle de qualidade, rastreabilidade dos projetos e histórico de relacionamento com cada cliente, garantindo transparência e confiança em todo o processo logístico digital.
+
+\fimdetapa{1}{20140521}
+
+% ══════════════ ETAPA 2 ══════════════
+\secao{Introdução da Etapa 2: Compras e Suprimentos}
+
+Após a definição dos fundamentos da empresa na primeira etapa, incluindo segmento de mercado, identidade da marca, público-alvo, portfólio de serviços e fluxo logístico básico, esta segunda etapa avança para o planejamento do setor de \textbf{compras e suprimentos} da EDITORA Z40. Embora a empresa opere exclusivamente no ambiente digital, sem aquisição de mercadorias físicas, a lógica de compras permanece essencial: é preciso garantir que todas as ferramentas, licenças, plataformas e serviços tecnológicos necessários estejam disponíveis no momento certo, com qualidade adequada e pelo melhor custo possível.
+
+Um planejamento de compras bem estruturado evita interrupções na operação editorial, reduz desperdícios financeiros com contratações desnecessárias e permite à empresa negociar condições mais vantajosas com seus fornecedores. No contexto da EDITORA Z40, isso se traduz na gestão eficiente de assinaturas de software, serviços de hospedagem, ferramentas de marketing digital e demais insumos tecnológicos que sustentam toda a cadeia de valor da empresa.
+
+Nesta etapa, são desenvolvidos quatro itens fundamentais: a elaboração de uma lista inicial de fornecedores digitais, organizados por categoria de serviço; a simulação completa do processo de compra, desde a solicitação até a conferência do recebimento; a montagem de um cronograma de compras que considera a periodicidade e a previsão de demanda de cada insumo; e a definição dos critérios objetivos que a empresa adotará para selecionar e negociar com seus fornecedores. Todo o conteúdo reflete as competências da UC02, aplicadas à realidade de uma empresa de serviços editoriais 100\% digitais.
+
+\devbarra{DESENVOLVIMENTO DA ETAPA 2}{UC02: Compras e Suprimentos}
+
+\itemh{1}{Lista inicial de fornecedores}
+
+Por ser uma empresa de serviços editoriais 100\% digitais, a \textbf{EDITORA Z40} não adquire matérias-primas físicas nem depende de fornecedores tradicionais de mercadorias. Os fornecedores da empresa são prestadores de serviços digitais e desenvolvedores de soluções tecnológicas que sustentam toda a operação editorial, desde a recepção dos arquivos dos clientes até a entrega final do conteúdo revisado e editado. A escolha de cada fornecedor leva em conta três critérios fundamentais: custo-benefício, qualidade do serviço e proximidade operacional. No contexto digital, esse critério se traduz em disponibilidade imediata de acesso, servidores localizados no Brasil ou com baixa latência e suporte em português, fatores que substituem com vantagem a proximidade geográfica tradicional.
+
+O primeiro grupo de fornecedores é composto pelas \textbf{empresas de software de produtividade e edição}. A Microsoft, por meio do pacote Microsoft 365 (Word, Excel, OneDrive), é fornecedora essencial, pois oferece as ferramentas de edição de texto e armazenamento em nuvem mais utilizadas no mercado editorial. O Google, com o Google Workspace (Docs, Drive, Meet), complementa a operação com ferramentas colaborativas de alta disponibilidade e custo acessível. A Grammarly Inc., com o Grammarly Pro, fornece tecnologia de revisão gramatical e estilística baseada em inteligência artificial, fundamental para garantir a qualidade dos textos editados pela empresa.
+
+O segundo grupo inclui os \textbf{fornecedores de infraestrutura digital e hospedagem}. A Cloudflare Pages é responsável pela hospedagem do site oficial da empresa (\zsiteplain{}), oferecendo alta velocidade de carregamento, segurança SSL e custo zero na camada gratuita. Para serviços de domínio e DNS, a empresa conta com o Registro.br ou a Namecheap, que oferecem preços competitivos e estabilidade comprovada. A Amazon Web Services (AWS) ou o Google Cloud Platform podem ser acionados futuramente para escalabilidade de armazenamento e processamento.
+
+O terceiro grupo é formado pelos \textbf{fornecedores de ferramentas de gestão e comunicação}. A Atlassian, com o Trello, fornece a plataforma de gerenciamento de projetos e tarefas utilizada pela equipe editorial para acompanhar cada demanda do início ao fim. A Notion Labs oferece o Notion, ferramenta versátil para documentação interna, wikis de estilo editorial e bases de conhecimento. A Slack Technologies fornece a plataforma de comunicação interna da equipe, garantindo agilidade no atendimento e na troca de informações entre editores e gestores.
+
+O quarto grupo abrange os \textbf{fornecedores de marketing digital e pagamentos}. O Google, por meio do Google Ads, e a Meta, com o Meta Ads (Facebook e Instagram), são os principais fornecedores de publicidade digital para captação de novos clientes. Para processamento de pagamentos, a empresa utiliza o Mercado Pago, o PayPal e o PagBank, plataformas consolidadas no mercado brasileiro que oferecem segurança nas transações, taxas competitivas e integração simples com o site da empresa. Por fim, a Zoom Video Communications fornece a plataforma de videoconferência utilizada para reuniões com clientes e alinhamentos de briefing.
+
+\separador
+\itemh{2}{Simulação do processo de compra}
+
+O processo de compra da \textbf{EDITORA Z40} é inteiramente digital e segue um fluxo estruturado para garantir que todas as aquisições sejam feitas com planejamento, controle e aprovação adequados. Como a empresa não compra produtos físicos, o processo de compra se refere à contratação e renovação de licenças de software, assinaturas de plataformas, serviços de hospedagem, ferramentas de marketing digital e demais insumos tecnológicos necessários para a operação editorial.
+
+\textbf{Quem faz o pedido:} a solicitação de compra é feita pelo responsável pela área que identifica a necessidade. Por exemplo, se a equipe editorial precisa de uma nova licença do Grammarly Pro, o editor-chefe preenche um formulário interno de solicitação de compra no Notion, descrevendo o item desejado, a justificativa da necessidade, o fornecedor indicado, o valor estimado e o prazo ideal de contratação. No caso de ferramentas de marketing, a solicitação parte do responsável pela área de captação de clientes.
+
+\textbf{Quem autoriza a compra:} toda solicitação de compra passa pela aprovação do gestor administrativo-financeiro da empresa, que analisa o orçamento disponível, verifica se o item solicitado está previsto no planejamento de compras e avalia se há alternativas mais vantajosas no mercado. Para compras acima de um valor previamente estabelecido (por exemplo, R\$ 500,00), a aprovação final cabe ao proprietário da empresa, garantindo controle total sobre os gastos.
+
+\textbf{Como o pedido é feito:} após a aprovação, a compra é realizada diretamente no site do fornecedor, por meio de assinatura online ou contratação via e-mail. O comprovante de pagamento, a nota fiscal digital e o contrato de licença são imediatamente salvos na pasta de compras do Google Drive da empresa, organizada por mês e por fornecedor. Em caso de fornecedores que exigem negociação prévia (como serviços de tradução ou consultorias externas), o contato é feito por e-mail ou videoconferência antes da formalização.
+
+\textbf{Como os produtos são recebidos e conferidos:} como se trata de compras digitais, o recebimento é imediato. Após a contratação, o responsável pela área verifica se o acesso à ferramenta ou plataforma está ativo e funcionando corretamente, testa as funcionalidades principais e confirma o recebimento no sistema de controle interno. Caso haja qualquer problema (licença não ativada, funcionalidade indisponível ou cobrança divergente), o gestor entra em contato com o suporte do fornecedor para resolução antes de registrar a compra como concluída.
+
+\separador
+\itemh{3}{Cronograma de compras}
+
+O cronograma de compras da \textbf{EDITORA Z40} é organizado de acordo com a natureza e a periodicidade de cada insumo digital necessário para a operação da empresa. Como os serviços editoriais possuem demanda relativamente constante ao longo do ano, com picos em períodos acadêmicos e de final de ano fiscal, o planejamento de compras antecipa essas variações para garantir que nenhuma ferramenta ou licença fique indisponível em momentos críticos de alta demanda.
+
+\textbf{Compras anuais:} no início de cada ano (janeiro), a empresa realiza a renovação das licenças anuais dos principais softwares de operação: Microsoft 365, Google Workspace, Grammarly Pro e Notion. Essas renovações são programadas para o mesmo período, facilitando o controle financeiro e evitando esquecimentos. Também em janeiro é renovado o domínio e mantida a configuração da hospedagem (Cloudflare Pages, que possui camada gratuita, mas exige renovação periódica do domínio e eventuais ajustes técnicos), garantindo que a presença online da empresa não sofra interrupções.
+
+\textbf{Compras mensais:} todo mês, no primeiro dia útil, são pagas as assinaturas de ferramentas de comunicação e gestão de projetos (Trello Premium, Slack Pro) e as plataformas de pagamento online (taxas do Mercado Pago, PayPal e PagBank). As campanhas de marketing digital no Google Ads e Meta Ads são contratadas e renovadas mensalmente, com orçamento ajustado conforme a demanda de clientes projetada para o mês seguinte. Vale destacar que algumas plataformas operam em regime anual e outras em assinatura mensal, conforme o modelo comercial de cada fornecedor, o que explica, por exemplo, o Notion ser renovado anualmente enquanto o Trello Premium segue cobrança mensal.
+
+\textbf{Compras trimestrais:} a cada três meses (março, junho, setembro e dezembro), a empresa avalia a necessidade de contratar serviços complementares, como tradução e legendagem para projetos bilíngues, consultorias externas de estratégia de conteúdo ou treinamentos para a equipe editorial. Também trimestralmente é feita a aquisição ou atualização de templates e guias de estilo editoriais utilizados na padronização dos trabalhos entregues aos clientes.
+
+\textbf{Compras sob demanda:} alguns insumos são adquiridos conforme a necessidade específica de projetos. Por exemplo, se um cliente solicita um e-book com design gráfico elaborado, a empresa pode contratar pontualmente um designer freelancer ou adquirir uma licença temporária de software de diagramação (como o Canva Pro ou Adobe InDesign). Essas compras eventuais seguem o mesmo fluxo de solicitação e aprovação descrito no processo de compra, garantindo controle e rastreabilidade mesmo em aquisições não programadas.
+
+\separador
+\itemh{4}{Critérios para escolher e negociar com fornecedores}
+
+A \textbf{EDITORA Z40} adota critérios claros e objetivos para selecionar seus fornecedores de serviços e ferramentas digitais. Esses critérios foram definidos para garantir que toda aquisição contribua diretamente para a qualidade dos serviços prestados aos clientes, a eficiência operacional e a saúde financeira da empresa. Os cinco critérios principais são: preço justo, qualidade comprovada do serviço, suporte técnico eficiente, flexibilidade contratual e reputação no mercado.
+
+\textbf{Preço justo e custo-benefício:} a empresa prioriza fornecedores que ofereçam planos com boa relação custo-benefício, considerando não apenas o valor da mensalidade ou anuidade, mas também os recursos inclusos, os limites de uso e os custos adicionais de escala. São comparados no mínimo três fornecedores antes de cada contratação, e sempre que possível a empresa opta por planos anuais com desconto ou condições especiais para startups e pequenas empresas.
+
+\textbf{Qualidade e confiabilidade do serviço:} o fornecedor deve apresentar histórico comprovado de estabilidade, com alto índice de disponibilidade (uptime acima de 99\%) e atualizações frequentes que garantam segurança e compatibilidade com as demais ferramentas utilizadas pela empresa. A empresa consulta avaliações em plataformas especializadas (como G2, Capterra e Trustpilot) e verifica cases de uso antes de fechar qualquer contrato.
+
+\textbf{Suporte técnico e prazo de resposta:} como a operação da EDITORA Z40 é inteiramente digital, qualquer falha em uma ferramenta pode paralisar a produção editorial. Por isso, a empresa exige que os fornecedores ofereçam suporte técnico ágil, preferencialmente com atendimento em português e tempo de resposta inferior a 24 horas. Fornecedores que disponibilizam chat ao vivo, base de conhecimento detalhada e comunidade ativa de usuários recebem prioridade na seleção.
+
+\textbf{Como será feita a negociação:} a negociação com fornecedores é conduzida pelo gestor administrativo-financeiro, que entra em contato direto com os departamentos comerciais das empresas fornecedoras por e-mail ou videoconferência. A estratégia de negociação inclui solicitar períodos de teste gratuito antes da contratação definitiva, negociar descontos para pagamento antecipado ou planos plurianuais, buscar condições diferenciadas por volume de licenças e manter um cadastro atualizado de fornecedores alternativos para fortalecer o poder de barganha. Toda negociação é documentada e arquivada no sistema de gestão da empresa, assegurando transparência e possibilitando renegociações futuras com base em dados históricos.
+
+\fimdetapa{2}{20172507}
+
+% ══════════════ ETAPA 3 ══════════════
+\secao{Introdução da Etapa 3: Planejamento do Armazém e Estoques}
+
+Nas etapas anteriores, foram estabelecidos os pilares fundamentais da \textbf{EDITORA Z40}: o segmento de mercado, a identidade da marca, o público-alvo, o portfólio de serviços, o fluxo logístico básico de recebimento e entrega, além do planejamento completo de compras e suprimentos, com a seleção de fornecedores digitais e a definição de cronogramas e critérios de negociação. Com essa base sólida construída, chegou o momento de avançar para o próximo nível da operação: o \textbf{planejamento do armazém e dos estoques}, etapa essencial para garantir que todos os recursos, ferramentas e ativos digitais da empresa estejam sempre organizados, disponíveis e acessíveis no momento certo.
+
+Por operar exclusivamente no ambiente digital, a EDITORA Z40 não possui armazém físico, prateleiras ou depósito de mercadorias no sentido convencional. No entanto, os princípios da logística de armazenagem e controle de estoques se aplicam plenamente à sua realidade: o "armazém" da empresa é o seu \textbf{repositório em nuvem}, composto pela estrutura organizada de pastas, plataformas e sistemas digitais que recebem, guardam, processam e disponibilizam todos os ativos necessários para a execução dos serviços editoriais. Gerir esse armazém digital com eficiência é tão importante quanto organizar um depósito físico em uma empresa tradicional.
+
+Nesta terceira etapa, são desenvolvidos quatro itens fundamentais: o levantamento detalhado dos equipamentos, materiais e produtos que compõem o ambiente operacional da empresa; a proposta de um leiaute funcional para o armazém digital, com a definição de setores, fluxos e critérios de organização dos arquivos e recursos; o estabelecimento de uma política de controle de estoques digitais, com a escolha e justificativa do método mais adequado à realidade da empresa; e a definição da periodicidade de reposição e do nível de segurança de estoque para garantir a continuidade operacional sem falhas ou desperdícios. Todo o conteúdo está alinhado às competências da \textbf{UC03}, aplicadas à gestão de armazéns e estoques em um modelo de negócio 100\% digital.
+
+\devbarra{DESENVOLVIMENTO DA ETAPA 3}{UC03: Planejamento do Armazém e Estoques}
+
+\itemh{1}{Equipamentos, materiais e produtos necessários à organização do armazém}
+
+O armazém da \textbf{EDITORA Z40} é inteiramente digital, o que não elimina, mas transforma, a necessidade de equipamentos, materiais e produtos para seu funcionamento eficiente. Os equipamentos físicos de suporte são a base que sustenta toda a operação: computadores de alta performance com processadores de múltiplos núcleos, memória RAM de no mínimo 16 GB e armazenamento SSD são indispensáveis para lidar com grandes volumes de arquivos simultaneamente, realizar edições complexas e manter múltiplas plataformas abertas sem perda de velocidade ou travamentos. Monitores de boa resolução (Full HD ou superior) facilitam a leitura e revisão de textos longos, reduzindo a fadiga visual da equipe e aumentando a produtividade. Nobreaks garantem a proteção dos equipamentos contra oscilações de energia elétrica, evitando a perda de dados em andamento.
+
+A \textbf{infraestrutura de conectividade} é um equipamento tão crítico quanto qualquer prateleira em um armazém físico: roteadores de alta velocidade, conexão de internet por fibra óptica com velocidade mínima de 200 Mbps e, preferencialmente, um plano de internet de contingência (4G/5G) para garantir continuidade operacional em caso de falha na conexão principal. Dispositivos móveis, smartphones e tablets, complementam a estrutura de comunicação e permitem que a equipe responda a clientes, aprove entregas e acompanhe projetos em tempo real, de qualquer local. HDs externos e pen drives de alta capacidade servem como camada adicional de backup físico para os arquivos mais críticos da empresa.
+
+Os \textbf{materiais digitais que compõem o estoque operacional} da empresa incluem: licenças ativas dos softwares de edição e revisão (Microsoft 365 com Word, Excel e OneDrive; Google Workspace com Docs, Drive e Meet; Grammarly Pro); banco de templates editoriais padronizados para diferentes tipos de projetos (documentos acadêmicos, e-books, posts de blog, materiais corporativos); guias de estilo e manuais de redação utilizados como referência técnica pelos editores; e modelos de contratos, formulários de solicitação de serviço e documentos administrativos digitais. Esses materiais equivalem, no contexto digital, às caixas, etiquetas e formulários de controle que um armazém físico utiliza para organizar e identificar seus produtos.
+
+Os \textbf{produtos armazenados} no repositório digital da EDITORA Z40 podem ser classificados em quatro categorias principais: (1) arquivos recebidos de clientes que aguardam processamento, equivalentes ao estoque de matéria-prima; (2) projetos em edição ativa, equivalentes ao estoque em processo de fabricação; (3) projetos finalizados e aprovados que aguardam entrega, equivalentes ao estoque de produtos acabados; e (4) acervo histórico de projetos já entregues, mantido por prazo definido para fins de auditoria, consulta e retrabalhos eventuais. Cada categoria ocupa um setor específico no repositório em nuvem e possui regras próprias de acesso, organização e retenção de dados.
+
+Por fim, os \textbf{recursos de segurança e controle do armazém digital} são componentes fundamentais do inventário operacional da empresa: software antivírus e antimalware profissional instalado em todos os equipamentos; sistema de backup automático configurado para gerar cópias de segurança diárias de todos os arquivos em nuvem; política de senhas fortes e autenticação em dois fatores para todos os sistemas e plataformas; e contratos de confidencialidade (NDAs) firmados com todos os colaboradores, garantindo que os documentos dos clientes estejam protegidos em todas as etapas do processo. Esses recursos não apenas protegem os ativos digitais da empresa como também reforçam a confiança dos clientes na EDITORA Z40 como parceira editorial segura e responsável.
+
+\separador
+\itemh{2}{Leiaute do armazém digital}
+
+O leiaute do armazém da \textbf{EDITORA Z40} corresponde à \textbf{arquitetura de organização do repositório em nuvem}, estruturada para refletir com precisão o fluxo operacional da empresa: recebimento, processamento, revisão final, entrega e arquivamento. Assim como em um armazém físico bem planejado, cada "setor" do repositório digital possui uma função específica, acesso controlado e regras claras de entrada e saída de arquivos. A plataforma principal utilizada é o \textbf{Google Drive Compartilhado} (Google Workspace), que permite o acesso simultâneo de toda a equipe com controle granular de permissões, além de integração com as demais ferramentas utilizadas na operação.
+
+A estrutura do repositório é dividida em \textbf{seis setores principais}, organizados de forma sequencial para espelhar o fluxo produtivo da empresa. O \textbf{Setor de Entrada (01\_RECEBIDOS)} é onde chegam todos os arquivos enviados pelos clientes logo após a confirmação do pedido e do pagamento. Neste setor, o responsável pelo atendimento realiza a triagem inicial, verifica se os arquivos estão completos e em formato adequado, e registra o projeto no sistema de gestão. Nenhum arquivo permanece neste setor por mais de 24 horas: após a triagem, é imediatamente movido para o próximo setor ou devolvido ao cliente para correção de pendências. Essa agilidade na entrada evita o acúmulo desordenado de demandas e garante que nenhum projeto seja esquecido ou duplicado.
+
+O \textbf{Setor de Produção (02\_EM\_PRODUCAO)} é o coração operacional do armazém digital, equivalente ao setor de estoque em processo de uma empresa manufatureira. Cada projeto em edição ativa é armazenado aqui, dentro de subpastas nomeadas com o código do projeto, o nome do cliente e a data de prazo de entrega, por exemplo: \emph{PRJ-2025-047\_ClienteABC\_Prazo20jan}. Cada editor tem acesso apenas às subpastas dos projetos sob sua responsabilidade, garantindo organização e privacidade entre os membros da equipe. O \textbf{Setor de Revisão Final (03\_REVISAO\_QA)} recebe os projetos concluídos pelo editor antes de irem para entrega, onde passam por verificação de qualidade realizada pelo editor-chefe ou gestor de projeto.
+
+O \textbf{Setor de Expedição (04\_PRONTOS\_PARA\_ENTREGA)} reúne os arquivos aprovados na revisão final e aguardando envio ao cliente. Neste setor, os arquivos já estão no formato e na nomenclatura combinados com o cliente, prontos para serem compartilhados via Google Drive, enviados por e-mail ou disponibilizados pela plataforma acordada. O \textbf{Setor de Arquivo (05\_ENTREGUES\_HISTORICO)} armazena todos os projetos já concluídos e entregues, organizados por ano, mês e cliente. Os arquivos neste setor permanecem disponíveis por um período mínimo de 12 meses para consulta em caso de solicitações de ajuste, auditoria ou reaproveitamento de materiais. Por fim, a \textbf{Biblioteca de Recursos (00\_TEMPLATES\_RECURSOS)} centraliza todos os modelos, guias de estilo, checklists e materiais de referência utilizados pela equipe, com acesso liberado a todos os colaboradores e atualização periódica pelo gestor editorial.
+
+O controle de acesso ao armazém digital segue uma hierarquia de três níveis: o \textbf{gestor administrativo} tem acesso completo a todos os setores, podendo criar, editar, mover e excluir arquivos em qualquer área do repositório; os \textbf{editores} têm acesso de leitura e edição apenas ao Setor de Produção (nas subpastas de seus projetos) e à Biblioteca de Recursos, sem permissão para acessar os setores de outros colaboradores; e os \textbf{colaboradores externos eventuais} (como freelancers contratados pontualmente) recebem acesso temporário e restrito a uma subpasta específica, revogado automaticamente após a conclusão do projeto. Esse modelo de leiaute e controle de acesso garante que o armazém digital da EDITORA Z40 funcione com a mesma eficiência, segurança e organização de um depósito físico bem gerido, sem os custos e limitações do espaço físico.
+
+\separador
+\itemh{3}{Política de controle de estoques}
+
+A política de controle de estoques da \textbf{EDITORA Z40} foi definida considerando as particularidades de uma empresa de serviços digitais, em que o "estoque" não é composto por mercadorias físicas, mas por ativos intangíveis, como licenças de software, capacidade de armazenamento em nuvem, projetos em andamento e recursos operacionais digitais. Após análise dos métodos disponíveis, a empresa adotou a \textbf{Curva ABC} como método principal de gestão de estoques, complementada pela lógica do \textbf{Just in Time} para insumos de uso eventual. Essa combinação permite que a empresa concentre sua atenção e recursos nos ativos mais críticos para a operação, sem desperdiçar capital com licenças subutilizadas ou capacidade de armazenamento excessiva.
+
+A \textbf{Curva ABC} classifica os itens do estoque em três categorias segundo sua criticidade e impacto para a operação. Os itens da \textbf{Classe A}, os mais críticos, que representam a maior parte do valor operacional, são as licenças dos softwares essenciais: Microsoft 365, Google Workspace e Grammarly Pro. Esses três itens sustentam diretamente 100\% dos projetos editoriais da empresa e, portanto, não podem em hipótese alguma ficar indisponíveis. Também compõem a Classe A a hospedagem e o domínio do site (\zsiteplain{}), pois qualquer interrupção afeta diretamente a captação de novos clientes e a imagem da empresa. Esses itens são monitorados semanalmente, com alertas configurados para renovação com antecedência mínima de 30 dias do vencimento.
+
+Os itens da \textbf{Classe B} têm importância operacional relevante, porém seu impacto imediato em caso de interrupção é menor, pois existem alternativas de curto prazo. Fazem parte desta categoria: Trello Premium e Notion (gestão de projetos), Slack Pro (comunicação interna), Zoom (videoconferências com clientes) e as plataformas de pagamento (Mercado Pago, PayPal, PagBank). A gestão desses itens é feita mensalmente, com revisão do uso real antes de cada renovação para verificar se o plano contratado ainda é adequado à demanda atual. Os itens da \textbf{Classe C} são insumos de uso ocasional e baixo impacto imediato: licenças pontuais de softwares de diagramação (Canva Pro, Adobe InDesign), serviços de tradução eventualmente terceirizados e ferramentas de análise de conteúdo contratadas por projeto. Esses itens são geridos pelo método \textbf{Just in Time}, adquiridos apenas quando há demanda concreta identificada, evitando gastos desnecessários com recursos que ficariam ociosos entre projetos.
+
+Além da Curva ABC, a empresa aplica o conceito de \textbf{PEPS (Primeiro a Entrar, Primeiro a Sair)} para a gestão da fila de projetos no Setor de Produção do armazém digital. O conceito foi adaptado ao fluxo digital de projetos, garantindo que os trabalhos sejam processados na ordem em que chegam, salvo em casos de prioridade explicitamente acordada com o cliente mediante contrato específico. Esse critério garante equidade no atendimento, previsibilidade de prazo para os clientes e evita que projetos mais antigos fiquem represados enquanto novas demandas são priorizadas. A ordem de entrada de cada projeto é registrada no sistema de gestão (Trello/Notion) com data e hora de recebimento, gerando um histórico auditável de toda a fila de produção.
+
+A política de controle de estoques da EDITORA Z40 também prevê uma \textbf{revisão trimestral completa} de todos os ativos digitais, na qual o gestor administrativo avalia quais ferramentas e licenças estão sendo efetivamente utilizadas, quais podem ser rebaixadas para planos mais econômicos e quais estão subutilizadas a ponto de justificar cancelamento ou substituição por alternativas mais eficientes. Essa revisão periódica evita o acúmulo de gastos com recursos desnecessários, o equivalente digital do "estoque encalhado" de uma empresa tradicional, e garante que o orçamento tecnológico da empresa esteja sempre alinhado à realidade operacional e às metas de crescimento da EDITORA Z40.
+
+\separador
+\itemh{4}{Frequência de reposição e nível de segurança do estoque}
+
+A definição da \textbf{frequência de reposição e do nível de segurança do estoque} é uma das decisões mais estratégicas na gestão logística da \textbf{EDITORA Z40}, pois garante que nenhuma ferramenta, licença ou recurso digital fique indisponível durante a operação editorial, situação que poderia causar atrasos em projetos, prejudicar a experiência dos clientes e comprometer a reputação da empresa. Para cada categoria de ativo, foram definidos a periodicidade de reposição, o prazo de antecedência para renovação e o nível mínimo de segurança abaixo do qual a empresa não pode operar sem risco de interrupção. Esses parâmetros foram estabelecidos com base no histórico de uso, na criticidade de cada recurso e nas características contratuais de cada fornecedor.
+
+Para os \textbf{itens da Classe A} (licenças essenciais e hospedagem), a frequência de reposição é anual, com renovação obrigatória realizada com \textbf{antecedência mínima de 30 dias} em relação ao vencimento. O nível de segurança exigido é de 100\% de disponibilidade contínua: não há margem tolerável para interrupção desses recursos. Para garantir isso, a empresa adota duas medidas complementares: (1) configuração de alertas automáticos no sistema de gestão para notificar o gestor com 45 e 30 dias de antecedência do vencimento de cada licença; e (2) manutenção de uma reserva financeira equivalente a pelo menos um mês de custo das ferramentas da Classe A, garantindo que uma renovação emergencial possa ser realizada mesmo em cenários de restrição orçamentária temporária.
+
+Os \textbf{itens da Classe B} são geridos com reposição mensal, renovada sempre no primeiro dia útil de cada mês. O nível de segurança para esses itens é de \textbf{continuidade garantida por no mínimo 15 dias adicionais} após o vencimento em caso de falha no processo de renovação, o que na prática significa que a empresa deve iniciar o processo de renovação com quinze dias de antecedência, não apenas no vencimento. As plataformas de pagamento (Mercado Pago, PayPal, PagBank) recebem atenção especial nesta categoria: como são o canal de recebimento de receitas da empresa, qualquer interrupção impacta diretamente o fluxo de caixa. Por isso, a empresa mantém contas ativas em todas as três plataformas simultaneamente, de forma que uma eventual falha em uma delas não comprometa a capacidade de receber pagamentos.
+
+Em relação à \textbf{capacidade de armazenamento em nuvem}, que corresponde ao "espaço físico" do armazém digital, a EDITORA Z40 estabelece como nível de segurança a manutenção de no mínimo \textbf{30\% de espaço livre} no repositório principal (Google Drive) em todos os momentos. Quando a ocupação superar 70\% da capacidade contratada, o gestor deve iniciar imediatamente o processo de expansão do plano de armazenamento ou de arquivamento e exclusão de projetos antigos que já ultrapassaram o prazo de retenção definido na política interna. Esse monitoramento é feito semanalmente durante as reuniões de gestão operacional. Para o backup em nuvem secundário (OneDrive), o nível de segurança mínimo é de 40\% de espaço livre, garantindo margem suficiente para absorver um eventual aumento repentino de volume de projetos.
+
+Por fim, o \textbf{nível de segurança do estoque de projetos em produção}, ou seja, a capacidade de absorver novas demandas sem comprometer a qualidade e os prazos dos projetos já em andamento, é definido em função da capacidade produtiva da equipe editorial. A EDITORA Z40 estabelece como parâmetro de segurança que o Setor de Produção nunca deve ultrapassar \textbf{80\% da capacidade máxima de projetos simultâneos} da equipe. Quando esse limite é atingido, o gestor ativa o protocolo de contenção de demanda: novos projetos recebem prazo de início estendido ou são encaminhados a editores parceiros previamente cadastrados, evitando sobrecarga da equipe e garantindo a qualidade de cada entrega. Esse indicador é monitorado diariamente pelo sistema de gestão de projetos (Trello), com atualização em tempo real do volume de projetos ativos por editor, assegurando visibilidade total sobre a saúde operacional do armazém digital da EDITORA Z40.
+
+\fimdetapa{3}{20211235}
+
+% ══════════════ ETAPA 4 ══════════════
+\secao{Introdução da Etapa 4: Estratégia de Distribuição e Transporte}
+
+Com a empresa estruturada na primeira etapa, com o planejamento de compras e suprimentos definido na segunda e com a organização do armazém e dos estoques concluída na terceira, a \textbf{EDITORA Z40} chega à sua quarta etapa com um objetivo essencial: garantir que o resultado final do seu trabalho chegue aos clientes de forma rápida, segura e rastreável. Esta etapa trata da \textbf{estratégia de distribuição e transporte}, elemento que, em qualquer operação logística, conecta a produção ao consumidor final e determina diretamente a satisfação do cliente, os custos operacionais e a competitividade do negócio.
+
+Por se tratar de uma empresa de serviços editoriais 100\% digital, a EDITORA Z40 não transporta mercadorias físicas em sua rotina principal: o seu "produto" é o arquivo revisado, editado e formatado, entregue por canais digitais. Por isso, os conceitos clássicos de modalidades e modais de transporte, roteirização de entregas e rastreamento de cargas são aqui adaptados à realidade da \textbf{logística digital}, em que a "carga" são os arquivos dos clientes e as "vias de transporte" são os canais de transmissão de dados pela internet. Mesmo assim, a empresa mantém preparada uma operação de apoio para as raras entregas físicas, como impressos e documentos assinados, utilizando serviços terceirizados especializados.
+
+Nesta etapa, são desenvolvidos três itens fundamentais: a definição das \textbf{modalidades de transporte} utilizadas pela empresa, com a justificativa de cada escolha; o \textbf{planejamento das rotas de entrega}, com a análise de custos e prazos de cada opção; e a criação de um \textbf{plano de rastreamento e acompanhamento das entregas}, com indicadores que garantem que cada projeto chegue ao cliente no prazo combinado. Toda a estratégia reflete as marcas formativas do SENAC — responsabilidade, foco no cliente, sustentabilidade e busca constante pela melhoria contínua — aplicadas à resolução prática dos desafios logísticos apresentados.
+
+\devbarra{DESENVOLVIMENTO DA ETAPA 4}{UC04: Estratégia de Distribuição e Transporte}
+
+\itemh{1}{Modalidades de transporte utilizadas}
+
+A primeira decisão da estratégia de distribuição da \textbf{EDITORA Z40} foi a definição das modalidades de transporte que serão utilizadas. Como a empresa entrega conteúdos digitais, a sua modalidade principal é o que se pode chamar de \textbf{transporte próprio digital}: a entrega realizada por meio da infraestrutura própria da empresa, composta pelo site oficial \zsite, pelo domínio registrado em nome da empresa, pelas contas de e-mail corporativo e pela rede de distribuição de conteúdo (CDN) que publica o site. Nessa modalidade, a empresa tem controle total sobre o canal, a identidade visual, a segurança e a disponibilidade, da mesma forma que uma transportadora própria controla seus veículos, suas rotas e seus motoristas.
+
+A segunda modalidade utilizada é o \textbf{serviço terceirizado}, que na logística tradicional corresponde à contratação de transportadoras especializadas. No contexto digital, a EDITORA Z40 utiliza plataformas terceirizadas consolidadas para complementar a entrega: o Google Drive, que permite o compartilhamento seguro de arquivos com links protegidos por senha e prazo de validade; o OneDrive, utilizado como canal alternativo e de contingência; e serviços de transferência de arquivos de grande porte, como o WeTransfer Pro, acionados quando os projetos superam os limites de anexação de e-mail. A escolha por parceiros terceirizados de grande porte garante redundância, segurança de dados e alcance nacional imediato, sem que a empresa precise investir em servidores próprios.
+
+Para as situações eventuais em que o cliente solicita material físico, a empresa adota a \textbf{modalidade terceirizada clássica}: os Correios, com os serviços SEDEX (entrega expressa) e PAC (entrega econômica) e, para volumes maiores, transportadoras rodoviárias de carga fracionada. Esses casos incluem o envio de contratos assinados, vias impressas de documentos ou materiais gráficos produzidos por parceiros. A opção pela terceirização total da entrega física é deliberada: o volume é baixo e imprevisível, e manter frota própria ou estrutura de expedição física geraria um custo fixo elevado para uma operação que, em essência, é digital.
+
+A empresa também utiliza o conceito de \textbf{operação multimodal}, adaptado à sua realidade: a combinação de mais de um canal de entrega para o mesmo projeto, executada de forma simultânea ou sequencial. Um mesmo arquivo, por exemplo, pode ser entregue pelo link do Google Drive e, em seguida, confirmado por e-mail com o resumo do serviço prestado; projetos corporativos de alto valor podem ser publicados temporariamente em área restrita do site próprio e comunicados por canais com recibo de leitura. Essa combinação de "modais digitais" aumenta a segurança da entrega, pois cria redundância: se um canal falhar, o outro assegura que o cliente receba o material no prazo.
+
+A escolha dessa combinação de modalidades se justifica por quatro fatores: \textbf{custo}, pois as plataformas digitais operam em modelo de assinatura com custo marginal praticamente zero por entrega; \textbf{velocidade}, pois a entrega digital é imediata, independentemente da distância; \textbf{alcance}, pois qualquer cliente no território nacional, ou até no exterior, é atendido com o mesmo prazo e a mesma qualidade; e \textbf{sustentabilidade}, pois a distribuição digital elimina emissões de carbono, embalagens e deslocamentos desnecessários. Cada canal é avaliado quanto à criptografia no trânsito, à possibilidade de definir senha e prazo de expiração para os links e à geração de registros de acesso, funcionando como o equivalente digital do lacre, do seguro de carga e do conhecimento de transporte.
+
+\separador
+\itemh{2}{Planejamento das rotas de entrega: custos e prazos}
+
+Na EDITORA Z40, o conceito de \textbf{rota de entrega} corresponde ao caminho completo percorrido pelo arquivo desde o Setor de Expedição do armazém digital (04\_PRONTOS\_\allowbreak PARA\_\allowbreak ENTREGA) até o acesso final pelo cliente. Assim como a roteirização tradicional busca o menor caminho pelo menor custo, o planejamento das rotas digitais define, para cada perfil de entrega, o canal mais adequado considerando quatro variáveis: custo operacional, prazo de entrega, tamanho do arquivo e nível de segurança exigido pelo cliente.
+
+A \textbf{Rota 1 — Entrega Padrão Nacional} é utilizada na grande maioria dos projetos e combina o envio do link de download do Google Drive com o e-mail formal de encerramento do serviço. O custo dessa rota está incluído na assinatura anual do Google Workspace (aproximadamente R\$ 40,00 por usuário/mês), o que representa custo marginal praticamente nulo por entrega; o prazo é imediato, com o material disponível ao cliente em poucos minutos após a aprovação na revisão de qualidade, para qualquer ponto do Brasil. É a rota de melhor relação custo-benefício e responde pela maior parte do volume de entregas da empresa.
+
+A \textbf{Rota 2 — Entrega de Alto Volume ou Corporativa} é acionada para arquivos de grande porte (e-books com imagens em alta resolução, pacotes completos de identidade editorial, bases de documentos) ou para clientes corporativos que exigem controles adicionais. Nela, são utilizados o WeTransfer Pro ou os links diretos da infraestrutura própria (CDN), com assinatura mensal dedicada, na faixa de R\$ 50,00 a R\$ 100,00, e transferências que suportam dezenas de gigabytes. O prazo também é imediato, e a segurança é reforçada com links de uso único, senha e prazo de expiração de sete dias, evitando o acúmulo de material de clientes em canais abertos.
+
+A \textbf{Rota 3 — Entrega Física Eventual} cobre as raras remessas de impressos e documentos assinados. São utilizados os Correios, com dois serviços complementares: o SEDEX, com prazo de um a três dias úteis para capitais e principais cidades e valor de referência entre R\$ 30,00 e R\$ 50,00 por remessa; e o PAC, com prazo de quatro a dez dias úteis e valor de referência entre R\$ 20,00 e R\$ 30,00 — valores conforme a tabela vigente dos Correios e o peso da remessa. Quando o cliente solicita e a localidade permite, pode ser contratada a modalidade expressa de entrega no mesmo dia. Os custos dessa rota são orçados previamente e repassados ao cliente conforme contrato, preservando a margem da operação digital.
+
+A escolha da rota em cada entrega segue uma lógica de decisão simples e registrada no sistema de gestão: prioriza-se sempre a Rota 1; a Rota 2 é ativada quando o arquivo excede os limites da Rota 1 ou quando o contrato do cliente exige controles adicionais; e a Rota 3 só é utilizada mediante solicitação expressa e orçamento aprovado. Com esse planejamento, a empresa \textbf{otimiza custos} — pois as rotas digitais têm custo marginal próximo de zero e as físicas só existem sob demanda — e assegura \textbf{prazos competitivos}, já que a entrega padrão é imediata e as eventuais remessas físicas contam com prazos contratados e rastreáveis dos Correios.
+
+\separador
+\itemh{3}{Plano de rastreamento e acompanhamento das entregas}
+
+O plano de rastreamento da EDITORA Z40 tem um objetivo único: garantir que cada entrega chegue ao cliente no tempo certo, com comprovação formal de envio e de recebimento. Assim como uma carga física gera documentos e registros em cada ponto da rota, cada entrega digital gera registros automáticos e registros proativos da equipe, formando um histórico completo e auditável do ciclo de vida do projeto, do recebimento dos arquivos até a aprovação final pelo cliente.
+
+O rastreamento digital começa no quadro de gestão de projetos (Trello), onde cada projeto possui um cartão com o histórico completo de status: \textbf{Recebido → Em Produção → Revisão de Qualidade → Pronto para Entrega → Enviado → Confirmado → Aprovado}, com data e hora em cada transição. No momento do envio, são registrados o canal utilizado, o link de entrega, a senha definida (quando houver) e o prazo combinado. Os logs do Google Drive registram automaticamente quem acessou o arquivo e quando, funcionando como o comprovante de entrega digital: quando o log indica o acesso do cliente, a entrega é marcada como "Confirmada" mesmo sem resposta formal.
+
+O plano inclui ainda a \textbf{comunicação proativa} com o cliente em cada mudança relevante de status: e-mail automático de aviso de conclusão com o link de entrega, mensagem de acompanhamento com instruções de acesso e prazo para solicitação de ajustes inclusos, e pesquisa curta de satisfação após a aprovação. Para as entregas físicas eventuais, o código de rastreio dos Correios é registrado no cartão do projeto e monitorado diariamente; qualquer exceção (atraso, devolução ou extravio) aciona imediatamente o protocolo de contingência, que prevê o contato com o cliente, a abertura de ocorrência junto aos Correios e, no pior cenário, a reemissão e o reenvio do material por serviço expresso, sem custo adicional para o cliente.
+
+O acompanhamento das entregas é gerido por \textbf{indicadores objetivos}, analisados em reunião semanal de operação. O indicador principal é o \textbf{OTD (On Time Delivery — entregas realizadas no prazo combinado)}, com meta mínima de 95\%; complementam o painel o tempo médio entre a aprovação na revisão e a entrega, a taxa de entregas confirmadas em até 24 horas, o número de ocorrências de exceção na rota física e o índice de satisfação dos clientes com a entrega. Quando qualquer indicador fica abaixo da meta, é aberto um plano de ação com causa raiz, responsável e prazo, transformando cada falha em aprendizado registrado na base de conhecimento da empresa.
+
+Esse plano de rastreamento e acompanhamento materializa as \textbf{marcas formativas SENAC} no dia a dia da EDITORA Z40: a responsabilidade, ao assumir o compromisso público com prazos e comprová-los com dados; o foco no cliente, com comunicação transparente e canais abertos durante todo o processo; a sustentabilidade, ao priorizar rotas digitais de baixo impacto ambiental; e a melhoria contínua, ao medir, analisar e corrigir a operação em ciclos semanais. Com isso, a estratégia de distribuição e transporte da empresa garante que seus produtos — conteúdos editoriais de qualidade — cheguem sempre ao cliente certo, pelo canal certo, na hora certa.
+
+\rodapeetapa{4}
+
+\end{document}
