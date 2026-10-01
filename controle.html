@@ -344,7 +344,7 @@ tbody tr:hover { background: var(--bg3); }
   <div class="sidebar-brand">
     <h1>📦 Controle<br>Almoxarifado</h1>
     <span style="font-weight:600;color:#60a5fa;display:block;margin-top:6px">Paulo Sérgio de Andrade</span>
-    <span style="display:block;margin-top:4px;line-height:1.4">Atividade 2 — Curso Técnico<br>em Logística — SENAC</span>
+    <span style="display:block;margin-top:4px;line-height:1.4">Atividade 2 - Curso Técnico<br>em Logística - SENAC</span>
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section">Principal</div>
@@ -381,7 +381,7 @@ tbody tr:hover { background: var(--bg3); }
       <span class="badge" id="badge-dev">0</span>
     </div>
   </nav>
-  <div class="sidebar-footer">v1.0 — Curso Técnico em Logística — SENAC</div>
+  <div class="sidebar-footer">v1.0 - Curso Técnico em Logística - SENAC</div>
 </aside>
 
 <!-- MAIN -->
@@ -508,7 +508,7 @@ tbody tr:hover { background: var(--bg3); }
     <div class="page" id="page-inventario">
       <div class="table-wrap">
         <div class="table-header">
-          <h3>Inventário — Contagem Física vs. Contábil</h3>
+          <h3>Inventário - Contagem Física vs. Contábil</h3>
           <div class="table-actions">
             <button class="btn btn-ghost" onclick="iniciarInventario()">🔄 Iniciar Contagem</button>
           </div>
@@ -878,9 +878,9 @@ tbody tr:hover { background: var(--bg3); }
       <div class="form-row">
         <label>Resultado da Inspeção</label>
         <select id="dev-inspecao">
-          <option value="Reprovado">Reprovado — Material com defeito/divergência</option>
-          <option value="Aprovado parcial">Aprovado Parcial — Parte aceita, parte devolvida</option>
-          <option value="Devolvido íntegro">Devolvido Íntegro — Material em bom estado (retorno interno)</option>
+          <option value="Reprovado">Reprovado - Material com defeito/divergência</option>
+          <option value="Aprovado parcial">Aprovado Parcial - Parte aceita, parte devolvida</option>
+          <option value="Devolvido íntegro">Devolvido Íntegro - Material em bom estado (retorno interno)</option>
         </select>
       </div>
       <div class="form-grid">
@@ -973,7 +973,7 @@ function closeModal(id) { document.getElementById(id).classList.remove('active')
 
 // ===== HELPERS =====
 function fmtDate(d) {
-  if (!d) return '—';
+  if (!d) return '-';
   const [y,m,day] = d.split('-');
   return `${day}/${m}/${y}`;
 }
@@ -1026,10 +1026,10 @@ function renderDocs() {
     <td class="mono">${fmtDate(d.data)}</td>
     <td>${tagHTML(d.tipo)}</td>
     <td class="mono">${d.numero}</td>
-    <td>${d.fornecedor||'—'}</td>
+    <td>${d.fornecedor||'-'}</td>
     <td class="mono" style="text-align:right">R$ ${fmtMoney(d.valor)}</td>
-    <td>${d.setor||'—'}</td>
-    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.obs||''}">${d.obs||'—'}</td>
+    <td>${d.setor||'-'}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.obs||''}">${d.obs||'-'}</td>
     <td><button class="del-btn" onclick="delDoc(${d.id})" title="Excluir">🗑</button></td>
   </tr>`).join('');
 }
@@ -1084,7 +1084,7 @@ function renderItens() {
       <td><span class="mono" style="font-weight:600;color:var(--accent2)">${i.codigo}</span></td>
       <td>${i.desc}</td>
       <td class="mono">${i.unidade}</td>
-      <td class="mono">${i.local||'—'}</td>
+      <td class="mono">${i.local||'-'}</td>
       <td class="mono">${i.min}</td>
       <td class="mono">${i.max}</td>
       <td class="mono" style="font-weight:700;font-size:14px">${i.saldo}</td>
@@ -1105,7 +1105,7 @@ function delItem(id) {
 // ===== MOVIMENTAÇÕES =====
 function populateMovItemSelect() {
   const sel = document.getElementById('mov-item');
-  sel.innerHTML = DB.itens.map(i => `<option value="${i.id}">${i.codigo} — ${i.desc} (Saldo: ${i.saldo})</option>`).join('');
+  sel.innerHTML = DB.itens.map(i => `<option value="${i.id}">${i.codigo} - ${i.desc} (Saldo: ${i.saldo})</option>`).join('');
 }
 
 function salvarMov() {
@@ -1158,11 +1158,11 @@ function renderMov() {
       <td class="mono">${fmtDate(m.data)}</td>
       <td>${tagHTML(tipoTag, m.tipo)}</td>
       <td><span class="mono" style="color:var(--accent2)">${m.itemCodigo}</span> ${m.itemDesc}</td>
-      <td class="mono">${m.doc||'—'}</td>
+      <td class="mono">${m.doc||'-'}</td>
       <td class="mono ${clr}" style="font-weight:700">${sign}${m.qtd}</td>
       <td class="mono" style="font-weight:600">${m.saldoApos}</td>
-      <td>${m.resp||'—'}</td>
-      <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${m.obs||''}">${m.obs||'—'}</td>
+      <td>${m.resp||'-'}</td>
+      <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${m.obs||''}">${m.obs||'-'}</td>
       <td><button class="del-btn" onclick="delMov(${m.id})" title="Excluir">🗑</button></td>
     </tr>`;
   }).join('');
@@ -1216,8 +1216,8 @@ function renderInventario() {
   if (!invData.length) { tb.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="icon">📝</div><p>Cadastre itens primeiro para realizar inventário</p></div></td></tr>'; return; }
   tb.innerHTML = invData.map((inv, idx) => {
     const diff = inv.contagem !== null ? inv.contagem - inv.saldoSistema : null;
-    const diffStr = diff !== null ? (diff > 0 ? `<span class="text-green">+${diff}</span>` : diff < 0 ? `<span class="text-red">${diff}</span>` : '<span style="color:var(--green)">0 ✓</span>') : '—';
-    const status = diff === null ? '—' : diff === 0 ? tagHTML('entrada','OK') : tagHTML('alerta','DIVERGÊNCIA');
+    const diffStr = diff !== null ? (diff > 0 ? `<span class="text-green">+${diff}</span>` : diff < 0 ? `<span class="text-red">${diff}</span>` : '<span style="color:var(--green)">0 ✓</span>') : '-';
+    const status = diff === null ? '-' : diff === 0 ? tagHTML('entrada','OK') : tagHTML('alerta','DIVERGÊNCIA');
     return `<tr>
       <td class="mono" style="color:var(--accent2);font-weight:600">${inv.codigo}</td>
       <td>${inv.desc}</td>
@@ -1295,12 +1295,12 @@ function renderDashboard() {
 
   // Alertas
   const alertas = DB.itens.filter(i => i.min > 0 && i.saldo <= i.min);
-  document.getElementById('dash-alertas').innerHTML = alertas.length ? `<div class="alert-bar">⚠️ <strong>Atenção:</strong> ${alertas.map(i => `${i.codigo} (${i.desc}) — Saldo: ${i.saldo}, Mín: ${i.min}`).join(' | ')}</div>` : '';
+  document.getElementById('dash-alertas').innerHTML = alertas.length ? `<div class="alert-bar">⚠️ <strong>Atenção:</strong> ${alertas.map(i => `${i.codigo} (${i.desc}) - Saldo: ${i.saldo}, Mín: ${i.min}`).join(' | ')}</div>` : '';
 
   // Últimos docs
   const lastDocs = DB.documentos.slice(-5).reverse();
   document.getElementById('dash-docs').innerHTML = lastDocs.length
-    ? lastDocs.map(d => `<tr><td class="mono">${fmtDate(d.data)}</td><td>${tagHTML(d.tipo)}</td><td class="mono">${d.numero}</td><td>${d.fornecedor||'—'}</td></tr>`).join('')
+    ? lastDocs.map(d => `<tr><td class="mono">${fmtDate(d.data)}</td><td>${tagHTML(d.tipo)}</td><td class="mono">${d.numero}</td><td>${d.fornecedor||'-'}</td></tr>`).join('')
     : '<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:24px">Nenhum documento</td></tr>';
 
   // Últimas movs
@@ -1389,8 +1389,8 @@ function renderSol() {
       <td>${s.setorOrigem}</td>
       <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${s.tipo}">${s.tipo}</td>
       <td>${s.desc}</td>
-      <td class="mono">${s.qtd || '—'}</td>
-      <td>${s.encaminhar || '—'}</td>
+      <td class="mono">${s.qtd || '-'}</td>
+      <td>${s.encaminhar || '-'}</td>
       <td>
         <select class="filter-select" style="font-size:11px;padding:3px 6px" onchange="updateSolStatus(${s.id}, this.value)">
           <option value="Pendente" ${s.status==='Pendente'?'selected':''}>Pendente</option>
@@ -1456,8 +1456,8 @@ function renderDev() {
       <td class="mono">${fmtDate(d.data)}</td>
       <td><span class="tag ${tipoCls}">${d.tipo}</span></td>
       <td>${d.item}</td>
-      <td class="mono">${d.qtd || '—'}</td>
-      <td class="mono">${d.nf || '—'}</td>
+      <td class="mono">${d.qtd || '-'}</td>
+      <td class="mono">${d.nf || '-'}</td>
       <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.motivo}">${d.motivo}</td>
       <td><span class="tag ${inspCls}">${d.inspecao}</span></td>
       <td>
