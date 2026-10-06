@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projeto Integrador I · Etapa 1 · Editora Z40</title>
+<title>Projeto Integrador I · Etapa 5 · Editora Z40</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -17,7 +17,7 @@ body {
   font-size: 15px;
 }
 
-/* ── TOPO / CAPA ── */
+/* TOPO / CAPA */
 .topo {
   text-align: center;
   padding-bottom: 16px;
@@ -41,7 +41,7 @@ body {
   color: #0F4761;
 }
 
-/* ── INFO ALUNO ── */
+/* INFO ALUNO */
 .aluno {
   display: flex;
   justify-content: space-between;
@@ -64,7 +64,7 @@ body {
   color: #272727;
 }
 
-/* ── SEÇÕES DE TEXTO ── */
+/* SEÇÕES DE TEXTO */
 .secao-titulo {
   font-size: 1.05rem;
   font-weight: 700;
@@ -83,14 +83,14 @@ body {
 .texto:last-child { margin-bottom: 0; }
 .texto strong { color: #272727; }
 
-/* ── INTRO ── */
+/* INTRO */
 .intro {
   margin-bottom: 18px;
   page-break-inside: avoid;
   break-inside: avoid;
 }
 
-/* ── LOGÍSTICA DIGITAL ── */
+/* LOGÍSTICA DIGITAL */
 .logistica-bloco {
   background: #EBF3FA;
   border-left: 4px solid #156082;
@@ -124,7 +124,7 @@ body {
 }
 .logistica-def strong { color: #fff; }
 
-/* ── DESENVOLVIMENTO (barra azul) ── */
+/* DESENVOLVIMENTO (barra azul) */
 .dev-barra {
   background: #0F4761;
   border-radius: 6px;
@@ -148,7 +148,7 @@ body {
   line-height: 1.5;
 }
 
-/* ── ITEM (cada atividade) ── */
+/* ITEM (cada atividade) */
 .item {
   padding: 32px 0;
   border-bottom: 1px solid #E6E6E6;
@@ -173,7 +173,7 @@ body {
   margin-bottom: 12px;
 }
 
-/* ── DOI ── */
+/* DOI */
 .doi {
   margin-top: 40px;
   padding: 18px 22px;
@@ -208,7 +208,7 @@ body {
 }
 .doi a:hover { background: #156082; }
 
-/* ── RODAPÉ ── */
+/* RODAPÉ */
 .rodape {
   margin-top: 48px;
   padding-top: 20px;
@@ -217,11 +217,51 @@ body {
   color: #aaa;
   text-align: center;
 }
+
+/* TABELA DE CUSTOS */
+.tabela-custos {
+  margin: 18px 0 6px;
+  border: 1px solid #D6E4ED;
+  border-radius: 6px;
+}
+.tabela-custos table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .84rem;
+}
+.tabela-custos th {
+  background: #0F4761;
+  color: #fff;
+  text-align: left;
+  padding: 9px 12px;
+  font-weight: 700;
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.tabela-custos td {
+  padding: 8px 12px;
+  border-top: 1px solid #E6E6E6;
+  vertical-align: top;
+  line-height: 1.55;
+  color: #272727;
+}
+.tabela-custos tr.grupo td {
+  background: #EBF3FA;
+  color: #0F4761;
+  font-weight: 700;
+}
+.tabela-custos .num { text-align: right; white-space: nowrap; }
+.tabela-nota {
+  font-size: .72rem;
+  color: #888;
+  margin: 6px 0 14px;
+}
 </style>
 </head>
 <body>
 
-<!-- ══ TOPO ══ -->
+<!-- TOPO -->
 <div class="topo">
   <img src="data:image/jpeg;base64,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" alt="SENAC EAD">
   <p class="topo-titulo">SENAC EAD</p>
@@ -240,7 +280,7 @@ body {
 </div>
 
 
-<!-- ══ INTRODUÇÃO ══ -->
+<!-- INTRODUÇÃO -->
 <div class="intro">
   <p class="secao-titulo">Introdução</p>
   <p class="texto">O presente projeto apresenta o planejamento logístico da <strong>Editora Z40</strong>, empresa fictícia de serviços editoriais 100% digitais, desenvolvida no âmbito do Projeto Integrador I do Curso Técnico em Logística do SENAC EAD. A Editora Z40 é especializada em revisão, edição, formatação e produção de conteúdos online, atendendo pessoas físicas e jurídicas em todo o território nacional por meio de uma operação inteiramente virtual.</p>
@@ -249,7 +289,7 @@ body {
 </div>
 
 
-<!-- ══ SOBRE A EMPRESA & LOGÍSTICA DIGITAL ══ -->
+<!-- SOBRE A EMPRESA & LOGÍSTICA DIGITAL -->
 <p class="secao-titulo">Sobre a empresa e a logística digital</p>
 
 <div class="logistica-bloco">
@@ -261,14 +301,14 @@ body {
 </div>
 
 
-<!-- ══ DESENVOLVIMENTO DA ETAPA 1 ══ -->
+<!-- DESENVOLVIMENTO DA ETAPA 1 -->
 <div class="dev-barra">
   <p class="dev-label">Desenvolvimento da Etapa 1</p>
   <p class="dev-uc">UC01: Realizar procedimentos de conferência de equipamentos, materiais e produtos no processo logístico</p>
 </div>
 
 
-<!-- ══ ITEM 1 ══ -->
+<!-- ITEM 1 -->
 <div class="item">
   <p class="item-num">Item 1</p>
   <h2>Segmento de mercado</h2>
@@ -280,7 +320,7 @@ body {
 </div>
 
 
-<!-- ══ ITEM 2 ══ -->
+<!-- ITEM 2 -->
 <div class="item">
   <p class="item-num">Item 2</p>
   <h2>Nome da empresa</h2>
@@ -292,7 +332,7 @@ body {
 </div>
 
 
-<!-- ══ ITEM 3 ══ -->
+<!-- ITEM 3 -->
 <div class="item">
   <p class="item-num">Item 3</p>
   <h2>Público-alvo, serviços oferecidos e localização</h2>
@@ -304,7 +344,7 @@ body {
 </div>
 
 
-<!-- ══ ITEM 4 ══ -->
+<!-- ITEM 4 -->
 <div class="item">
   <p class="item-num">Item 4</p>
   <h2>Necessidades logísticas</h2>
@@ -316,7 +356,7 @@ body {
 </div>
 
 
-<!-- ══ ITEM 5 ══ -->
+<!-- ITEM 5 -->
 <div class="item">
   <p class="item-num">Item 5</p>
   <h2>Fluxo logístico básico (UC01)</h2>
@@ -328,7 +368,7 @@ body {
 </div>
 
 
-<!-- ══ DOI ══ -->
+<!-- DOI -->
 <div class="doi">
   <div class="doi-icone">📄</div>
   <div class="doi-texto">
@@ -345,9 +385,9 @@ body {
 
 
 
-<!-- ══════════════════════════════════════════ -->
+<!--  -->
 <!--              ETAPA 2                      -->
-<!-- ══════════════════════════════════════════ -->
+<!--  -->
 
 <div class="intro" style="margin-top:48px;">
   <p class="secao-titulo">Introdução da Etapa 2: Compras e Suprimentos</p>
@@ -401,7 +441,7 @@ body {
   <p class="texto"><strong>Como será feita a negociação:</strong> a negociação com fornecedores é conduzida pelo gestor administrativo-financeiro, que entra em contato direto com os departamentos comerciais das empresas fornecedoras por e-mail ou videoconferência. A estratégia de negociação inclui solicitar períodos de teste gratuito antes da contratação definitiva, negociar descontos para pagamento antecipado ou planos plurianuais, buscar condições diferenciadas por volume de licenças e manter um cadastro atualizado de fornecedores alternativos para fortalecer o poder de barganha. Toda negociação é documentada e arquivada no sistema de gestão da empresa, assegurando transparência e possibilitando renegociações futuras com base em dados históricos.</p>
 </div>
 
-<!-- ══ DOI ETAPA 2 ══ -->
+<!-- DOI ETAPA 2 -->
 <div class="doi">
   <div class="doi-icone">📄</div>
   <div class="doi-texto">
@@ -414,9 +454,9 @@ body {
 
 
 
-<!-- ══════════════════════════════════════════ -->
+<!--  -->
 <!--              ETAPA 3                      -->
-<!-- ══════════════════════════════════════════ -->
+<!--  -->
 
 <div class="intro" style="margin-top:48px;">
   <p class="secao-titulo">Introdução da Etapa 3: Planejamento do Armazém e Estoques</p>
@@ -470,7 +510,7 @@ body {
   <p class="texto">Por fim, o <strong>nível de segurança do estoque de projetos em produção</strong>, ou seja, a capacidade de absorver novas demandas sem comprometer a qualidade e os prazos dos projetos já em andamento, é definido em função da capacidade produtiva da equipe editorial. A EDITORA Z40 estabelece como parâmetro de segurança que o Setor de Produção nunca deve ultrapassar <strong>80% da capacidade máxima de projetos simultâneos</strong> da equipe. Quando esse limite é atingido, o gestor ativa o protocolo de contenção de demanda: novos projetos recebem prazo de início estendido ou são encaminhados a editores parceiros previamente cadastrados, evitando sobrecarga da equipe e garantindo a qualidade de cada entrega. Esse indicador é monitorado diariamente pelo sistema de gestão de projetos (Trello), com atualização em tempo real do volume de projetos ativos por editor, assegurando visibilidade total sobre a saúde operacional do armazém digital da EDITORA Z40.</p>
 </div>
 
-<!-- ══ DOI ETAPA 3 ══ -->
+<!-- DOI ETAPA 3 -->
 <div class="doi">
   <div class="doi-icone">📄</div>
   <div class="doi-texto">
@@ -481,9 +521,9 @@ body {
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════ -->
+<!--  -->
 <!--              ETAPA 4                      -->
-<!-- ══════════════════════════════════════════ -->
+<!--  -->
 
 <div class="intro" style="margin-top:48px;">
   <p class="secao-titulo">Introdução da Etapa 4: Estratégia de Distribuição e Transporte</p>
@@ -527,7 +567,7 @@ body {
   <p class="texto">Esse plano de rastreamento e acompanhamento materializa as <strong>marcas formativas SENAC</strong> no dia a dia da EDITORA Z40: a responsabilidade, ao assumir o compromisso público com prazos e comprová-los com dados; o foco no cliente, com comunicação transparente e canais abertos durante todo o processo; a sustentabilidade, ao priorizar rotas digitais de baixo impacto ambiental; e a melhoria contínua, ao medir, analisar e corrigir a operação em ciclos semanais. Com isso, a estratégia de distribuição e transporte da empresa garante que seus produtos, conteúdos editoriais de qualidade, cheguem sempre ao cliente certo, pelo canal certo, na hora certa.</p>
 </div>
 
-<!-- ══ DOI ETAPA 4 ══ -->
+<!-- DOI ETAPA 4 -->
 <div class="doi">
   <div class="doi-icone">📄</div>
   <div class="doi-texto">
@@ -538,8 +578,92 @@ body {
   </div>
 </div>
 
+<!-- ETAPA 5 -->
+
+<div class="intro" style="margin-top:48px;">
+  <p class="secao-titulo">Introdução da Etapa 5: Gestão de Custos Logísticos</p>
+  <p class="texto">Com a estrutura da empresa definida na primeira etapa, com o planejamento de compras e suprimentos organizado na segunda, com o armazém digital e os estoques geridos na terceira e com a estratégia de distribuição e transporte estruturada na quarta, a <strong>EDITORA Z40</strong> chega à sua quinta etapa com uma pergunta essencial: quanto custa manter toda essa operação funcionando? Esta etapa trata da <strong>gestão de custos logísticos</strong>, tema que, em qualquer operação, determina a capacidade da empresa de precificar seus serviços de forma competitiva, manter margens saudáveis e sobreviver em um mercado cada vez mais disputado.</p>
+  <p class="texto">Conhecer os custos é o ponto de partida de qualquer decisão logística: sem esse conhecimento, a empresa não sabe se está ganhando ou perdendo dinheiro em cada projeto, não consegue identificar desperdícios e fica impossibilitada de negociar com fornecedores de forma embasada. No caso da EDITORA Z40, embora não existam mercadorias físicas circulando, os custos logísticos existem e se manifestam em formas digitais: o transporte se traduz na transferência de arquivos e no frete físico eventual, a armazenagem se materializa no espaço em nuvem e na infraestrutura de hospedagem, a aquisição de materiais corresponde às licenças e assinaturas de software, e a mão de obra representa o principal componente de custo da operação editorial.</p>
+  <p class="texto">Nesta etapa, são desenvolvidos três itens fundamentais: a análise dos principais custos logísticos da empresa, abrangendo transporte, armazenagem, aquisição de materiais e mão de obra; a identificação e a classificação dos custos fixos e variáveis da operação, apresentada em uma tabela comparativa com estimativas simuladas; e as estratégias de otimização e redução de custos, considerando as boas práticas, as tendências e as inovações do setor logístico. Todo o conteúdo reflete as marcas formativas do SENAC, com foco na responsabilidade, na eficiência e na melhoria contínua da gestão.</p>
+</div>
+
+<div class="dev-barra">
+  <p class="dev-label">Desenvolvimento da Etapa 5</p>
+  <p class="dev-uc">UC05: Gestão de Custos Logísticos</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 1</p>
+  <h2>Análise dos principais custos logísticos da empresa</h2>
+  <p class="texto">A literatura clássica de logística identifica o <strong>transporte</strong> e a <strong>armazenagem</strong> como os maiores componentes de custo de uma operação, somados ao processamento de pedidos, aos estoques e à administração (BALLOU, 2006). Na EDITORA Z40, esses conceitos permanecem válidos, ainda que manifestados de forma digital: cada etapa do fluxo logístico da empresa, do recebimento dos arquivos dos clientes até a entrega do conteúdo finalizado, consome recursos que precisam ser identificados, medidos e controlados. A análise apresentada a seguir demonstra que uma empresa de serviços digitais possui custos logísticos tão reais quanto os de uma operação tradicional, apenas com naturezas diferentes.</p>
+  <p class="texto">Os <strong>custos de transporte</strong> da EDITORA Z40 correspondem, em primeiro lugar, à movimentação de dados: a assinatura de internet fibra óptica de alta velocidade, essencial para receber e enviar grandes volumes de arquivos com agilidade; o consumo de banda nas plataformas de transferência e nos serviços de nuvem utilizados para compartilhar projetos; e as ferramentas de envio que sustentam a comunicação com os clientes. Em segundo lugar, existe o transporte físico eventual: quando um cliente solicita material impresso, como um e-book diagramado em versão física ou material corporativo, o envio pelos Correios gera frete que precisa ser previsto no orçamento do projeto. Embora o custo marginal de um envio digital seja próximo de zero, a soma da infraestrutura de conectividade representa uma despesa fixa relevante e indispensável à operação.</p>
+  <p class="texto">Os <strong>custos de armazenagem</strong> se concentram no repositório em nuvem que substitui o depósito físico da empresa: as assinaturas do Google Workspace e do OneDrive, contratadas por capacidade de espaço, funcionam exatamente como o aluguel de um galpão, em que a metragem corresponde ao volume de armazenamento contratado; a hospedagem do site na Cloudflare, que mantém a vitrine digital da empresa sempre disponível; o sistema de backup automático, que garante cópias de segurança de todos os arquivos; e os recursos de segurança digital, como antivírus profissional e autenticação em dois fatores. Somam-se a esses itens os custos indiretos de manter os equipamentos operacionais: energia elétrica, depreciação dos computadores e manutenção periódica, que sustentam o "armazém digital" descrito na terceira etapa do projeto.</p>
+  <p class="texto">Os <strong>custos de aquisição de materiais</strong> da empresa correspondem à compra dos insumos digitais necessários à produção editorial: as licenças dos softwares essenciais (Microsoft 365, Google Workspace e Grammarly Pro), classificadas como itens Classe A na curva ABC da etapa 3; as ferramentas de gestão e comunicação (Trello, Notion e Slack); o domínio e a hospedagem do site; os templates editoriais e guias de estilo utilizados na padronização dos trabalhos; e os serviços terceirizados contratados sob demanda, como tradução, legendagem, diagramação complexa e design gráfico. Assim como a matéria-prima de uma indústria, esses insumos digitais são a base sobre a qual o serviço é produzido, e sua aquisição segue o fluxo de compras planejado na etapa 2, com aprovação, comparação de fornecedores e registro documental.</p>
+  <p class="texto">Por fim, os <strong>custos de mão de obra</strong> representam o maior peso na estrutura de custos da EDITORA Z40, como é típico em empresas de serviços: os editores e revisores são contratados como prestadores de serviço, remunerados por projeto conforme a extensão e a complexidade do trabalho; o gestor administrativo responde pela coordenação, pela aprovação de compras e pelo relacionamento com fornecedores; e as plataformas de pagamento cobram taxas percentuais sobre cada transação realizada com os clientes. Além da remuneração direta, a empresa investe em treinamentos periódicos da equipe editorial, em atualização técnica das ferramentas e em tempo de qualidade, pois erros de revisão geram retrabalho, que é a forma mais cara de desperdício em uma operação de serviços.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 2</p>
+  <h2>Identificação dos custos fixos e variáveis da operação</h2>
+  <p class="texto">A contabilidade de custos classifica os gastos em <strong>fixos</strong> e <strong>variáveis</strong> segundo o comportamento em relação ao volume de atividade: os custos fixos permanecem constantes dentro de uma faixa relevante de produção, independentemente de quantos projetos a empresa executa no mês, enquanto os custos variáveis crescem ou diminuem proporcionalmente ao nível de operação (MARTINS, 2018). Essa distinção é fundamental para a EDITORA Z40 porque define o valor mínimo de receita necessário para pagar a estrutura (o ponto de equilíbrio) e orienta decisões de precificação, de contratação e de investimento em capacidade.</p>
+  <p class="texto">Os <strong>custos fixos</strong> da empresa incluem: a assinatura mensal da internet fibra, que existe mesmo em meses de pouca demanda; as licenças essenciais dos softwares de edição e revisão, renovadas em valores previsíveis; o domínio e a hospedagem do site, que mantêm a presença digital ativa; as ferramentas de gestão de projetos e comunicação interna; e o investimento em backup e segurança digital. Esses itens formam a base estrutural da operação: são pagos de forma recorrente e garantem que a empresa esteja pronta para receber qualquer demanda a qualquer momento. A gestão estratégica dos custos fixos consiste em revisar periodicamente a real utilização de cada ferramenta, evitando pagar por capacidade ociosa, o equivalente digital de um galpão alugado pela metade.</p>
+  <p class="texto">Os <strong>custos variáveis</strong> da EDITORA Z40 se ligam diretamente ao volume de projetos: a remuneração dos editores e revisores freelancers, calculada por trabalho executado; as taxas percentuais das plataformas de pagamento, que crescem com o faturamento; o orçamento de marketing digital (Google Ads e Meta Ads), ajustado mês a mês conforme a meta de captação de clientes; os serviços eventuais de terceiros, contratados apenas quando um projeto específico exige; o armazenamento adicional em nuvem, adquirido quando o volume de arquivos ultrapassa o plano contratado; e o frete físico dos envios eventuais. Em meses de alta demanda, esses custos crescem e reduzem a margem percentual, mas o modelo mantém a estrutura financeira flexível, pois a empresa paga por produtividade efetivamente entregue.</p>
+  <p class="texto">A tabela a seguir separa os dois tipos de custos da EDITORA Z40, com os principais itens de cada grupo, a periodicidade de cobrança e uma estimativa mensal simulada, elaborada para fins de planejamento financeiro do projeto.</p>
+
+  <div class="tabela-custos">
+    <table>
+      <tr>
+        <th style="width:52%">Item de custo</th>
+        <th style="width:24%">Periodicidade</th>
+        <th style="width:24%; text-align:right">Estimativa mensal</th>
+      </tr>
+      <tr class="grupo"><td colspan="3">Custos fixos</td></tr>
+      <tr><td>Internet fibra óptica (500 Mbps)</td><td>Mensal</td><td class="num">R$ 149,90</td></tr>
+      <tr><td>Microsoft 365 Business Standard (2 licenças)</td><td>Mensal</td><td class="num">R$ 75,00</td></tr>
+      <tr><td>Google Workspace Business Starter (2 contas)</td><td>Mensal</td><td class="num">R$ 66,00</td></tr>
+      <tr><td>Grammarly Pro</td><td>Mensal</td><td class="num">R$ 90,00</td></tr>
+      <tr><td>Trello Premium, Notion e Slack</td><td>Mensal</td><td class="num">R$ 70,00</td></tr>
+      <tr><td>Domínio (Registro.br) e hospedagem (Cloudflare)</td><td>Anual (rateio)</td><td class="num">R$ 15,00</td></tr>
+      <tr><td>Backup em nuvem e segurança digital</td><td>Mensal</td><td class="num">R$ 40,00</td></tr>
+      <tr class="grupo"><td colspan="3">Custos variáveis</td></tr>
+      <tr><td>Mão de obra editorial (freelancers por projeto)</td><td>Por projeto</td><td class="num">R$ 1.200,00</td></tr>
+      <tr><td>Taxas das plataformas de pagamento (por transação)</td><td>Por transação</td><td class="num">R$ 150,00</td></tr>
+      <tr><td>Mídias pagas (Google Ads e Meta Ads)</td><td>Orçamento variável</td><td class="num">R$ 300,00</td></tr>
+      <tr><td>Serviços eventuais de terceiros (tradução, diagramação, design)</td><td>Sob demanda</td><td class="num">R$ 200,00</td></tr>
+      <tr><td>Armazenamento adicional em nuvem</td><td>Conforme consumo</td><td class="num">R$ 20,00</td></tr>
+      <tr><td>Frete físico eventual (Correios)</td><td>Por envio</td><td class="num">R$ 60,00</td></tr>
+      <tr class="grupo"><td>Total estimado da operação</td><td>Média mensal</td><td class="num">R$ 2.435,90</td></tr>
+    </table>
+  </div>
+  <p class="tabela-nota">Fonte: elaborada pelo autor (2026). Valores simulados para fins de planejamento financeiro do projeto integrador.</p>
+
+  <p class="texto">A leitura da tabela evidencia que a mão de obra editorial responde por cerca de metade do custo total estimado, confirmando o caráter intensivo em conhecimento da operação, enquanto o bloco de custos fixos, aproximadamente um quinto do total, permanece enxuto em razão do modelo digital. Essa configuração é vantajosa em períodos de retração de demanda, pois a empresa pode reduzir os custos variáveis sem desmontar a estrutura, e exige atenção permanente com os custos fixos, que continuam sendo cobrados mesmo quando a operação está ociosa. É exatamente esse equilíbrio entre base fixa enxuta e custo variável por demanda que permite à EDITORA Z40 praticar preços competitivos sem comprometer a qualidade dos serviços entregues.</p>
+</div>
+
+<div class="item">
+  <p class="item-num">Item 3</p>
+  <h2>Estratégias para otimizar e reduzir custos</h2>
+  <p class="texto">A otimização de custos logísticos não significa cortar gastos de forma indiscriminada, e sim eliminar desperdícios mantendo ou elevando a qualidade percebida pelo cliente (CHRISTOPHER, 2017). Na EDITORA Z40, as estratégias partem do princípio de que cada real gasto deve ter retorno comprovado em produtividade, qualidade ou captação de clientes. A primeira prática estruturada é a <strong>revisão trimestral completa dos gastos</strong>, já prevista na política de estoques da etapa 3: o gestor analisa todas as assinaturas e licenças pela lógica da curva ABC, identifica recursos subutilizados, rebaixa planos superdimensionados para categorias mais econômicas e cancela ferramentas que perderam a utilidade, evitando o acúmulo de gastos invisíveis.</p>
+  <p class="texto">No bloco de <strong>custos fixos</strong>, a empresa adota a consolidação de fornecedores: ferramentas com funções sobrepostas são substituídas por plataformas integradas, como concentrar a gestão de documentos no próprio Google Workspace em vez de pagar serviços paralelos, e licenças anuais são negociadas com desconto em relação ao somatório das mensalidades, como já praticado no cronograma de compras da etapa 2. A comparação sistemática de no mínimo três fornecedores antes de cada contratação ou renovação mantém a pressão competitiva sobre os preços, e a negociação direta com os departamentos comerciais busca condições especiais para pequenas empresas e períodos de teste antes da assinatura definitiva.</p>
+  <p class="texto">Nos <strong>custos variáveis</strong>, a otimização de transporte e armazenagem digitais passa por medidas simples e contínuas: a compressão de arquivos antes de cada envio, que reduz o consumo de banda e o tempo de transferência; a consolidação de entregas de um mesmo cliente em um único pacote organizado, que diminui o número de transferências e o risco de erros; a política de expurgo periódico do repositório, movendo projetos antigos para camadas de armazenamento mais baratas e evitando a compra de capacidade adicional; e a definição de regras claras para o frete físico eventual, com o custo repassado ao orçamento do projeto sempre que o cliente solicitar material impresso.</p>
+  <p class="texto">Na <strong>mão de obra</strong>, o maior custo da operação, a estratégia central é a produtividade apoiada em automação: os templates editoriais e os checklists padronizados reduzem o tempo de execução de cada projeto; as ferramentas de inteligência artificial atuam na pré-revisão gramatical, acelerando o trabalho do editor humano sem substituir sua análise crítica; e o treinamento contínuo da equipe reduz erros e retrabalho, que representam o desperdício mais caro de uma empresa de serviços. O modelo de contratação por projeto, com rede de freelancers especializados por tipo de demanda, mantém os custos variáveis alinhados à receita real de cada mês, sem a rigidez de uma folha de pagamento fixa subutilizada.</p>
+  <p class="texto">Entre as <strong>tendências e inovações do setor logístico</strong> aplicáveis à realidade da empresa, destacam-se: a computação em nuvem elástica, com cobrança por consumo efetivo, que elimina o pagamento por capacidade ociosa; a inteligência artificial aplicada à gestão, com análises preditivas de demanda que orientam o orçamento de marketing e a escala da equipe; os sistemas de análise de dados (BI), que calculam o custo logístico por projeto e revelam quais tipos de serviço têm margem real e quais precisam de reprecificação; a automação robótica de processos (RPA) para tarefas repetitivas de conferência e registro; e a logística sustentável, que na versão digital é intrínseca ao negócio, pois a ausência de deslocamentos e de papel reduz o impacto ambiental e os custos correlatos.</p>
+  <p class="texto">Essas estratégias materializam as <strong>marcas formativas SENAC</strong> na gestão financeira da EDITORA Z40: a responsabilidade, ao garantir que cada gasto seja planejado, registrado e justificado; o foco no cliente, ao proteger a qualidade dos serviços mesmo em ciclos de redução de custos; a sustentabilidade, ao eliminar desperdícios e priorizar recursos digitais de baixo impacto ambiental; e a melhoria contínua, ao transformar a revisão de custos em rotina trimestral apoiada em dados. Com essa disciplina de gestão, a empresa assegura preços competitivos, margens saudáveis e capacidade de investimento em tecnologia, condições essenciais para crescer de forma sustentável no mercado de serviços editoriais digitais.</p>
+</div>
+
+<!-- DOI ETAPA 5 (atualizar o numero apos a publicacao no Zenodo) -->
+<div class="doi">
+  <div class="doi-icone">📄</div>
+  <div class="doi-texto">
+    <label>Publicação vinculada · Zenodo</label>
+    <p class="doi-titulo">Projeto Integrador I · Etapa 5 · Editora Z40</p>
+    <p class="doi-autor">Paulo Sérgio de Andrade · SENAC EAD · Curso Técnico em Logística</p>
+    <a href="https://doi.org/10.5281/zenodo.XXXXXXX" target="_blank" rel="noopener">DOI: 10.5281/zenodo.XXXXXXX ↗</a>
+  </div>
+</div>
+
 <div class="rodape">
-  SENAC EAD · Curso Técnico em Logística · Projeto Integrador I · Etapa 4 · EDITORA Z40
+  SENAC EAD · Curso Técnico em Logística · Projeto Integrador I · Etapa 5 · EDITORA Z40
 </div>
 
 </body>
